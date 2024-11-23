@@ -104,3 +104,6 @@ deploy:
   type: git
   repo: https://github.com/lhzzz08/lhzzz08.github.io.git
   branch: gh-pages
+
+encrypt:
+  password: "liuhanzhi"   # 设置一个密码用于加密
