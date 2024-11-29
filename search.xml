@@ -14,7 +14,6 @@
 <li><p><strong>没有设备信息：</strong> 小明没有提到使用的操作系统（如Windows、Mac、Linux）和其他设备（如手机、平板）是否能够正常上网，这对于判断问题有很大帮助。</p>
 </li>
 </ul>
-<p>由于信息不完整，很难仅凭这些信息快速诊断问题，回答的效率会降低。</p>
 <p><strong>问题二：如果第（1）的答案是否定的，请你以追问的方式，了解小明电脑的可能故障原因。</strong></p>
 <p>“小明，能否提供更多的信息，以帮助我更好地理解你的问题？比如：</p>
 <ol>
@@ -81,6 +80,9 @@
 </li>
 </ul>
 ]]></content>
+      <tags>
+        <tag>提问方式</tag>
+      </tags>
   </entry>
   <entry>
     <title>实现远程操控你的电脑</title>
@@ -90,14 +92,7 @@
 <h3 id="实现基本原理："><a href="#实现基本原理：" class="headerlink" title="实现基本原理："></a>实现基本原理：</h3>]]></content>
       <tags>
         <tag>windows</tag>
-        <tag>ipad</tag>
         <tag>WLAN</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>测试加密</title>
-    <url>/2024/11/23/%E6%B5%8B%E8%AF%95%E5%8A%A0%E5%AF%86/</url>
-    <content><![CDATA[<p>这是一个加密测试。</p>
-]]></content>
   </entry>
 </search>
