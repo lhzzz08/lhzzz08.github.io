@@ -85,6 +85,97 @@
       </tags>
   </entry>
   <entry>
+    <title>关于提问题的智慧</title>
+    <url>/2024/11/22/kali%E4%B8%ADfcrackzip%E7%9A%84%E4%BD%BF%E7%94%A8/</url>
+    <content><![CDATA[<h1 id="Fcrackzip-使用教程"><a href="#Fcrackzip-使用教程" class="headerlink" title="Fcrackzip 使用教程"></a>Fcrackzip 使用教程</h1><p><code>fcrackzip</code> 是一个用于破解加密 ZIP 文件密码的命令行工具，支持暴力破解和字典攻击。本文将介绍如何在 Kali Linux 中使用 <code>fcrackzip</code> 工具。</p>
+<h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ul>
+<li><a href="#fcrackzip-%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B">Fcrackzip 使用教程</a><ul>
+<li><a href="#%E7%9B%AE%E5%BD%95">目录</a></li>
+<li><a href="#%E5%AE%89%E8%A3%85">安装</a></li>
+<li><a href="#%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95">基本用法</a></li>
+<li><a href="#%E5%B8%B8%E7%94%A8%E9%80%89%E9%A1%B9">常用选项</a></li>
+<li><a href="#%E7%A4%BA%E4%BE%8B">示例</a><ul>
+<li><a href="#%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3">暴力破解</a></li>
+<li><a href="#%E5%AD%97%E5%85%B8%E6%94%BB%E5%87%BB">字典攻击</a></li>
+</ul>
+</li>
+<li><a href="#%E9%AB%98%E7%BA%A7%E7%94%A8%E6%B3%95">高级用法</a><ul>
+<li><a href="#%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%A0%B4%E8%A7%A3">多线程破解</a></li>
+<li><a href="#%E4%BD%BF%E7%94%A8%E8%87%AA%E5%AE%9A%E4%B9%89%E5%AD%97%E7%AC%A6%E9%9B%86">使用自定义字符集</a></li>
+</ul>
+</li>
+<li><a href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9">注意事项</a><ul>
+<li><a href="#%E5%85%8D%E8%B4%A3%E5%A3%B0%E6%98%8E">免责声明</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>在大多数 Kali Linux 发行版中，<code>fcrackzip</code> 已预装。如果未安装，可以通过以下命令安装：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt update</span><br><span class="line"><span class="built_in">sudo</span> apt install fcrackzip</span><br></pre></td></tr></table></figure>
+
+<h2 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h2><p><code>fcrackzip</code> 的基本语法如下：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">fcrackzip [options] &lt;zipfile&gt;</span><br></pre></td></tr></table></figure>
+
+<p>其中 <code>&lt;zipfile&gt;</code> 是目标 ZIP 文件的路径。</p>
+<h2 id="常用选项"><a href="#常用选项" class="headerlink" title="常用选项"></a>常用选项</h2><ul>
+<li>-u：测试密码的正确性（解压验证）。  </li>
+<li>-v：启用详细输出模式。  </li>
+<li>-b：启用暴力破解模式。  </li>
+<li>-D：启用字典攻击模式。  </li>
+<li>-p <password>：指定密码（用于简单测试）。  </li>
+<li>-c <charset>：指定字符集（用于暴力破解）。  </li>
+<li>-l <min>-<max>：设置密码长度范围（用于暴力破解）。  </li>
+<li>-C <charset>：指定自定义字符集。</li>
+</ul>
+<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><h3 id="暴力破解"><a href="#暴力破解" class="headerlink" title="暴力破解"></a>暴力破解</h3><p>使用暴力破解尝试所有可能的密码组合。以下示例尝试长度为1到3的字母数字密码：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">fcrackzip -v -b -c aA1 -l 1-3 target.zip</span><br></pre></td></tr></table></figure>
+
+<p>解释：</p>
+<ul>
+<li>-v：详细模式。  </li>
+<li>-b：暴力破解。  </li>
+<li>-c aA1：字符集包含小写字母 (a)、大写字母 (A) 和数字 (1)。  </li>
+<li>-l 1-3：密码长度在1到3之间。  </li>
+<li>target.zip：目标 ZIP 文件。</li>
+</ul>
+<h3 id="字典攻击"><a href="#字典攻击" class="headerlink" title="字典攻击"></a>字典攻击</h3><p>使用字典文件进行攻击。以下示例使用 passwords.txt 作为字典文件：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">fcrackzip -v -D -p passwords.txt target.zip</span><br></pre></td></tr></table></figure>
+
+<p>解释：</p>
+<ul>
+<li>-v：详细模式。  </li>
+<li>-D：字典攻击。  </li>
+<li>-p passwords.txt：指定字典文件。  </li>
+<li>target.zip：目标 ZIP 文件。</li>
+</ul>
+<h2 id="高级用法"><a href="#高级用法" class="headerlink" title="高级用法"></a>高级用法</h2><h3 id="多线程破解"><a href="#多线程破解" class="headerlink" title="多线程破解"></a>多线程破解</h3><p><code>fcrackzip</code> 支持多线程破解，可以加快破解速度。使用 -t 选项指定线程数：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">fcrackzip -v -b -c aA1 -l 1-4 -t 4 target.zip</span><br></pre></td></tr></table></figure>
+
+<p>解释：</p>
+<ul>
+<li>-t 4：使用4个线程进行破解。</li>
+</ul>
+<h3 id="使用自定义字符集"><a href="#使用自定义字符集" class="headerlink" title="使用自定义字符集"></a>使用自定义字符集</h3><p>如果知道密码包含特定字符，可以自定义字符集：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">fcrackzip -v -b -c abc123 -l 3-5 target.zip</span><br></pre></td></tr></table></figure>
+
+<p>解释：</p>
+<ul>
+<li>-c abc123：字符集为 a, b, c, 1, 2, 3。  </li>
+<li>-l 3-5：密码长度在3到5之间。</li>
+</ul>
+<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><ul>
+<li>合法性：仅在合法授权下使用 fcrackzip，破解他人密码保护的文件可能违法。  </li>
+<li>性能：暴力破解时间可能较长，具体取决于密码复杂度和计算资源。  </li>
+<li>字典质量：字典攻击的成功率依赖于字典文件的质量和覆盖范围。</li>
+</ul>
+<h3 id="免责声明"><a href="#免责声明" class="headerlink" title="免责声明"></a>免责声明</h3><p>本文仅用于教育和研究目的。请勿将 <code>fcrackzip</code> 用于任何非法活动。使用者应自行承担使用该工具可能带来的法律风险。</p>
+]]></content>
+      <tags>
+        <tag>提问方式</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>实现远程操控你的电脑</title>
     <url>/2024/11/22/%E5%AE%9E%E7%8E%B0%E8%BF%9C%E7%A8%8B%E6%93%8D%E6%8E%A7%E4%BD%A0%E7%9A%84%E7%94%B5%E8%84%91/</url>
     <content><![CDATA[<h3 id="写前说明："><a href="#写前说明：" class="headerlink" title="写前说明："></a>写前说明：</h3><p>本人作为一名牢大一学生，因为专业与计算机相关，每天都要背着死重的电脑上课，为了实现用平板代替电脑，学会了利用平板远程操控寝室里的电脑，这也太棒了，下面教小白如何利用手里的平板，使其变成你的便携电脑，我所讲的方法存在一定的局限性，但后面会更新相应补充哦。</p>
