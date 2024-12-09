@@ -1,7 +1,7 @@
 ---
-title: 关于提问题的智慧
+title: Fcrackzip 使用教程
 date: 2024-11-22 21:55:56
-tags: ["提问方式"]
+tags: ["Fcrackzip"]
 ---
 
 # Fcrackzip 使用教程
