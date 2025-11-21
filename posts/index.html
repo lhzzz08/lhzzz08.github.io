@@ -5,9 +5,9 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>Posts | My New Hugo Site</title>
+<title>Posts | Lhz&#39;s blog</title>
 <meta name="keywords" content="">
-<meta name="description" content="Posts - My New Hugo Site">
+<meta name="description" content="Posts - Lhz&#39;s blog">
 <meta name="author" content="">
 <link rel="canonical" href="https://lhzzz08.github.io/posts/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.343cc480b9ffc8f04ccbe5e968ad674880cab773ec19905e93033065c1e7a804.css" integrity="sha256-NDzEgLn/yPBMy&#43;XpaK1nSIDKt3PsGZBekwMwZcHnqAQ=" rel="preload stylesheet" as="style">
@@ -72,7 +72,7 @@
     }
 
 </script><meta property="og:url" content="https://lhzzz08.github.io/posts/">
-  <meta property="og:site_name" content="My New Hugo Site">
+  <meta property="og:site_name" content="Lhz&#39;s blog">
   <meta property="og:title" content="Posts">
   <meta property="og:locale" content="en-us">
   <meta property="og:type" content="website">
@@ -100,7 +100,7 @@
     <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="https://lhzzz08.github.io/" accesskey="h" title="My New Hugo Site (Alt + H)">My New Hugo Site</a>
+            <a href="https://lhzzz08.github.io/" accesskey="h" title="Lhz&#39;s blog (Alt + H)">Lhz&#39;s blog</a>
             <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
@@ -137,19 +137,22 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2 class="entry-hint-parent">First Blog
+    <h2 class="entry-hint-parent">如何快速搭建个人博客
     </h2>
   </header>
   <div class="entry-content">
-    <p>搭建个人博客 快速开始 brew install hugo cd ~/Workspace hugo new site Lhz-blogs --format yaml cd Lhz-blogs git init git submodule add --depth=1 https://github.com/adityatelange/hugo-PaperMod.git themes/PaperMod echo &#39;theme: PaperMod&#39; &gt;&gt; hugo.yaml hugo new posts/quickstart.md </p>
+    <p>快速开始 声明：因为我自己使用的是 MacBook，所以以下操作环境均为 macOS，但操作思路是一致的
+开始前准备
+安装了 homebrew 软件包管理系统 安装了 git 分布式版本控制系统 拥有一个 GitHub 静态网站托管仓库（GitHub Pages） 在执行代码前可以先查看本文中可能遇到的问题 # 安装 hugo 静态网站生成器 brew install hugo # 找一个放置网站数据的地方 cd ~/Workspace # 创建一个名为 Lhz-blogs 的新网站项目目录 # --format 来选取构建的首选文件格式（toml 默认 ｜ yaml ｜ json） hugo new site Lhz-blogs --format yaml # 进入新创建的项目目录 cd Lhz-blogs # 在项目根目录下初始化 git 仓库 git init # 拉取最新的 PaperMod 网站主题 git submodule add --depth=1 https://github.com/adityatelange/hugo-PaperMod.git themes/PaperMod # 追加网站主题配置信息 echo &#39;theme: PaperMod&#39; &gt;&gt; hugo.yaml # 创建一篇 quickstart.md 的文章，位于 content/posts/ 目录下 hugo new posts/quickstart.md # 编辑文章 open content/posts/quickstart.md -a Typora # 在本地启动一个 Web 服务器预览博客，可以边写边改，在部署前检查 hugo server # 将项目源文件编译成静态文件并输出到项目根目录的 public 目录下 hugo # 切换为静态文件目录 cd public # 在静态目录下初始化第二个 git 仓库 git init # 为静态文件仓库添加一个名为 git-blog 的远程仓库，指向您的 GitHub Pages 仓库 URL git remote add git-blog https://github.com/lhzzz08/lhzzz08.github.io.git # 显示当前仓库配置的所有远程仓库的详细信息 git remote -v # 将目录下的所有静态文件添加到 git 暂存区 git add . # 将暂存区的文件提交到本地仓库 git commit -m &#34;init myblog&#34; # 将本地 main 分支的内容提交到远程仓库 git push -u github-blog main 会遇到的问题
+...</p>
   </div>
   <footer class="entry-footer"><span title='2025-11-20 15:16:41 +0800 CST'>November 20, 2025</span></footer>
-  <a class="entry-link" aria-label="post link to First Blog" href="https://lhzzz08.github.io/posts/quickstart/"></a>
+  <a class="entry-link" aria-label="post link to 如何快速搭建个人博客" href="https://lhzzz08.github.io/posts/quickstart/"></a>
 </article>
     </main>
     
 <footer class="footer">
-        <span>&copy; 2025 <a href="https://lhzzz08.github.io/">My New Hugo Site</a></span> · 
+        <span>&copy; 2025 <a href="https://lhzzz08.github.io/">Lhz&#39;s blog</a></span> · 
 
     <span>
         Powered by
