@@ -137,6 +137,24 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">2025极客大挑战web（部分）WP
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>声明：第一次参加极客大挑战CTF比赛，web方向总共解决了六道题目（6/20），我是菜鸟🫠
+阿基里斯追乌龟 #JavaScript
+题目描述：在古希腊，英雄阿基里斯和一只乌龟赛跑。阿基里斯的速度是乌龟的十倍。比赛开始时，乌龟在阿基里斯前面100米。芝诺悖论认为，当阿基里斯追到乌龟的出发点时，乌龟已经又向前爬了一段距离。当阿基里斯再追到那个位置时，乌龟又向前爬了。如此无限循环，阿基里斯似乎永远也追不上乌龟。他真的追不上吗？
+大概查看网页信息，只要让阿基里斯的位置比乌龟的位置远即可得到 flag，但是根据题目的 JavaScript 代码，不可能一直点击追赶按键，其实只要用浏览器进行前端调试即可
+... const payload = { achilles_distance: achillesPos, tortoise_distance: tortoisePos, }; fetch(&#39;/chase&#39;, { // 在这里打断点，在 fetch 发起请求前修改 Payload 对象 method: &#39;POST&#39;, // 使 achillesPos &gt; tortoisePos headers: { &#39;Content-Type&#39;: &#39;application/json&#39;, }, body: JSON.stringify({ &#34;data&#34;: encryptData(payload) }), }) ... 修改后继续执行脚本即可得到 flag，对代码感兴趣的可以去详细了解一下原理，下面附上源代码
+function encryptData(obj) { const jsonString = JSON.stringify(obj); return btoa(unescape(encodeURIComponent(jsonString))); } function decryptData(encodedString) { const jsonString = decodeURIComponent(escape(atob(encodedString))); return JSON.parse(jsonString); } document.addEventListener(&#39;DOMContentLoaded&#39;, () =&gt; { const chaseBtn = document.getElementById(&#39;chase-btn&#39;); const achillesDistanceSpan = document.getElementById(&#39;achilles-distance&#39;); const tortoiseDistanceSpan = document.getElementById(&#39;tortoise-distance&#39;); const resultDiv = document.getElementById(&#39;result&#39;); let achillesPos = 0; let tortoisePos = 10000000000; // Initial head start for the tortoise achillesDistanceSpan.textContent = achillesPos.toFixed(2); tortoiseDistanceSpan.textContent = tortoisePos.toFixed(2); chaseBtn.addEventListener(&#39;click&#39;, () =&gt; { // Achilles moves to the tortoise&#39;s current position const achillesMoveDistance = tortoisePos - achillesPos; achillesPos = tortoisePos; // The tortoise moves 1/10th of the distance Achilles just covered const tortoiseMoveDistance = achillesMoveDistance / 10; tortoisePos &#43;= tortoiseMoveDistance; achillesDistanceSpan.textContent = achillesPos.toFixed(2); tortoiseDistanceSpan.textContent = tortoisePos.toFixed(2); const payload = { achilles_distance: achillesPos, tortoise_distance: tortoisePos, }; fetch(&#39;/chase&#39;, { method: &#39;POST&#39;, headers: { &#39;Content-Type&#39;: &#39;application/json&#39;, }, body: JSON.stringify({ &#34;data&#34;: encryptData(payload) }), }) .then(response =&gt; response.json()) .then(encryptedResponse =&gt; { if (encryptedResponse.data) { const data = decryptData(encryptedResponse.data); if (data.flag) { // Use &#39;pre-wrap&#39; to respect newlines in the fake flag message resultDiv.style.whiteSpace = &#39;pre-wrap&#39;; resultDiv.textContent = `你追上它了！\n${data.flag}`; chaseBtn.disabled = true; } else if (data.message) { resultDiv.textContent = data.message; } } else { console.error(&#39;Error:&#39;, encryptedResponse.error); resultDiv.textContent = `发生错误: ${encryptedResponse.error}`; } }) .catch(error =&gt; { console.error(&#39;Error:&#39;, error); resultDiv.textContent = &#39;发生错误。&#39;; }); }); }); Vibe SEO #目录扫描
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2025-11-24 21:04:46 +0800 CST'>November 24, 2025</span></footer>
+  <a class="entry-link" aria-label="post link to 2025极客大挑战web（部分）WP" href="https://lhzzz08.github.io/posts/geekchallengewebwp/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">如何快速搭建个人博客
     </h2>
   </header>

