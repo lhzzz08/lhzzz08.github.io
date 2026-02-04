@@ -5,11 +5,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>Categories | Lhz&#39;s blog</title>
+<title>漏洞挖掘 | Lhz&#39;s blog</title>
 <meta name="keywords" content="">
 <meta name="description" content="">
 <meta name="author" content="">
-<link rel="canonical" href="https://lhzzz08.github.io/categories/">
+<link rel="canonical" href="https://lhzzz08.github.io/categories/%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.343cc480b9ffc8f04ccbe5e968ad674880cab773ec19905e93033065c1e7a804.css" integrity="sha256-NDzEgLn/yPBMy&#43;XpaK1nSIDKt3PsGZBekwMwZcHnqAQ=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://lhzzz08.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://lhzzz08.github.io/favicon-16x16.png">
@@ -18,8 +18,8 @@
 <link rel="mask-icon" href="https://lhzzz08.github.io/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" type="application/rss+xml" href="https://lhzzz08.github.io/categories/index.xml" title="rss">
-<link rel="alternate" hreflang="en" href="https://lhzzz08.github.io/categories/">
+<link rel="alternate" type="application/rss+xml" href="https://lhzzz08.github.io/categories/%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98/index.xml" title="rss">
+<link rel="alternate" hreflang="en" href="https://lhzzz08.github.io/categories/%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98/">
 <noscript>
     <style>
         #theme-toggle,
@@ -71,13 +71,13 @@
         document.querySelector("html").dataset.theme = 'light';
     }
 
-</script><meta property="og:url" content="https://lhzzz08.github.io/categories/">
+</script><meta property="og:url" content="https://lhzzz08.github.io/categories/%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98/">
   <meta property="og:site_name" content="Lhz&#39;s blog">
-  <meta property="og:title" content="Categories">
+  <meta property="og:title" content="漏洞挖掘">
   <meta property="og:locale" content="en-us">
   <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Categories">
+<meta name="twitter:title" content="漏洞挖掘">
 <meta name="twitter:description" content="">
 
 </head>
@@ -117,7 +117,7 @@
             </li>
             <li>
                 <a href="https://lhzzz08.github.io/categories/" title="Categories">
-                    <span class="active">Categories</span>
+                    <span>Categories</span>
                 </a>
             </li>
             <li>
@@ -128,22 +128,58 @@
         </ul>
     </nav>
 </header>
-<main class="main">
+<main class="main"> 
 <header class="page-header">
-    <h1>Categories</h1>
+  <h1>
+    漏洞挖掘
+  </h1>
 </header>
 
-<ul class="terms-tags">
-    <li>
-        <a href="https://lhzzz08.github.io/categories/ctf/">CTF <sup><strong><sup>1</sup></strong></sup> </a>
-    </li>
-    <li>
-        <a href="https://lhzzz08.github.io/categories/%E5%85%B6%E4%BB%96%E5%88%86%E4%BA%AB%E5%86%85%E5%AE%B9/">其他分享内容 <sup><strong><sup>1</sup></strong></sup> </a>
-    </li>
-    <li>
-        <a href="https://lhzzz08.github.io/categories/%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98/">漏洞挖掘 <sup><strong><sup>2</sup></strong></sup> </a>
-    </li>
-</ul>
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">浏览器渗透插件分享
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>声明 操作环境为 Ghrome 浏览器，主要介绍插件的大致作用，具体操作细节不做讲解，后续遇到好用的插件会在文章后面更新分享的，尽情期待😘
+Proxy SwitchyOmega 3 (ZeroOmega) 说明：好用的代理工具，结合抓包工具或代理插件使用，可以对无需代理的目标进行白名单处理，下面给出我常用的白名单列表，遇到一个添加一个即可
+*.bing.com *.bing.cn *.bing.net *.msn.cn www.yuque.com cn.bing.com aefd.nelreports.net www.googleapis.com content-autofill.googleapis.com www.google.com accounts.google.com optimizationguide-pa.googleapis.com www.gstatic.com android.clients.google.com clients4.google.com fofa.info google-ohttp-relay-safebrowsing.fastly-edge.com revenue.ezboti.com oauthaccountmanager.googleapis.com HackBar 说明：打过CTF的都懂，可以理解为网页版的简易抓包工具，不多解释了
+FindSomething 说明：又叫”熊猫头“，会对页面中的静态资源进行信息提取，可以获得一些网页目录、api接口等敏感路径和用户名、密码等一些敏感信息，还会列出完整URL、IP、域名等等，用于信息收集
+雪瞳 Tips：需要GitHub下载自行导入
+说明：和 FindSomething 功能相似，一款新出的综合信息提取识别插件，多了一些指纹嗅探、网站解析的功能，可以添加扫描白名单
+Wappalyzer - Technology profiler 说明：老牌指纹识别工具，必备
+Source detector Tips：需要GitHub下载自行导入，Chrome版本高于等于v142，无法安装此插件
+说明：自动化提取 js.map 文件（webpack进行打包等）的工具，后续可以利用 reverse-sourcemap 工具，还原源代码，进行代码审计
+Heimdallr Tips：需要GitHub下载自行导入
+说明：指纹识别、反蜜罐、特征对抗
+总结 我认为 Proxy SwitchyOmega 3 (ZeroOmega) &amp; Wappalyzer - Technology profiler 必装，FindSomething &amp; 雪瞳 任选一个或者两个都用，其他的按需安装即可
+</p>
+  </div>
+  <footer class="entry-footer"><span title='2026-02-04 21:34:01 +0800 CST'>February 4, 2026</span></footer>
+  <a class="entry-link" aria-label="post link to 浏览器渗透插件分享" href="https://lhzzz08.github.io/posts/chromeplugin/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">记一次实战src中的SQL注入
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>声明 本博客提供的思路和技术仅限于提升自身技术，不得用于非法活动，任何非法活动均与本博客的立场相违背，违法者将依法承担法律责任
+某数字店铺存在SQL注入漏洞 注册后登陆数字店铺后台查看“数字标签”页面，其中的查询框存在SQL报错注入
+仔细观察请求数据包，我传递的查询参数只有一个1&#39;，但是请求数据包中的内容却采用POSTmultipart/form-data类型进行传输，更具数据包分析很容易知道前端进行了加密签名处理，这个网站中的其他数据传输都采用这种方式，这样可以让你看不出传递的具体数据并防止篡改请求包，这就是为什么此站在无waf的情况下，挂着xray代理（以及任何多强大扫描SQL注入的工具）不可能扫描出此处存在SQL注入的原因，也就是说这里只能靠手动尝试才可以发现
+查询参数输入1&#39;时回显You have an error in your SQL syntax
+查询参数输入1&#39;&#39;时回显正常
+查询参数输入1&#39;&#39;&#39;时回显You have an error in your SQL syntax
+查询参数输入1&#39;&#39;&#39;&#39;时回显正常
+通过4个单引号检测，明确确定存在SQL注入，接下来需要构造注入语句得到数据库名证明危害即可，不要拖库拿信息！！！不要拖库拿信息！！！不要拖库拿信息！！！
+Tips：注释符号一般都是不起作用的，建议使用单引号闭合的方式闭合语句，这里注释符就不起作用
+1&#39; and updatexml(1,concat(0x7e,DATABASE(),0x7e),1) and &#39;1&#39;=&#39;1 用报错注入，成功得到数据库名😎
+总结 要提升逻辑观察能力，随机应变，遇到只能手动测试的网站不要怕麻烦，万一出洞了呢 4个单引号检测SQL注入挺好用 实战尽量使用单引号闭合方式，不要用注释符打不成功就不打了 上述只是针对一般类型的SQL注入，还有好多类型的SQL注入 </p>
+  </div>
+  <footer class="entry-footer"><span title='2026-01-31 12:08:01 +0800 CST'>January 31, 2026</span></footer>
+  <a class="entry-link" aria-label="post link to 记一次实战src中的SQL注入" href="https://lhzzz08.github.io/posts/sqlidemo1/"></a>
+</article>
     </main>
     
 <footer class="footer">

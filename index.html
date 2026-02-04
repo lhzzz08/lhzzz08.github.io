@@ -124,6 +124,21 @@
             </div>
         </div>
         <ul id="menu">
+            <li>
+                <a href="https://lhzzz08.github.io/" title="Home">
+                    <span class="active">Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://lhzzz08.github.io/categories/" title="Categories">
+                    <span>Categories</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://lhzzz08.github.io/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
         </ul>
     </nav>
 </header>
@@ -140,6 +155,30 @@
 </div>
 
     </footer>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">浏览器渗透插件分享
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>声明 操作环境为 Ghrome 浏览器，主要介绍插件的大致作用，具体操作细节不做讲解，后续遇到好用的插件会在文章后面更新分享的，尽情期待😘
+Proxy SwitchyOmega 3 (ZeroOmega) 说明：好用的代理工具，结合抓包工具或代理插件使用，可以对无需代理的目标进行白名单处理，下面给出我常用的白名单列表，遇到一个添加一个即可
+*.bing.com *.bing.cn *.bing.net *.msn.cn www.yuque.com cn.bing.com aefd.nelreports.net www.googleapis.com content-autofill.googleapis.com www.google.com accounts.google.com optimizationguide-pa.googleapis.com www.gstatic.com android.clients.google.com clients4.google.com fofa.info google-ohttp-relay-safebrowsing.fastly-edge.com revenue.ezboti.com oauthaccountmanager.googleapis.com HackBar 说明：打过CTF的都懂，可以理解为网页版的简易抓包工具，不多解释了
+FindSomething 说明：又叫”熊猫头“，会对页面中的静态资源进行信息提取，可以获得一些网页目录、api接口等敏感路径和用户名、密码等一些敏感信息，还会列出完整URL、IP、域名等等，用于信息收集
+雪瞳 Tips：需要GitHub下载自行导入
+说明：和 FindSomething 功能相似，一款新出的综合信息提取识别插件，多了一些指纹嗅探、网站解析的功能，可以添加扫描白名单
+Wappalyzer - Technology profiler 说明：老牌指纹识别工具，必备
+Source detector Tips：需要GitHub下载自行导入，Chrome版本高于等于v142，无法安装此插件
+说明：自动化提取 js.map 文件（webpack进行打包等）的工具，后续可以利用 reverse-sourcemap 工具，还原源代码，进行代码审计
+Heimdallr Tips：需要GitHub下载自行导入
+说明：指纹识别、反蜜罐、特征对抗
+总结 我认为 Proxy SwitchyOmega 3 (ZeroOmega) &amp; Wappalyzer - Technology profiler 必装，FindSomething &amp; 雪瞳 任选一个或者两个都用，其他的按需安装即可
+</p>
+  </div>
+  <footer class="entry-footer"><span title='2026-02-04 21:34:01 +0800 CST'>February 4, 2026</span></footer>
+  <a class="entry-link" aria-label="post link to 浏览器渗透插件分享" href="https://lhzzz08.github.io/posts/chromeplugin/"></a>
 </article>
 
 <article class="post-entry"> 
@@ -161,7 +200,7 @@ Tips：注释符号一般都是不起作用的，建议使用单引号闭合的�
 总结 要提升逻辑观察能力，随机应变，遇到只能手动测试的网站不要怕麻烦，万一出洞了呢 4个单引号检测SQL注入挺好用 实战尽量使用单引号闭合方式，不要用注释符打不成功就不打了 上述只是针对一般类型的SQL注入，还有好多类型的SQL注入 </p>
   </div>
   <footer class="entry-footer"><span title='2026-01-31 12:08:01 +0800 CST'>January 31, 2026</span></footer>
-  <a class="entry-link" aria-label="post link to 记一次实战src中的SQL注入" href="https://lhzzz08.github.io/posts/sqli-demo1/"></a>
+  <a class="entry-link" aria-label="post link to 记一次实战src中的SQL注入" href="https://lhzzz08.github.io/posts/sqlidemo1/"></a>
 </article>
 
 <article class="post-entry"> 
@@ -170,7 +209,7 @@ Tips：注释符号一般都是不起作用的，建议使用单引号闭合的�
     </h2>
   </header>
   <div class="entry-content">
-    <p>声明：第一次参加极客大挑战CTF比赛，web方向总共解决了六道题目（6/20），我是菜鸟🫠
+    <p>声明 第一次参加极客大挑战CTF比赛，web方向总共解决了六道题目（6/20），我是菜鸟🫠
 阿基里斯追乌龟 #JavaScript
 题目描述：在古希腊，英雄阿基里斯和一只乌龟赛跑。阿基里斯的速度是乌龟的十倍。比赛开始时，乌龟在阿基里斯前面100米。芝诺悖论认为，当阿基里斯追到乌龟的出发点时，乌龟已经又向前爬了一段距离。当阿基里斯再追到那个位置时，乌龟又向前爬了。如此无限循环，阿基里斯似乎永远也追不上乌龟。他真的追不上吗？
 大概查看网页信息，只要让阿基里斯的位置比乌龟的位置远即可得到 flag，但是根据题目的 JavaScript 代码，不可能一直点击追赶按键，其实只要用浏览器进行前端调试即可
@@ -188,8 +227,8 @@ function encryptData(obj) { const jsonString = JSON.stringify(obj); return btoa(
     </h2>
   </header>
   <div class="entry-content">
-    <p>快速开始 声明：因为我自己使用的是 MacBook，所以以下操作环境均为 macOS，但操作思路是一致的
-开始前准备：
+    <p>声明 以下具体操作环境为 macOS，不同操作系统操作思路一致
+快速开始 开始前准备：
 安装了 homebrew 软件包管理系统 安装了 git 分布式版本控制系统 拥有一个 GitHub 静态网站托管仓库（GitHub Pages） 在执行代码前可以先查看本文中会遇到的问题 # 安装 hugo 静态网站生成器 brew install hugo # 找一个放置网站数据的地方 cd ~/Workspace # 创建一个名为 Lhz-blogs 的新网站项目目录 # --format 来选取构建的首选文件格式（toml 默认 ｜ yaml ｜ json） hugo new site Lhz-blogs --format yaml # 进入新创建的项目目录 cd Lhz-blogs # 在项目根目录下初始化 git 仓库 git init # 拉取最新的 PaperMod 网站主题 git submodule add --depth=1 https://github.com/adityatelange/hugo-PaperMod.git themes/PaperMod # 追加网站主题配置信息 # 拿我的 hugo.yaml 举个例子 baseURL: https://lhzzz08.github.io languageCode: en-us title: Lhz&#39;s blog theme: PaperMod params: homeInfoParams: Title: &#34;在这里分享我的个人见解与技术心得🎉&#34; Content: &#34;大二在读，专注于Web安全，欢迎交流👏（wx:lhz13588161325)&#34; # 创建一篇 quickstart.md 的文章，位于 content/posts/ 目录下 hugo new posts/quickstart.md # 编辑文章 open content/posts/quickstart.md -a Typora # 在本地启动一个 Web 服务器预览博客，可以边写边改，在部署前检查 hugo server # 将项目源文件编译成静态文件并输出到项目根目录的 public 目录下 hugo # 切换为静态文件目录 cd public # 在静态目录下初始化第二个 git 仓库 git init # 为静态文件仓库添加一个名为 git-blog 的远程仓库，指向您的 GitHub Pages 仓库 URL git remote add git-blog https://github.com/lhzzz08/lhzzz08.github.io.git # 显示当前仓库配置的所有远程仓库的详细信息 git remote -v # 将目录下的所有静态文件添加到 git 暂存区 git add . # 将暂存区的文件提交到本地仓库 git commit -m &#34;init myblog&#34; # 将本地 main 分支的内容提交到远程仓库 git push -u github-blog main 会遇到的问题：
 ...</p>
   </div>
