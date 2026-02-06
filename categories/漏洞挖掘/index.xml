@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>漏洞挖掘 on Lhz&#39;s blog</title>
-    <link>http://localhost:1313/categories/%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98/</link>
+    <link>https://lhzzz08.github.io/categories/%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98/</link>
     <description>Recent content in 漏洞挖掘 on Lhz&#39;s blog</description>
     <generator>Hugo -- 0.152.2</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 04 Feb 2026 21:34:01 +0800</lastBuildDate>
-    <atom:link href="http://localhost:1313/categories/%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://lhzzz08.github.io/categories/%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>浏览器渗透插件分享</title>
-      <link>http://localhost:1313/posts/chromeplugin/</link>
+      <link>https://lhzzz08.github.io/posts/chromeplugin/</link>
       <pubDate>Wed, 04 Feb 2026 21:34:01 +0800</pubDate>
-      <guid>http://localhost:1313/posts/chromeplugin/</guid>
+      <guid>https://lhzzz08.github.io/posts/chromeplugin/</guid>
       <description>&lt;h1 id=&#34;声明&#34;&gt;声明&lt;/h1&gt;
 &lt;p&gt;&lt;strong&gt;操作环境为 Ghrome 浏览器，主要介绍插件的大致作用，具体操作细节不做讲解，后续遇到好用的插件会在文章后面更新分享的，尽情期待😘&lt;/strong&gt;&lt;/p&gt;
 &lt;h1 id=&#34;proxy-switchyomega-3-zeroomega&#34;&gt;Proxy SwitchyOmega 3 (ZeroOmega)&lt;/h1&gt;
 &lt;p&gt;&lt;strong&gt;说明：好用的代理工具，结合抓包工具或代理插件使用，可以对无需代理的目标进行白名单处理，下面给出我常用的白名单列表，遇到一个添加一个即可&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img alt=&#34;插件一&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/images/2026-1/plugin1.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;插件一&#34; loading=&#34;lazy&#34; src=&#34;https://lhzzz08.github.io/images/2026-1/plugin1.png&#34;&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;*.bing.com
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;*.bing.cn
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;*.bing.net
@@ -39,16 +39,16 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;oauthaccountmanager.googleapis.com
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;hackbar&#34;&gt;HackBar&lt;/h1&gt;
 &lt;p&gt;&lt;strong&gt;说明：打过CTF的都懂，可以理解为网页版的简易抓包工具，不多解释了&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img alt=&#34;插件二&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/images/2026-1/plugin2.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;插件二&#34; loading=&#34;lazy&#34; src=&#34;https://lhzzz08.github.io/images/2026-1/plugin2.png&#34;&gt;&lt;/p&gt;
 &lt;h1 id=&#34;findsomething&#34;&gt;FindSomething&lt;/h1&gt;
 &lt;p&gt;&lt;strong&gt;说明：又叫”熊猫头“，会对页面中的静态资源进行信息提取，可以获得一些网页目录、api接口等敏感路径和用户名、密码等一些敏感信息，还会列出完整URL、IP、域名等等，用于信息收集&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img alt=&#34;插件三&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/images/2026-1/plugin3.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;插件三&#34; loading=&#34;lazy&#34; src=&#34;https://lhzzz08.github.io/images/2026-1/plugin3.png&#34;&gt;&lt;/p&gt;
 &lt;h1 id=&#34;雪瞳&#34;&gt;雪瞳&lt;/h1&gt;
 &lt;p&gt;&lt;strong&gt;Tips：需要&lt;a href=&#34;https://github.com/SickleSec/snoweyes&#34;&gt;GitHub&lt;/a&gt;下载自行导入&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;说明：和 FindSomething 功能相似，一款新出的综合信息提取识别插件，多了一些指纹嗅探、网站解析的功能，可以添加扫描白名单&lt;/strong&gt;&lt;/p&gt;
 &lt;h1 id=&#34;wappalyzer---technology-profiler&#34;&gt;Wappalyzer - Technology profiler&lt;/h1&gt;
 &lt;p&gt;&lt;strong&gt;说明：老牌指纹识别工具，必备&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img alt=&#34;插件五&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/images/2026-1/plugin5.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;插件五&#34; loading=&#34;lazy&#34; src=&#34;https://lhzzz08.github.io/images/2026-1/plugin5.png&#34;&gt;&lt;/p&gt;
 &lt;h1 id=&#34;source-detector&#34;&gt;Source detector&lt;/h1&gt;
 &lt;p&gt;&lt;strong&gt;Tips：需要&lt;a href=&#34;https://github.com/mKeySafe/SourceDetector-dist&#34;&gt;GitHub&lt;/a&gt;下载自行导入，Chrome版本高于等于v142，无法安装此插件&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;说明：自动化提取 js.map 文件（webpack进行打包等）的工具，后续可以利用 reverse-sourcemap 工具，还原源代码，进行代码审计&lt;/strong&gt;&lt;/p&gt;
@@ -60,15 +60,15 @@
     </item>
     <item>
       <title>记一次实战src中的SQL注入</title>
-      <link>http://localhost:1313/posts/sqlidemo1/</link>
+      <link>https://lhzzz08.github.io/posts/sqlidemo1/</link>
       <pubDate>Sat, 31 Jan 2026 12:08:01 +0800</pubDate>
-      <guid>http://localhost:1313/posts/sqlidemo1/</guid>
+      <guid>https://lhzzz08.github.io/posts/sqlidemo1/</guid>
       <description>&lt;h1 id=&#34;声明&#34;&gt;声明&lt;/h1&gt;
 &lt;p&gt;&lt;strong&gt;本博客提供的思路和技术仅限于提升自身技术，不得用于非法活动，任何非法活动均与本博客的立场相违背，违法者将依法承担法律责任&lt;/strong&gt;&lt;/p&gt;
 &lt;h1 id=&#34;某数字店铺存在sql注入漏洞&#34;&gt;某数字店铺存在SQL注入漏洞&lt;/h1&gt;
 &lt;p&gt;注册后登陆数字店铺后台查看“数字标签”页面，其中的查询框存在SQL报错注入&lt;/p&gt;
-&lt;p&gt;&lt;img alt=&#34;数字店铺后台&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/images/2026-1/shop1.png&#34;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img alt=&#34;报错数据包1&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/images/2026-1/burpsuite1.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;数字店铺后台&#34; loading=&#34;lazy&#34; src=&#34;https://lhzzz08.github.io/images/2026-1/shop1.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;报错数据包1&#34; loading=&#34;lazy&#34; src=&#34;https://lhzzz08.github.io/images/2026-1/burpsuite1.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;仔细观察请求数据包，我传递的查询参数只有一个&lt;code&gt;1&#39;&lt;/code&gt;，但是请求数据包中的内容却采用POST&lt;code&gt;multipart/form-data&lt;/code&gt;类型进行传输，更具数据包分析很容易知道前端进行了加密签名处理，这个网站中的其他数据传输都采用这种方式，&lt;strong&gt;这样可以让你看不出传递的具体数据并防止篡改请求包，这就是为什么此站在无waf的情况下，挂着xray代理（以及任何多强大扫描SQL注入的工具）不可能扫描出此处存在SQL注入的原因&lt;/strong&gt;，也就是说这里只能靠手动尝试才可以发现&lt;/p&gt;
 &lt;p&gt;查询参数输入&lt;code&gt;1&#39;&lt;/code&gt;时回显&lt;code&gt;You have an error in your SQL syntax&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;查询参数输入&lt;code&gt;1&#39;&#39;&lt;/code&gt;时回显正常&lt;/p&gt;
@@ -77,7 +77,7 @@
 &lt;p&gt;通过4个单引号检测，明确确定存在SQL注入，接下来需要构造注入语句得到数据库名证明危害即可，&lt;strong&gt;不要拖库拿信息！！！不要拖库拿信息！！！不要拖库拿信息！！！&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Tips：注释符号一般都是不起作用的，建议使用单引号闭合的方式闭合语句，这里注释符就不起作用&lt;/strong&gt;&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-Payload&#34; data-lang=&#34;Payload&#34;&gt;1&amp;#39; and updatexml(1,concat(0x7e,DATABASE(),0x7e),1) and &amp;#39;1&amp;#39;=&amp;#39;1
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img alt=&#34;报错数据包1&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/images/2026-1/burpsuite2.png&#34;&gt;&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img alt=&#34;报错数据包1&#34; loading=&#34;lazy&#34; src=&#34;https://lhzzz08.github.io/images/2026-1/burpsuite2.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;用报错注入，成功得到数据库名😎&lt;/p&gt;
 &lt;h1 id=&#34;总结&#34;&gt;总结&lt;/h1&gt;
 &lt;ul&gt;

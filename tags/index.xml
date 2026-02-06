@@ -2,52 +2,52 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Tags on Lhz&#39;s blog</title>
-    <link>http://localhost:1313/tags/</link>
+    <link>https://lhzzz08.github.io/tags/</link>
     <description>Recent content in Tags on Lhz&#39;s blog</description>
     <generator>Hugo -- 0.152.2</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 06 Feb 2026 22:18:16 +0800</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://lhzzz08.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>生活技巧</title>
-      <link>http://localhost:1313/tags/%E7%94%9F%E6%B4%BB%E6%8A%80%E5%B7%A7/</link>
+      <link>https://lhzzz08.github.io/tags/%E7%94%9F%E6%B4%BB%E6%8A%80%E5%B7%A7/</link>
       <pubDate>Fri, 06 Feb 2026 22:18:16 +0800</pubDate>
-      <guid>http://localhost:1313/tags/%E7%94%9F%E6%B4%BB%E6%8A%80%E5%B7%A7/</guid>
+      <guid>https://lhzzz08.github.io/tags/%E7%94%9F%E6%B4%BB%E6%8A%80%E5%B7%A7/</guid>
       <description></description>
     </item>
     <item>
       <title>渗透</title>
-      <link>http://localhost:1313/tags/%E6%B8%97%E9%80%8F/</link>
+      <link>https://lhzzz08.github.io/tags/%E6%B8%97%E9%80%8F/</link>
       <pubDate>Wed, 04 Feb 2026 21:34:01 +0800</pubDate>
-      <guid>http://localhost:1313/tags/%E6%B8%97%E9%80%8F/</guid>
+      <guid>https://lhzzz08.github.io/tags/%E6%B8%97%E9%80%8F/</guid>
       <description></description>
     </item>
     <item>
       <title>SRC</title>
-      <link>http://localhost:1313/tags/src/</link>
+      <link>https://lhzzz08.github.io/tags/src/</link>
       <pubDate>Sat, 31 Jan 2026 12:08:01 +0800</pubDate>
-      <guid>http://localhost:1313/tags/src/</guid>
+      <guid>https://lhzzz08.github.io/tags/src/</guid>
       <description></description>
     </item>
     <item>
       <title>CTF</title>
-      <link>http://localhost:1313/tags/ctf/</link>
+      <link>https://lhzzz08.github.io/tags/ctf/</link>
       <pubDate>Mon, 24 Nov 2025 21:04:46 +0800</pubDate>
-      <guid>http://localhost:1313/tags/ctf/</guid>
+      <guid>https://lhzzz08.github.io/tags/ctf/</guid>
       <description></description>
     </item>
     <item>
       <title>极客大挑战</title>
-      <link>http://localhost:1313/tags/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98/</link>
+      <link>https://lhzzz08.github.io/tags/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98/</link>
       <pubDate>Mon, 24 Nov 2025 21:04:46 +0800</pubDate>
-      <guid>http://localhost:1313/tags/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98/</guid>
+      <guid>https://lhzzz08.github.io/tags/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98/</guid>
       <description></description>
     </item>
     <item>
       <title>网站搭建</title>
-      <link>http://localhost:1313/tags/%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA/</link>
+      <link>https://lhzzz08.github.io/tags/%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA/</link>
       <pubDate>Thu, 20 Nov 2025 15:16:41 +0800</pubDate>
-      <guid>http://localhost:1313/tags/%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA/</guid>
+      <guid>https://lhzzz08.github.io/tags/%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA/</guid>
       <description></description>
     </item>
   </channel>
