@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>CTF on Lhz&#39;s blog</title>
-    <link>https://lhzzz08.github.io/categories/ctf/</link>
+    <link>http://localhost:1313/categories/ctf/</link>
     <description>Recent content in CTF on Lhz&#39;s blog</description>
     <generator>Hugo -- 0.152.2</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 24 Nov 2025 21:04:46 +0800</lastBuildDate>
-    <atom:link href="https://lhzzz08.github.io/categories/ctf/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/categories/ctf/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>2025极客大挑战web（部分）WP</title>
-      <link>https://lhzzz08.github.io/posts/geekchallengewebwp/</link>
+      <link>http://localhost:1313/posts/geekchallengewebwp/</link>
       <pubDate>Mon, 24 Nov 2025 21:04:46 +0800</pubDate>
-      <guid>https://lhzzz08.github.io/posts/geekchallengewebwp/</guid>
+      <guid>http://localhost:1313/posts/geekchallengewebwp/</guid>
       <description>&lt;h1 id=&#34;声明&#34;&gt;声明&lt;/h1&gt;
 &lt;p&gt;&lt;strong&gt;第一次参加极客大挑战CTF比赛，web方向总共解决了六道题目（6/20），我是菜鸟🫠&lt;/strong&gt;&lt;/p&gt;
 &lt;h1 id=&#34;阿基里斯追乌龟&#34;&gt;阿基里斯追乌龟&lt;/h1&gt;

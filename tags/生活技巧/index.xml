@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>生活技巧 on Lhz&#39;s blog</title>
+    <link>http://localhost:1313/tags/%E7%94%9F%E6%B4%BB%E6%8A%80%E5%B7%A7/</link>
+    <description>Recent content in 生活技巧 on Lhz&#39;s blog</description>
+    <generator>Hugo -- 0.152.2</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 06 Feb 2026 22:18:16 +0800</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/%E7%94%9F%E6%B4%BB%E6%8A%80%E5%B7%A7/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>MacBook鼠标设置</title>
+      <link>http://localhost:1313/posts/mouseviewpoint/</link>
+      <pubDate>Fri, 06 Feb 2026 22:18:16 +0800</pubDate>
+      <guid>http://localhost:1313/posts/mouseviewpoint/</guid>
+      <description>&lt;h1 id=&#34;前言&#34;&gt;前言&lt;/h1&gt;
+&lt;p&gt;大二也是换了苹果电脑，听说触控板很好用，大二上学期就也没有买鼠标，使用体验确实挺惊艳的，就是有些时候手一直搓来搓去太累了，寒假放假买了个鼠标，不买不知道，一买吓一跳，对于我（网安需求）来说，鼠标是真的好用多了，后悔没有早点买，呜呜呜😭&lt;/p&gt;
+&lt;h1 id=&#34;鼠标选择&#34;&gt;鼠标选择&lt;/h1&gt;
+&lt;p&gt;我买的是 ROG AP，这里肯定有人会说主播主播为什么 macOS 不配合罗技鼠标使用，罗技不是配合苹果很好吗，我这里也是没有使用过，就不做评价了，&lt;strong&gt;总的来说，带两个侧键的鼠标（任意品牌）配合 Mac Mousse Fix 软件都可以是鼠标相当丝滑&lt;/strong&gt;，对我渗透效率提升也是杠杠的，所以挑选鼠标看自己要求就行，外观好看、性能好等等，有些人反应蓝牙连接经常时不时断连，我一直用的蓝牙，从来没有这方面的问题，我也不太了解，参考一下即可&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;我的鼠标&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/images/2026-1/rogmouse.jpg&#34;&gt;&lt;/p&gt;
+&lt;h1 id=&#34;软件下载&#34;&gt;软件下载&lt;/h1&gt;
+&lt;p&gt;Mac Mousse Fix 正版软件要收费，从 &lt;a href=&#34;https://www.macwk.com/soft/mac-mouse-fix&#34;&gt;MacWK&lt;/a&gt; 下载破解版即可&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;软件下载&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/images/2026-1/macmousefix.png&#34;&gt;&lt;/p&gt;
+&lt;h1 id=&#34;软件配置&#34;&gt;软件配置&lt;/h1&gt;
+&lt;p&gt;我的配置分享给你们，&lt;strong&gt;我的配置真的好用&lt;/strong&gt;，当然你也可以自定义，鼠标移动速度可以结合设置中的鼠标速度进行调试&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;软件配置&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/images/2026-1/mouseconfig.png&#34;&gt;&lt;/p&gt;
+&lt;h1 id=&#34;总结&#34;&gt;总结&lt;/h1&gt;
+&lt;p&gt;&lt;strong&gt;买一个外观好看，性能不错，有两个侧键，有蓝牙连接功能的鼠标，在 MacBook 中配合 Mac Mousse Fix 软件使用，体验丝滑无比，游刃有余，完全不输触控板&lt;/strong&gt;&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

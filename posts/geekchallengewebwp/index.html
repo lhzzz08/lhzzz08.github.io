@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" dir="auto" data-theme="auto">
 
-<head><meta charset="utf-8">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="index, follow">
+<meta name="robots" content="noindex, nofollow">
 <title>2025极客大挑战web（部分）WP | Lhz&#39;s blog</title>
 <meta name="keywords" content="CTF, 极客大挑战">
 <meta name="description" content="声明
@@ -101,16 +101,16 @@ document.addEventListener(&#39;DOMContentLoaded&#39;, () =&gt; {
 Vibe SEO
 #目录扫描 #Linux">
 <meta name="author" content="">
-<link rel="canonical" href="https://lhzzz08.github.io/posts/geekchallengewebwp/">
+<link rel="canonical" href="http://localhost:1313/posts/geekchallengewebwp/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.343cc480b9ffc8f04ccbe5e968ad674880cab773ec19905e93033065c1e7a804.css" integrity="sha256-NDzEgLn/yPBMy&#43;XpaK1nSIDKt3PsGZBekwMwZcHnqAQ=" rel="preload stylesheet" as="style">
-<link rel="icon" href="https://lhzzz08.github.io/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="https://lhzzz08.github.io/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="https://lhzzz08.github.io/favicon-32x32.png">
-<link rel="apple-touch-icon" href="https://lhzzz08.github.io/apple-touch-icon.png">
-<link rel="mask-icon" href="https://lhzzz08.github.io/safari-pinned-tab.svg">
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="en" href="https://lhzzz08.github.io/posts/geekchallengewebwp/">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/posts/geekchallengewebwp/">
 <noscript>
     <style>
         #theme-toggle,
@@ -162,174 +162,13 @@ Vibe SEO
         document.querySelector("html").dataset.theme = 'light';
     }
 
-</script><meta property="og:url" content="https://lhzzz08.github.io/posts/geekchallengewebwp/">
-  <meta property="og:site_name" content="Lhz&#39;s blog">
-  <meta property="og:title" content="2025极客大挑战web（部分）WP">
-  <meta property="og:description" content="声明 第一次参加极客大挑战CTF比赛，web方向总共解决了六道题目（6/20），我是菜鸟🫠
-阿基里斯追乌龟 #JavaScript
-题目描述：在古希腊，英雄阿基里斯和一只乌龟赛跑。阿基里斯的速度是乌龟的十倍。比赛开始时，乌龟在阿基里斯前面100米。芝诺悖论认为，当阿基里斯追到乌龟的出发点时，乌龟已经又向前爬了一段距离。当阿基里斯再追到那个位置时，乌龟又向前爬了。如此无限循环，阿基里斯似乎永远也追不上乌龟。他真的追不上吗？
-大概查看网页信息，只要让阿基里斯的位置比乌龟的位置远即可得到 flag，但是根据题目的 JavaScript 代码，不可能一直点击追赶按键，其实只要用浏览器进行前端调试即可
-... const payload = { achilles_distance: achillesPos, tortoise_distance: tortoisePos, }; fetch(&#39;/chase&#39;, { // 在这里打断点，在 fetch 发起请求前修改 Payload 对象 method: &#39;POST&#39;, // 使 achillesPos &gt; tortoisePos headers: { &#39;Content-Type&#39;: &#39;application/json&#39;, }, body: JSON.stringify({ &#34;data&#34;: encryptData(payload) }), }) ... 修改后继续执行脚本即可得到 flag，对代码感兴趣的可以去详细了解一下原理，下面附上源代码
-function encryptData(obj) { const jsonString = JSON.stringify(obj); return btoa(unescape(encodeURIComponent(jsonString))); } function decryptData(encodedString) { const jsonString = decodeURIComponent(escape(atob(encodedString))); return JSON.parse(jsonString); } document.addEventListener(&#39;DOMContentLoaded&#39;, () =&gt; { const chaseBtn = document.getElementById(&#39;chase-btn&#39;); const achillesDistanceSpan = document.getElementById(&#39;achilles-distance&#39;); const tortoiseDistanceSpan = document.getElementById(&#39;tortoise-distance&#39;); const resultDiv = document.getElementById(&#39;result&#39;); let achillesPos = 0; let tortoisePos = 10000000000; // Initial head start for the tortoise achillesDistanceSpan.textContent = achillesPos.toFixed(2); tortoiseDistanceSpan.textContent = tortoisePos.toFixed(2); chaseBtn.addEventListener(&#39;click&#39;, () =&gt; { // Achilles moves to the tortoise&#39;s current position const achillesMoveDistance = tortoisePos - achillesPos; achillesPos = tortoisePos; // The tortoise moves 1/10th of the distance Achilles just covered const tortoiseMoveDistance = achillesMoveDistance / 10; tortoisePos &#43;= tortoiseMoveDistance; achillesDistanceSpan.textContent = achillesPos.toFixed(2); tortoiseDistanceSpan.textContent = tortoisePos.toFixed(2); const payload = { achilles_distance: achillesPos, tortoise_distance: tortoisePos, }; fetch(&#39;/chase&#39;, { method: &#39;POST&#39;, headers: { &#39;Content-Type&#39;: &#39;application/json&#39;, }, body: JSON.stringify({ &#34;data&#34;: encryptData(payload) }), }) .then(response =&gt; response.json()) .then(encryptedResponse =&gt; { if (encryptedResponse.data) { const data = decryptData(encryptedResponse.data); if (data.flag) { // Use &#39;pre-wrap&#39; to respect newlines in the fake flag message resultDiv.style.whiteSpace = &#39;pre-wrap&#39;; resultDiv.textContent = `你追上它了！\n${data.flag}`; chaseBtn.disabled = true; } else if (data.message) { resultDiv.textContent = data.message; } } else { console.error(&#39;Error:&#39;, encryptedResponse.error); resultDiv.textContent = `发生错误: ${encryptedResponse.error}`; } }) .catch(error =&gt; { console.error(&#39;Error:&#39;, error); resultDiv.textContent = &#39;发生错误。&#39;; }); }); }); Vibe SEO #目录扫描 #Linux">
-  <meta property="og:locale" content="en-us">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2025-11-24T21:04:46+08:00">
-    <meta property="article:modified_time" content="2025-11-24T21:04:46+08:00">
-    <meta property="article:tag" content="CTF">
-    <meta property="article:tag" content="极客大挑战">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="2025极客大挑战web（部分）WP">
-<meta name="twitter:description" content="声明
-第一次参加极客大挑战CTF比赛，web方向总共解决了六道题目（6/20），我是菜鸟🫠
-阿基里斯追乌龟
-#JavaScript
-题目描述：在古希腊，英雄阿基里斯和一只乌龟赛跑。阿基里斯的速度是乌龟的十倍。比赛开始时，乌龟在阿基里斯前面100米。芝诺悖论认为，当阿基里斯追到乌龟的出发点时，乌龟已经又向前爬了一段距离。当阿基里斯再追到那个位置时，乌龟又向前爬了。如此无限循环，阿基里斯似乎永远也追不上乌龟。他真的追不上吗？
-大概查看网页信息，只要让阿基里斯的位置比乌龟的位置远即可得到 flag，但是根据题目的 JavaScript 代码，不可能一直点击追赶按键，其实只要用浏览器进行前端调试即可
-...
-const payload = { 
-    achilles_distance: achillesPos,
-    tortoise_distance: tortoisePos,
-};
-fetch(&#39;/chase&#39;, {             // 在这里打断点，在 fetch 发起请求前修改 Payload 对象
-    method: &#39;POST&#39;,           // 使 achillesPos &gt; tortoisePos
-    headers: {
-        &#39;Content-Type&#39;: &#39;application/json&#39;,
-    },
-    body: JSON.stringify({ 
-        &#34;data&#34;: encryptData(payload) 
-    }),
-})
-...
-修改后继续执行脚本即可得到 flag，对代码感兴趣的可以去详细了解一下原理，下面附上源代码
-function encryptData(obj) {
-    const jsonString = JSON.stringify(obj);
-    return btoa(unescape(encodeURIComponent(jsonString)));
-}
-
-function decryptData(encodedString) {
-    const jsonString = decodeURIComponent(escape(atob(encodedString)));
-    return JSON.parse(jsonString);
-}
-
-document.addEventListener(&#39;DOMContentLoaded&#39;, () =&gt; {
-    const chaseBtn = document.getElementById(&#39;chase-btn&#39;);
-    const achillesDistanceSpan = document.getElementById(&#39;achilles-distance&#39;);
-    const tortoiseDistanceSpan = document.getElementById(&#39;tortoise-distance&#39;);
-    const resultDiv = document.getElementById(&#39;result&#39;);
-
-    let achillesPos = 0;
-    let tortoisePos = 10000000000; // Initial head start for the tortoise
-
-    achillesDistanceSpan.textContent = achillesPos.toFixed(2);
-    tortoiseDistanceSpan.textContent = tortoisePos.toFixed(2);
-
-    chaseBtn.addEventListener(&#39;click&#39;, () =&gt; {
-        // Achilles moves to the tortoise&#39;s current position
-        const achillesMoveDistance = tortoisePos - achillesPos;
-        achillesPos = tortoisePos;
-
-        // The tortoise moves 1/10th of the distance Achilles just covered
-        const tortoiseMoveDistance = achillesMoveDistance / 10;
-        tortoisePos &#43;= tortoiseMoveDistance;
-
-        achillesDistanceSpan.textContent = achillesPos.toFixed(2);
-        tortoiseDistanceSpan.textContent = tortoisePos.toFixed(2);
-
-        const payload = {
-            achilles_distance: achillesPos,
-            tortoise_distance: tortoisePos,
-        };
-
-        fetch(&#39;/chase&#39;, {
-            method: &#39;POST&#39;,
-            headers: {
-                &#39;Content-Type&#39;: &#39;application/json&#39;,
-            },
-            body: JSON.stringify({ &#34;data&#34;: encryptData(payload) }),
-        })
-        .then(response =&gt; response.json())
-        .then(encryptedResponse =&gt; {
-            if (encryptedResponse.data) {
-                const data = decryptData(encryptedResponse.data);
-                if (data.flag) {
-                    // Use &#39;pre-wrap&#39; to respect newlines in the fake flag message
-                    resultDiv.style.whiteSpace = &#39;pre-wrap&#39;;
-                    resultDiv.textContent = `你追上它了！\n${data.flag}`;
-                    chaseBtn.disabled = true;
-                } else if (data.message) {
-                    resultDiv.textContent = data.message;
-                }
-            } else {
-                console.error(&#39;Error:&#39;, encryptedResponse.error);
-                resultDiv.textContent = `发生错误: ${encryptedResponse.error}`;
-            }
-        })
-        .catch(error =&gt; {
-            console.error(&#39;Error:&#39;, error);
-            resultDiv.textContent = &#39;发生错误。&#39;;
-        });
-    });
-}); 
-Vibe SEO
-#目录扫描 #Linux">
-
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position":  1 ,
-      "name": "Posts",
-      "item": "https://lhzzz08.github.io/posts/"
-    }, 
-    {
-      "@type": "ListItem",
-      "position":  2 ,
-      "name": "2025极客大挑战web（部分）WP",
-      "item": "https://lhzzz08.github.io/posts/geekchallengewebwp/"
-    }
-  ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": "2025极客大挑战web（部分）WP",
-  "name": "2025极客大挑战web（部分）WP",
-  "description": "声明 第一次参加极客大挑战CTF比赛，web方向总共解决了六道题目（6/20），我是菜鸟🫠\n阿基里斯追乌龟 #JavaScript\n题目描述：在古希腊，英雄阿基里斯和一只乌龟赛跑。阿基里斯的速度是乌龟的十倍。比赛开始时，乌龟在阿基里斯前面100米。芝诺悖论认为，当阿基里斯追到乌龟的出发点时，乌龟已经又向前爬了一段距离。当阿基里斯再追到那个位置时，乌龟又向前爬了。如此无限循环，阿基里斯似乎永远也追不上乌龟。他真的追不上吗？\n大概查看网页信息，只要让阿基里斯的位置比乌龟的位置远即可得到 flag，但是根据题目的 JavaScript 代码，不可能一直点击追赶按键，其实只要用浏览器进行前端调试即可\n... const payload = { achilles_distance: achillesPos, tortoise_distance: tortoisePos, }; fetch(\u0026#39;/chase\u0026#39;, { // 在这里打断点，在 fetch 发起请求前修改 Payload 对象 method: \u0026#39;POST\u0026#39;, // 使 achillesPos \u0026gt; tortoisePos headers: { \u0026#39;Content-Type\u0026#39;: \u0026#39;application/json\u0026#39;, }, body: JSON.stringify({ \u0026#34;data\u0026#34;: encryptData(payload) }), }) ... 修改后继续执行脚本即可得到 flag，对代码感兴趣的可以去详细了解一下原理，下面附上源代码\nfunction encryptData(obj) { const jsonString = JSON.stringify(obj); return btoa(unescape(encodeURIComponent(jsonString))); } function decryptData(encodedString) { const jsonString = decodeURIComponent(escape(atob(encodedString))); return JSON.parse(jsonString); } document.addEventListener(\u0026#39;DOMContentLoaded\u0026#39;, () =\u0026gt; { const chaseBtn = document.getElementById(\u0026#39;chase-btn\u0026#39;); const achillesDistanceSpan = document.getElementById(\u0026#39;achilles-distance\u0026#39;); const tortoiseDistanceSpan = document.getElementById(\u0026#39;tortoise-distance\u0026#39;); const resultDiv = document.getElementById(\u0026#39;result\u0026#39;); let achillesPos = 0; let tortoisePos = 10000000000; // Initial head start for the tortoise achillesDistanceSpan.textContent = achillesPos.toFixed(2); tortoiseDistanceSpan.textContent = tortoisePos.toFixed(2); chaseBtn.addEventListener(\u0026#39;click\u0026#39;, () =\u0026gt; { // Achilles moves to the tortoise\u0026#39;s current position const achillesMoveDistance = tortoisePos - achillesPos; achillesPos = tortoisePos; // The tortoise moves 1/10th of the distance Achilles just covered const tortoiseMoveDistance = achillesMoveDistance / 10; tortoisePos += tortoiseMoveDistance; achillesDistanceSpan.textContent = achillesPos.toFixed(2); tortoiseDistanceSpan.textContent = tortoisePos.toFixed(2); const payload = { achilles_distance: achillesPos, tortoise_distance: tortoisePos, }; fetch(\u0026#39;/chase\u0026#39;, { method: \u0026#39;POST\u0026#39;, headers: { \u0026#39;Content-Type\u0026#39;: \u0026#39;application/json\u0026#39;, }, body: JSON.stringify({ \u0026#34;data\u0026#34;: encryptData(payload) }), }) .then(response =\u0026gt; response.json()) .then(encryptedResponse =\u0026gt; { if (encryptedResponse.data) { const data = decryptData(encryptedResponse.data); if (data.flag) { // Use \u0026#39;pre-wrap\u0026#39; to respect newlines in the fake flag message resultDiv.style.whiteSpace = \u0026#39;pre-wrap\u0026#39;; resultDiv.textContent = `你追上它了！\\n${data.flag}`; chaseBtn.disabled = true; } else if (data.message) { resultDiv.textContent = data.message; } } else { console.error(\u0026#39;Error:\u0026#39;, encryptedResponse.error); resultDiv.textContent = `发生错误: ${encryptedResponse.error}`; } }) .catch(error =\u0026gt; { console.error(\u0026#39;Error:\u0026#39;, error); resultDiv.textContent = \u0026#39;发生错误。\u0026#39;; }); }); }); Vibe SEO #目录扫描 #Linux\n",
-  "keywords": [
-    "CTF", "极客大挑战"
-  ],
-  "articleBody": "声明 第一次参加极客大挑战CTF比赛，web方向总共解决了六道题目（6/20），我是菜鸟🫠\n阿基里斯追乌龟 #JavaScript\n题目描述：在古希腊，英雄阿基里斯和一只乌龟赛跑。阿基里斯的速度是乌龟的十倍。比赛开始时，乌龟在阿基里斯前面100米。芝诺悖论认为，当阿基里斯追到乌龟的出发点时，乌龟已经又向前爬了一段距离。当阿基里斯再追到那个位置时，乌龟又向前爬了。如此无限循环，阿基里斯似乎永远也追不上乌龟。他真的追不上吗？\n大概查看网页信息，只要让阿基里斯的位置比乌龟的位置远即可得到 flag，但是根据题目的 JavaScript 代码，不可能一直点击追赶按键，其实只要用浏览器进行前端调试即可\n... const payload = { achilles_distance: achillesPos, tortoise_distance: tortoisePos, }; fetch('/chase', { // 在这里打断点，在 fetch 发起请求前修改 Payload 对象 method: 'POST', // 使 achillesPos \u003e tortoisePos headers: { 'Content-Type': 'application/json', }, body: JSON.stringify({ \"data\": encryptData(payload) }), }) ... 修改后继续执行脚本即可得到 flag，对代码感兴趣的可以去详细了解一下原理，下面附上源代码\nfunction encryptData(obj) { const jsonString = JSON.stringify(obj); return btoa(unescape(encodeURIComponent(jsonString))); } function decryptData(encodedString) { const jsonString = decodeURIComponent(escape(atob(encodedString))); return JSON.parse(jsonString); } document.addEventListener('DOMContentLoaded', () =\u003e { const chaseBtn = document.getElementById('chase-btn'); const achillesDistanceSpan = document.getElementById('achilles-distance'); const tortoiseDistanceSpan = document.getElementById('tortoise-distance'); const resultDiv = document.getElementById('result'); let achillesPos = 0; let tortoisePos = 10000000000; // Initial head start for the tortoise achillesDistanceSpan.textContent = achillesPos.toFixed(2); tortoiseDistanceSpan.textContent = tortoisePos.toFixed(2); chaseBtn.addEventListener('click', () =\u003e { // Achilles moves to the tortoise's current position const achillesMoveDistance = tortoisePos - achillesPos; achillesPos = tortoisePos; // The tortoise moves 1/10th of the distance Achilles just covered const tortoiseMoveDistance = achillesMoveDistance / 10; tortoisePos += tortoiseMoveDistance; achillesDistanceSpan.textContent = achillesPos.toFixed(2); tortoiseDistanceSpan.textContent = tortoisePos.toFixed(2); const payload = { achilles_distance: achillesPos, tortoise_distance: tortoisePos, }; fetch('/chase', { method: 'POST', headers: { 'Content-Type': 'application/json', }, body: JSON.stringify({ \"data\": encryptData(payload) }), }) .then(response =\u003e response.json()) .then(encryptedResponse =\u003e { if (encryptedResponse.data) { const data = decryptData(encryptedResponse.data); if (data.flag) { // Use 'pre-wrap' to respect newlines in the fake flag message resultDiv.style.whiteSpace = 'pre-wrap'; resultDiv.textContent = `你追上它了！\\n${data.flag}`; chaseBtn.disabled = true; } else if (data.message) { resultDiv.textContent = data.message; } } else { console.error('Error:', encryptedResponse.error); resultDiv.textContent = `发生错误: ${encryptedResponse.error}`; } }) .catch(error =\u003e { console.error('Error:', error); resultDiv.textContent = '发生错误。'; }); }); }); Vibe SEO #目录扫描 #Linux\n题目描述：“我让 AI 帮我做了搜索引擎优化，它好像说什么『搜索引擎喜欢结构化的站点地图』，虽然不是很懂就是了”\n网站首页什么信息都没有，但是根据题目描述中的信息，SEO (Search Engine Optimization)，就是搜索引擎优化，可以访问一些与之相关的文件目录，如：robots.txt，sitemap.xml 等，dirsearch 中也包含了这些常见目录，得到 /sitemap.xml\n",
-  "wordCount" : "1639",
-  "inLanguage": "en",
-  "datePublished": "2025-11-24T21:04:46+08:00",
-  "dateModified": "2025-11-24T21:04:46+08:00",
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://lhzzz08.github.io/posts/geekchallengewebwp/"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "Lhz's blog",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://lhzzz08.github.io/favicon.ico"
-    }
-  }
-}
 </script>
 </head>
 <body id="top">
     <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="https://lhzzz08.github.io/" accesskey="h" title="Lhz&#39;s blog (Alt + H)">Lhz&#39;s blog</a>
+            <a href="http://localhost:1313/" accesskey="h" title="Lhz&#39;s blog (Alt + H)">Lhz&#39;s blog</a>
             <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
@@ -355,17 +194,17 @@ Vibe SEO
         </div>
         <ul id="menu">
             <li>
-                <a href="https://lhzzz08.github.io/" title="Home">
+                <a href="http://localhost:1313/" title="Home">
                     <span>Home</span>
                 </a>
             </li>
             <li>
-                <a href="https://lhzzz08.github.io/categories/" title="Categories">
+                <a href="http://localhost:1313/categories/" title="Categories">
                     <span>Categories</span>
                 </a>
             </li>
             <li>
-                <a href="https://lhzzz08.github.io/tags/" title="Tags">
+                <a href="http://localhost:1313/tags/" title="Tags">
                     <span>Tags</span>
                 </a>
             </li>
@@ -983,15 +822,15 @@ index.php?f=xxx.bz2&amp;cmd=env | grep SYC
 
   <footer class="post-footer">
     <ul class="post-tags">
-      <li><a href="https://lhzzz08.github.io/tags/ctf/">CTF</a></li>
-      <li><a href="https://lhzzz08.github.io/tags/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98/">极客大挑战</a></li>
+      <li><a href="http://localhost:1313/tags/ctf/">CTF</a></li>
+      <li><a href="http://localhost:1313/tags/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98/">极客大挑战</a></li>
     </ul>
   </footer>
 </article>
     </main>
     
 <footer class="footer">
-        <span>&copy; 2026 <a href="https://lhzzz08.github.io/">Lhz&#39;s blog</a></span> · 
+        <span>&copy; 2026 <a href="http://localhost:1313/">Lhz&#39;s blog</a></span> · 
 
     <span>
         Powered by

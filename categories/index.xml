@@ -2,31 +2,31 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Categories on Lhz&#39;s blog</title>
-    <link>https://lhzzz08.github.io/categories/</link>
+    <link>http://localhost:1313/categories/</link>
     <description>Recent content in Categories on Lhz&#39;s blog</description>
     <generator>Hugo -- 0.152.2</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 04 Feb 2026 21:34:01 +0800</lastBuildDate>
-    <atom:link href="https://lhzzz08.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 06 Feb 2026 22:18:16 +0800</lastBuildDate>
+    <atom:link href="http://localhost:1313/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>其他分享内容</title>
+      <link>http://localhost:1313/categories/%E5%85%B6%E4%BB%96%E5%88%86%E4%BA%AB%E5%86%85%E5%AE%B9/</link>
+      <pubDate>Fri, 06 Feb 2026 22:18:16 +0800</pubDate>
+      <guid>http://localhost:1313/categories/%E5%85%B6%E4%BB%96%E5%88%86%E4%BA%AB%E5%86%85%E5%AE%B9/</guid>
+      <description></description>
+    </item>
     <item>
       <title>漏洞挖掘</title>
-      <link>https://lhzzz08.github.io/categories/%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98/</link>
+      <link>http://localhost:1313/categories/%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98/</link>
       <pubDate>Wed, 04 Feb 2026 21:34:01 +0800</pubDate>
-      <guid>https://lhzzz08.github.io/categories/%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98/</guid>
+      <guid>http://localhost:1313/categories/%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98/</guid>
       <description></description>
     </item>
     <item>
       <title>CTF</title>
-      <link>https://lhzzz08.github.io/categories/ctf/</link>
+      <link>http://localhost:1313/categories/ctf/</link>
       <pubDate>Mon, 24 Nov 2025 21:04:46 +0800</pubDate>
-      <guid>https://lhzzz08.github.io/categories/ctf/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>其他分享内容</title>
-      <link>https://lhzzz08.github.io/categories/%E5%85%B6%E4%BB%96%E5%88%86%E4%BA%AB%E5%86%85%E5%AE%B9/</link>
-      <pubDate>Thu, 20 Nov 2025 15:16:41 +0800</pubDate>
-      <guid>https://lhzzz08.github.io/categories/%E5%85%B6%E4%BB%96%E5%88%86%E4%BA%AB%E5%86%85%E5%AE%B9/</guid>
+      <guid>http://localhost:1313/categories/ctf/</guid>
       <description></description>
     </item>
   </channel>
