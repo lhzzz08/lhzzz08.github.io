@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
 <title>浏览器渗透插件分享 | Lhz&#39;s blog</title>
-<meta name="keywords" content="渗透">
+<meta name="keywords" content="渗透, 插件">
 <meta name="description" content="声明
 操作环境为 Ghrome 浏览器，主要介绍插件的大致作用，具体操作细节不做讲解，后续遇到好用的插件会在文章后面更新分享的，尽情期待😘
 Proxy SwitchyOmega 3 (ZeroOmega)
@@ -54,10 +54,10 @@ Tips：需要GitHub下载自行导入
 <meta name="author" content="">
 <link rel="canonical" href="https://lhzzz08.github.io/posts/chromeplugin/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.343cc480b9ffc8f04ccbe5e968ad674880cab773ec19905e93033065c1e7a804.css" integrity="sha256-NDzEgLn/yPBMy&#43;XpaK1nSIDKt3PsGZBekwMwZcHnqAQ=" rel="preload stylesheet" as="style">
-<link rel="icon" href="https://lhzzz08.github.io/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="https://lhzzz08.github.io/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="https://lhzzz08.github.io/favicon-32x32.png">
-<link rel="apple-touch-icon" href="https://lhzzz08.github.io/apple-touch-icon.png">
+<link rel="icon" href="https://lhzzz08.github.io/favicon.svg">
+<link rel="icon" type="image/png" sizes="16x16" href="https://lhzzz08.github.io/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="https://lhzzz08.github.io/favicon.svg">
+<link rel="apple-touch-icon" href="https://lhzzz08.github.io/apple-icon.png">
 <link rel="mask-icon" href="https://lhzzz08.github.io/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
@@ -134,6 +134,7 @@ Heimdallr Tips：需要GitHub下载自行导入
     <meta property="article:published_time" content="2026-02-04T21:34:01+08:00">
     <meta property="article:modified_time" content="2026-02-04T21:34:01+08:00">
     <meta property="article:tag" content="渗透">
+    <meta property="article:tag" content="插件">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="浏览器渗透插件分享">
 <meta name="twitter:description" content="声明
@@ -210,7 +211,7 @@ Tips：需要GitHub下载自行导入
   "name": "浏览器渗透插件分享",
   "description": "声明 操作环境为 Ghrome 浏览器，主要介绍插件的大致作用，具体操作细节不做讲解，后续遇到好用的插件会在文章后面更新分享的，尽情期待😘\nProxy SwitchyOmega 3 (ZeroOmega) 说明：好用的代理工具，结合抓包工具或代理插件使用，可以对无需代理的目标进行白名单处理，下面给出我常用的白名单列表，遇到一个添加一个即可\n*.bing.com *.bing.cn *.bing.net *.msn.cn www.yuque.com cn.bing.com aefd.nelreports.net www.googleapis.com content-autofill.googleapis.com www.google.com accounts.google.com optimizationguide-pa.googleapis.com www.gstatic.com android.clients.google.com clients4.google.com fofa.info google-ohttp-relay-safebrowsing.fastly-edge.com revenue.ezboti.com oauthaccountmanager.googleapis.com HackBar 说明：打过CTF的都懂，可以理解为网页版的简易抓包工具，不多解释了\nFindSomething 说明：又叫”熊猫头“，会对页面中的静态资源进行信息提取，可以获得一些网页目录、api接口等敏感路径和用户名、密码等一些敏感信息，还会列出完整URL、IP、域名等等，用于信息收集\n雪瞳 Tips：需要GitHub下载自行导入\n说明：和 FindSomething 功能相似，一款新出的综合信息提取识别插件，多了一些指纹嗅探、网站解析的功能，可以添加扫描白名单\nWappalyzer - Technology profiler 说明：老牌指纹识别工具，必备\nSource detector Tips：需要GitHub下载自行导入，Chrome版本高于等于v142，无法安装此插件\n说明：自动化提取 js.map 文件（webpack进行打包等）的工具，后续可以利用 reverse-sourcemap 工具，还原源代码，进行代码审计\nHeimdallr Tips：需要GitHub下载自行导入\n说明：指纹识别、反蜜罐、特征对抗\n总结 我认为 Proxy SwitchyOmega 3 (ZeroOmega) \u0026amp; Wappalyzer - Technology profiler 必装，FindSomething \u0026amp; 雪瞳 任选一个或者两个都用，其他的按需安装即可\n",
   "keywords": [
-    "渗透"
+    "渗透", "插件"
   ],
   "articleBody": "声明 操作环境为 Ghrome 浏览器，主要介绍插件的大致作用，具体操作细节不做讲解，后续遇到好用的插件会在文章后面更新分享的，尽情期待😘\nProxy SwitchyOmega 3 (ZeroOmega) 说明：好用的代理工具，结合抓包工具或代理插件使用，可以对无需代理的目标进行白名单处理，下面给出我常用的白名单列表，遇到一个添加一个即可\n*.bing.com *.bing.cn *.bing.net *.msn.cn www.yuque.com cn.bing.com aefd.nelreports.net www.googleapis.com content-autofill.googleapis.com www.google.com accounts.google.com optimizationguide-pa.googleapis.com www.gstatic.com android.clients.google.com clients4.google.com fofa.info google-ohttp-relay-safebrowsing.fastly-edge.com revenue.ezboti.com oauthaccountmanager.googleapis.com HackBar 说明：打过CTF的都懂，可以理解为网页版的简易抓包工具，不多解释了\nFindSomething 说明：又叫”熊猫头“，会对页面中的静态资源进行信息提取，可以获得一些网页目录、api接口等敏感路径和用户名、密码等一些敏感信息，还会列出完整URL、IP、域名等等，用于信息收集\n雪瞳 Tips：需要GitHub下载自行导入\n说明：和 FindSomething 功能相似，一款新出的综合信息提取识别插件，多了一些指纹嗅探、网站解析的功能，可以添加扫描白名单\nWappalyzer - Technology profiler 说明：老牌指纹识别工具，必备\nSource detector Tips：需要GitHub下载自行导入，Chrome版本高于等于v142，无法安装此插件\n说明：自动化提取 js.map 文件（webpack进行打包等）的工具，后续可以利用 reverse-sourcemap 工具，还原源代码，进行代码审计\nHeimdallr Tips：需要GitHub下载自行导入\n说明：指纹识别、反蜜罐、特征对抗\n总结 我认为 Proxy SwitchyOmega 3 (ZeroOmega) \u0026 Wappalyzer - Technology profiler 必装，FindSomething \u0026 雪瞳 任选一个或者两个都用，其他的按需安装即可\n",
   "wordCount" : "68",
@@ -226,7 +227,7 @@ Tips：需要GitHub下载自行导入
     "name": "Lhz's blog",
     "logo": {
       "@type": "ImageObject",
-      "url": "https://lhzzz08.github.io/favicon.ico"
+      "url": "https://lhzzz08.github.io/favicon.svg"
     }
   }
 }
@@ -342,6 +343,7 @@ Tips：需要GitHub下载自行导入
   <footer class="post-footer">
     <ul class="post-tags">
       <li><a href="https://lhzzz08.github.io/tags/%E6%B8%97%E9%80%8F/">渗透</a></li>
+      <li><a href="https://lhzzz08.github.io/tags/%E6%8F%92%E4%BB%B6/">插件</a></li>
     </ul>
   </footer>
 </article>

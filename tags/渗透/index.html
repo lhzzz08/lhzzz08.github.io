@@ -11,10 +11,10 @@
 <meta name="author" content="">
 <link rel="canonical" href="https://lhzzz08.github.io/tags/%E6%B8%97%E9%80%8F/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.343cc480b9ffc8f04ccbe5e968ad674880cab773ec19905e93033065c1e7a804.css" integrity="sha256-NDzEgLn/yPBMy&#43;XpaK1nSIDKt3PsGZBekwMwZcHnqAQ=" rel="preload stylesheet" as="style">
-<link rel="icon" href="https://lhzzz08.github.io/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="https://lhzzz08.github.io/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="https://lhzzz08.github.io/favicon-32x32.png">
-<link rel="apple-touch-icon" href="https://lhzzz08.github.io/apple-touch-icon.png">
+<link rel="icon" href="https://lhzzz08.github.io/favicon.svg">
+<link rel="icon" type="image/png" sizes="16x16" href="https://lhzzz08.github.io/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="https://lhzzz08.github.io/favicon.svg">
+<link rel="apple-touch-icon" href="https://lhzzz08.github.io/apple-icon.png">
 <link rel="mask-icon" href="https://lhzzz08.github.io/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
@@ -137,6 +137,22 @@
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">前后端分离接口渗透
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>声明 本博客提供的思路和技术仅限于提升自身技术，不得用于非法活动，任何非法活动均与本博客的立场相违背，违法者将依法承担法律责任
+区分前后端分离 不管用框架识别、关键词识别等等，总的来说就是用各种方法观察访问的URL路径和返回的数据形式，如果出现下面类似的信息，就是前后端分离
+# URL 路径 /api/ /api/v1/ /users/list ...... # 返回数据 大部分 JSON 格式 { username: &#34;zzl&#34;, password: &#34;zzl0805&#34; } ...... 提取接口 因为前端和后端是区分开的，所以用户要拿到请求的信息，就需要前端去请求后端接口得到信息，所以提取后端接口是很重要的
+Tips：还有一点很重要，用插件找接口时要注意路径中是否存在baseurl，怎么找？直接看抓包历史数据包中接口和提取接口是否一致，还有就是浏览器中全局搜索baseurl，这两种方式都试一下就行了，前者更准确
+# 没有 baseurl https://www.zzl.com/userinfo/list # 存在 baseurl:/api/ https://www.zzl.com/api/userinfo/list FindSomething 插件自动收集 雪瞳插件自动收集 URLfinder 工具收集，GitHub下载即可 JSFinder 老牌工具，可以被上述工具替代，感兴趣的自行寻找 接口利用 接口信息泄露、未鉴权等等，将提取的接口用爆破模块进行爆破即可，可以用不同请求方式都试一下，有一些具体文件上传接口等等，可以在前端找到相应功能点进行针对化测试 浏览器访问不存在的接口，观察返回情况，观察后端是否采用springboot框架，测试 swagger、druid、actuator 这三个常见的漏洞 敏感接口尝试进行 bypass …… </p>
+  </div>
+  <footer class="entry-footer"><span title='2026-02-09 20:56:25 +0800 CST'>February 9, 2026</span></footer>
+  <a class="entry-link" aria-label="post link to 前后端分离接口渗透" href="https://lhzzz08.github.io/posts/js-api/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">浏览器渗透插件分享
     </h2>
   </header>
@@ -161,12 +177,12 @@ Heimdallr Tips：需要GitHub下载自行导入
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2 class="entry-hint-parent">记一次实战src中的SQL注入
+    <h2 class="entry-hint-parent">记一次实战中的SQL注入
     </h2>
   </header>
   <div class="entry-content">
     <p>声明 本博客提供的思路和技术仅限于提升自身技术，不得用于非法活动，任何非法活动均与本博客的立场相违背，违法者将依法承担法律责任
-某数字店铺存在SQL注入漏洞 注册后登陆数字店铺后台查看“数字标签”页面，其中的查询框存在SQL报错注入
+某SRC数字店铺存在SQL注入漏洞 注册后登陆数字店铺后台查看“数字标签”页面，其中的查询框存在SQL报错注入
 仔细观察请求数据包，我传递的查询参数只有一个1&#39;，但是请求数据包中的内容却采用POSTmultipart/form-data类型进行传输，更具数据包分析很容易知道前端进行了加密签名处理，这个网站中的其他数据传输都采用这种方式，这样可以让你看不出传递的具体数据并防止篡改请求包，这就是为什么此站在无waf的情况下，挂着xray代理（以及任何多强大扫描SQL注入的工具）不可能扫描出此处存在SQL注入的原因，也就是说这里只能靠手动尝试才可以发现
 查询参数输入1&#39;时回显You have an error in your SQL syntax
 查询参数输入1&#39;&#39;时回显正常
@@ -178,7 +194,7 @@ Tips：注释符号一般都是不起作用的，建议使用单引号闭合的�
 总结 要提升逻辑观察能力，随机应变，遇到只能手动测试的网站不要怕麻烦，万一出洞了呢 4个单引号检测SQL注入挺好用 实战尽量使用单引号闭合方式，不要用注释符打不成功就不打了 上述只是针对一般类型的SQL注入，还有好多类型的SQL注入 </p>
   </div>
   <footer class="entry-footer"><span title='2026-01-31 12:08:01 +0800 CST'>January 31, 2026</span></footer>
-  <a class="entry-link" aria-label="post link to 记一次实战src中的SQL注入" href="https://lhzzz08.github.io/posts/sqlidemo1/"></a>
+  <a class="entry-link" aria-label="post link to 记一次实战中的SQL注入" href="https://lhzzz08.github.io/posts/sqlidemo1/"></a>
 </article>
     </main>
     

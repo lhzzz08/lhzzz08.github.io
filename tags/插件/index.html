@@ -5,21 +5,21 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>CTF | Lhz&#39;s blog</title>
+<title>插件 | Lhz&#39;s blog</title>
 <meta name="keywords" content="">
 <meta name="description" content="">
 <meta name="author" content="">
-<link rel="canonical" href="https://lhzzz08.github.io/tags/ctf/">
+<link rel="canonical" href="https://lhzzz08.github.io/tags/%E6%8F%92%E4%BB%B6/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.343cc480b9ffc8f04ccbe5e968ad674880cab773ec19905e93033065c1e7a804.css" integrity="sha256-NDzEgLn/yPBMy&#43;XpaK1nSIDKt3PsGZBekwMwZcHnqAQ=" rel="preload stylesheet" as="style">
-<link rel="icon" href="https://lhzzz08.github.io/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="https://lhzzz08.github.io/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="https://lhzzz08.github.io/favicon-32x32.png">
-<link rel="apple-touch-icon" href="https://lhzzz08.github.io/apple-touch-icon.png">
+<link rel="icon" href="https://lhzzz08.github.io/favicon.svg">
+<link rel="icon" type="image/png" sizes="16x16" href="https://lhzzz08.github.io/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="https://lhzzz08.github.io/favicon.svg">
+<link rel="apple-touch-icon" href="https://lhzzz08.github.io/apple-icon.png">
 <link rel="mask-icon" href="https://lhzzz08.github.io/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" type="application/rss+xml" href="https://lhzzz08.github.io/tags/ctf/index.xml" title="rss">
-<link rel="alternate" hreflang="en" href="https://lhzzz08.github.io/tags/ctf/">
+<link rel="alternate" type="application/rss+xml" href="https://lhzzz08.github.io/tags/%E6%8F%92%E4%BB%B6/index.xml" title="rss">
+<link rel="alternate" hreflang="en" href="https://lhzzz08.github.io/tags/%E6%8F%92%E4%BB%B6/">
 <noscript>
     <style>
         #theme-toggle,
@@ -71,13 +71,13 @@
         document.querySelector("html").dataset.theme = 'light';
     }
 
-</script><meta property="og:url" content="https://lhzzz08.github.io/tags/ctf/">
+</script><meta property="og:url" content="https://lhzzz08.github.io/tags/%E6%8F%92%E4%BB%B6/">
   <meta property="og:site_name" content="Lhz&#39;s blog">
-  <meta property="og:title" content="CTF">
+  <meta property="og:title" content="插件">
   <meta property="og:locale" content="en-us">
   <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CTF">
+<meta name="twitter:title" content="插件">
 <meta name="twitter:description" content="">
 
 </head>
@@ -131,26 +131,32 @@
 <main class="main"> 
 <header class="page-header">
   <h1>
-    CTF
+    插件
   </h1>
 </header>
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2 class="entry-hint-parent">2025极客大挑战web（部分）WP
+    <h2 class="entry-hint-parent">浏览器渗透插件分享
     </h2>
   </header>
   <div class="entry-content">
-    <p>声明 第一次参加极客大挑战CTF比赛，web方向总共解决了六道题目（6/20），我是菜鸟🫠
-阿基里斯追乌龟 #JavaScript
-题目描述：在古希腊，英雄阿基里斯和一只乌龟赛跑。阿基里斯的速度是乌龟的十倍。比赛开始时，乌龟在阿基里斯前面100米。芝诺悖论认为，当阿基里斯追到乌龟的出发点时，乌龟已经又向前爬了一段距离。当阿基里斯再追到那个位置时，乌龟又向前爬了。如此无限循环，阿基里斯似乎永远也追不上乌龟。他真的追不上吗？
-大概查看网页信息，只要让阿基里斯的位置比乌龟的位置远即可得到 flag，但是根据题目的 JavaScript 代码，不可能一直点击追赶按键，其实只要用浏览器进行前端调试即可
-... const payload = { achilles_distance: achillesPos, tortoise_distance: tortoisePos, }; fetch(&#39;/chase&#39;, { // 在这里打断点，在 fetch 发起请求前修改 Payload 对象 method: &#39;POST&#39;, // 使 achillesPos &gt; tortoisePos headers: { &#39;Content-Type&#39;: &#39;application/json&#39;, }, body: JSON.stringify({ &#34;data&#34;: encryptData(payload) }), }) ... 修改后继续执行脚本即可得到 flag，对代码感兴趣的可以去详细了解一下原理，下面附上源代码
-function encryptData(obj) { const jsonString = JSON.stringify(obj); return btoa(unescape(encodeURIComponent(jsonString))); } function decryptData(encodedString) { const jsonString = decodeURIComponent(escape(atob(encodedString))); return JSON.parse(jsonString); } document.addEventListener(&#39;DOMContentLoaded&#39;, () =&gt; { const chaseBtn = document.getElementById(&#39;chase-btn&#39;); const achillesDistanceSpan = document.getElementById(&#39;achilles-distance&#39;); const tortoiseDistanceSpan = document.getElementById(&#39;tortoise-distance&#39;); const resultDiv = document.getElementById(&#39;result&#39;); let achillesPos = 0; let tortoisePos = 10000000000; // Initial head start for the tortoise achillesDistanceSpan.textContent = achillesPos.toFixed(2); tortoiseDistanceSpan.textContent = tortoisePos.toFixed(2); chaseBtn.addEventListener(&#39;click&#39;, () =&gt; { // Achilles moves to the tortoise&#39;s current position const achillesMoveDistance = tortoisePos - achillesPos; achillesPos = tortoisePos; // The tortoise moves 1/10th of the distance Achilles just covered const tortoiseMoveDistance = achillesMoveDistance / 10; tortoisePos &#43;= tortoiseMoveDistance; achillesDistanceSpan.textContent = achillesPos.toFixed(2); tortoiseDistanceSpan.textContent = tortoisePos.toFixed(2); const payload = { achilles_distance: achillesPos, tortoise_distance: tortoisePos, }; fetch(&#39;/chase&#39;, { method: &#39;POST&#39;, headers: { &#39;Content-Type&#39;: &#39;application/json&#39;, }, body: JSON.stringify({ &#34;data&#34;: encryptData(payload) }), }) .then(response =&gt; response.json()) .then(encryptedResponse =&gt; { if (encryptedResponse.data) { const data = decryptData(encryptedResponse.data); if (data.flag) { // Use &#39;pre-wrap&#39; to respect newlines in the fake flag message resultDiv.style.whiteSpace = &#39;pre-wrap&#39;; resultDiv.textContent = `你追上它了！\n${data.flag}`; chaseBtn.disabled = true; } else if (data.message) { resultDiv.textContent = data.message; } } else { console.error(&#39;Error:&#39;, encryptedResponse.error); resultDiv.textContent = `发生错误: ${encryptedResponse.error}`; } }) .catch(error =&gt; { console.error(&#39;Error:&#39;, error); resultDiv.textContent = &#39;发生错误。&#39;; }); }); }); Vibe SEO #目录扫描 #Linux
-...</p>
+    <p>声明 操作环境为 Ghrome 浏览器，主要介绍插件的大致作用，具体操作细节不做讲解，后续遇到好用的插件会在文章后面更新分享的，尽情期待😘
+Proxy SwitchyOmega 3 (ZeroOmega) 说明：好用的代理工具，结合抓包工具或代理插件使用，可以对无需代理的目标进行白名单处理，下面给出我常用的白名单列表，遇到一个添加一个即可
+*.bing.com *.bing.cn *.bing.net *.msn.cn www.yuque.com cn.bing.com aefd.nelreports.net www.googleapis.com content-autofill.googleapis.com www.google.com accounts.google.com optimizationguide-pa.googleapis.com www.gstatic.com android.clients.google.com clients4.google.com fofa.info google-ohttp-relay-safebrowsing.fastly-edge.com revenue.ezboti.com oauthaccountmanager.googleapis.com HackBar 说明：打过CTF的都懂，可以理解为网页版的简易抓包工具，不多解释了
+FindSomething 说明：又叫”熊猫头“，会对页面中的静态资源进行信息提取，可以获得一些网页目录、api接口等敏感路径和用户名、密码等一些敏感信息，还会列出完整URL、IP、域名等等，用于信息收集
+雪瞳 Tips：需要GitHub下载自行导入
+说明：和 FindSomething 功能相似，一款新出的综合信息提取识别插件，多了一些指纹嗅探、网站解析的功能，可以添加扫描白名单
+Wappalyzer - Technology profiler 说明：老牌指纹识别工具，必备
+Source detector Tips：需要GitHub下载自行导入，Chrome版本高于等于v142，无法安装此插件
+说明：自动化提取 js.map 文件（webpack进行打包等）的工具，后续可以利用 reverse-sourcemap 工具，还原源代码，进行代码审计
+Heimdallr Tips：需要GitHub下载自行导入
+说明：指纹识别、反蜜罐、特征对抗
+总结 我认为 Proxy SwitchyOmega 3 (ZeroOmega) &amp; Wappalyzer - Technology profiler 必装，FindSomething &amp; 雪瞳 任选一个或者两个都用，其他的按需安装即可
+</p>
   </div>
-  <footer class="entry-footer"><span title='2025-11-24 21:04:46 +0800 CST'>November 24, 2025</span></footer>
-  <a class="entry-link" aria-label="post link to 2025极客大挑战web（部分）WP" href="https://lhzzz08.github.io/posts/geekchallengewebwp/"></a>
+  <footer class="entry-footer"><span title='2026-02-04 21:34:01 +0800 CST'>February 4, 2026</span></footer>
+  <a class="entry-link" aria-label="post link to 浏览器渗透插件分享" href="https://lhzzz08.github.io/posts/chromeplugin/"></a>
 </article>
     </main>
     

@@ -6,8 +6,15 @@
     <description>Recent content in Tags on Lhz&#39;s blog</description>
     <generator>Hugo -- 0.152.2</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 06 Feb 2026 22:18:16 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 09 Feb 2026 20:56:25 +0800</lastBuildDate>
     <atom:link href="https://lhzzz08.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>渗透</title>
+      <link>https://lhzzz08.github.io/tags/%E6%B8%97%E9%80%8F/</link>
+      <pubDate>Mon, 09 Feb 2026 20:56:25 +0800</pubDate>
+      <guid>https://lhzzz08.github.io/tags/%E6%B8%97%E9%80%8F/</guid>
+      <description></description>
+    </item>
     <item>
       <title>生活技巧</title>
       <link>https://lhzzz08.github.io/tags/%E7%94%9F%E6%B4%BB%E6%8A%80%E5%B7%A7/</link>
@@ -16,24 +23,17 @@
       <description></description>
     </item>
     <item>
-      <title>渗透</title>
-      <link>https://lhzzz08.github.io/tags/%E6%B8%97%E9%80%8F/</link>
+      <title>插件</title>
+      <link>https://lhzzz08.github.io/tags/%E6%8F%92%E4%BB%B6/</link>
       <pubDate>Wed, 04 Feb 2026 21:34:01 +0800</pubDate>
-      <guid>https://lhzzz08.github.io/tags/%E6%B8%97%E9%80%8F/</guid>
+      <guid>https://lhzzz08.github.io/tags/%E6%8F%92%E4%BB%B6/</guid>
       <description></description>
     </item>
     <item>
-      <title>SRC</title>
-      <link>https://lhzzz08.github.io/tags/src/</link>
+      <title>SQL注入</title>
+      <link>https://lhzzz08.github.io/tags/sql%E6%B3%A8%E5%85%A5/</link>
       <pubDate>Sat, 31 Jan 2026 12:08:01 +0800</pubDate>
-      <guid>https://lhzzz08.github.io/tags/src/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>CTF</title>
-      <link>https://lhzzz08.github.io/tags/ctf/</link>
-      <pubDate>Mon, 24 Nov 2025 21:04:46 +0800</pubDate>
-      <guid>https://lhzzz08.github.io/tags/ctf/</guid>
+      <guid>https://lhzzz08.github.io/tags/sql%E6%B3%A8%E5%85%A5/</guid>
       <description></description>
     </item>
     <item>
