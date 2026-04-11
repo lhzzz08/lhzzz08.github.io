@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>渗透 on Lhz&#39;s blog</title>
-    <link>https://lhzzz08.github.io/tags/%E6%B8%97%E9%80%8F/</link>
-    <description>Recent content in 渗透 on Lhz&#39;s blog</description>
+    <title>JS逆向 on Lhz&#39;s blog</title>
+    <link>https://lhzzz08.github.io/tags/js%E9%80%86%E5%90%91/</link>
+    <description>Recent content in JS逆向 on Lhz&#39;s blog</description>
     <generator>Hugo -- 0.152.2</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 11 Apr 2026 16:59:39 +0800</lastBuildDate>
-    <atom:link href="https://lhzzz08.github.io/tags/%E6%B8%97%E9%80%8F/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://lhzzz08.github.io/tags/js%E9%80%86%E5%90%91/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>JS加解密逆向实战案例</title>
       <link>https://lhzzz08.github.io/posts/vulnerability1/</link>
@@ -97,127 +97,6 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{&amp;#34;code&amp;#34;:5026,&amp;#34;msg&amp;#34;:&amp;#34;Invalid sign&amp;#34;,&amp;#34;data&amp;#34;:{}}
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;有JS加解密经验的师傅并不会十分陌生，网站是通过&lt;code&gt;POST multipart/form-data&lt;/code&gt; 类型进行传递数据，而且根据各个英文名，&lt;code&gt;params&lt;/code&gt;是参数的意思，所以&lt;code&gt;yXABToyr+0mTGR9u4Yf2WOq54mU+LzNTLIuQHi1TpZPCK0+NCLk72AYz55wC5Y5N70zuQnttWAzBDVEhUvnZukJ0HG3G3VSRvciKRXco7DnC/a77d1VLAdVRJJGsL5ghna4jP2BHjSjExrIrJcm5DWvHEwiH3JglZ7lJhbF7K3fADSE2nuW1K+jeze5Kmu/MBKUTrqlU1XIH/U2tdzcz6Q==&lt;/code&gt;就是所有要传递的参数，而且还是进行了加密处理，然后其他的&lt;code&gt;timeStamp randomNum ...&lt;/code&gt; 就是起到了整体签名的作用，防止请求包POST部分进行任何篡改，而&lt;code&gt;sign&lt;/code&gt;参数&lt;code&gt;42d6b0c68a4151e3c17cbdac1746a14a&lt;/code&gt;就是整体进行签名后的结果，&lt;strong&gt;破解&lt;code&gt;params&lt;/code&gt;参数加密算法和&lt;code&gt;sign&lt;/code&gt;参数签名算法就是下一步需要做的，破解后才可以利用验证接口并没有做验证码验证次数限制进行爆破操作&lt;/strong&gt;&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>前后端分离接口渗透</title>
-      <link>https://lhzzz08.github.io/posts/js-api/</link>
-      <pubDate>Mon, 09 Feb 2026 20:56:25 +0800</pubDate>
-      <guid>https://lhzzz08.github.io/posts/js-api/</guid>
-      <description>&lt;h1 id=&#34;声明&#34;&gt;声明&lt;/h1&gt;
-&lt;p&gt;&lt;strong&gt;本博客提供的思路和技术仅限于提升自身技术，不得用于非法活动，任何非法活动均与本博客的立场相违背，违法者将依法承担法律责任&lt;/strong&gt;&lt;/p&gt;
-&lt;h1 id=&#34;区分前后端分离&#34;&gt;区分前后端分离&lt;/h1&gt;
-&lt;p&gt;不管用框架识别、关键词识别等等，总的来说就是&lt;strong&gt;用各种方法观察访问的URL路径和返回的数据形式&lt;/strong&gt;，如果出现下面类似的信息，就是前后端分离&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;# URL 路径
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;/api/
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;/api/v1/
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;/users/list
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;......
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;# 返回数据
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;大部分 JSON 格式
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	username: &amp;#34;zzl&amp;#34;,
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	password: &amp;#34;zzl0805&amp;#34;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;......
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;提取接口&#34;&gt;提取接口&lt;/h1&gt;
-&lt;p&gt;因为前端和后端是区分开的，所以用户要拿到请求的信息，就需要前端去请求后端接口得到信息，所以&lt;strong&gt;提取后端接口是很重要的&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Tips：还有一点很重要，用插件找接口时要注意路径中是否存在&lt;code&gt;baseurl&lt;/code&gt;，怎么找？直接看抓包历史数据包中接口和提取接口是否一致，还有就是浏览器中全局搜索&lt;code&gt;baseurl&lt;/code&gt;，这两种方式都试一下就行了，前者更准确&lt;/strong&gt;&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;# 没有 baseurl
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;https://www.zzl.com/userinfo/list
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;# 存在 baseurl:/api/
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;https://www.zzl.com/api/userinfo/list
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
-&lt;li&gt;FindSomething 插件自动收集&lt;/li&gt;
-&lt;li&gt;雪瞳插件自动收集&lt;/li&gt;
-&lt;li&gt;URLfinder 工具收集，&lt;a href=&#34;https://github.com/pingc0y/URLFinder&#34;&gt;GitHub&lt;/a&gt;下载即可&lt;/li&gt;
-&lt;li&gt;JSFinder 老牌工具，可以被上述工具替代，感兴趣的自行寻找&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1 id=&#34;接口利用&#34;&gt;接口利用&lt;/h1&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;接口信息泄露、未鉴权等等&lt;/strong&gt;，将提取的接口用爆破模块进行爆破即可，&lt;strong&gt;可以用不同请求方式都试一下&lt;/strong&gt;，有一些具体文件上传接口等等，可以在前端找到相应功能点进行针对化测试&lt;/li&gt;
-&lt;li&gt;浏览器访问不存在的接口，观察返回情况，观察后端是否采用&lt;code&gt;springboot&lt;/code&gt;框架，测试 swagger、druid、actuator 这三个常见的漏洞&lt;/li&gt;
-&lt;li&gt;敏感接口尝试进行 &lt;strong&gt;bypass&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;&amp;hellip;&amp;hellip;&lt;/li&gt;
-&lt;/ul&gt;</description>
-    </item>
-    <item>
-      <title>浏览器渗透插件分享</title>
-      <link>https://lhzzz08.github.io/posts/chromeplugin/</link>
-      <pubDate>Wed, 04 Feb 2026 21:34:01 +0800</pubDate>
-      <guid>https://lhzzz08.github.io/posts/chromeplugin/</guid>
-      <description>&lt;h1 id=&#34;声明&#34;&gt;声明&lt;/h1&gt;
-&lt;p&gt;&lt;strong&gt;操作环境为 Ghrome 浏览器，主要介绍插件的大致作用，具体操作细节不做讲解，后续遇到好用的插件会在文章后面更新分享的，尽情期待😘&lt;/strong&gt;&lt;/p&gt;
-&lt;h1 id=&#34;proxy-switchyomega-3-zeroomega&#34;&gt;Proxy SwitchyOmega 3 (ZeroOmega)&lt;/h1&gt;
-&lt;p&gt;&lt;strong&gt;说明：好用的代理工具，结合抓包工具或代理插件使用，可以对无需代理的目标进行白名单处理，下面给出我常用的白名单列表，遇到一个添加一个即可&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img alt=&#34;插件一&#34; loading=&#34;lazy&#34; src=&#34;https://lhzzz08.github.io/images/2026-1/plugin1.png&#34;&gt;&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;*.bing.com
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;*.bing.cn
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;*.bing.net
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;*.msn.cn
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;www.yuque.com
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cn.bing.com
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;aefd.nelreports.net
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;www.googleapis.com
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;content-autofill.googleapis.com
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;www.google.com
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;accounts.google.com
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;optimizationguide-pa.googleapis.com
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;www.gstatic.com
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;android.clients.google.com
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;clients4.google.com
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;fofa.info
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;google-ohttp-relay-safebrowsing.fastly-edge.com
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;revenue.ezboti.com
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;oauthaccountmanager.googleapis.com
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;hackbar&#34;&gt;HackBar&lt;/h1&gt;
-&lt;p&gt;&lt;strong&gt;说明：打过CTF的都懂，可以理解为网页版的简易抓包工具，不多解释了&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img alt=&#34;插件二&#34; loading=&#34;lazy&#34; src=&#34;https://lhzzz08.github.io/images/2026-1/plugin2.png&#34;&gt;&lt;/p&gt;
-&lt;h1 id=&#34;findsomething&#34;&gt;FindSomething&lt;/h1&gt;
-&lt;p&gt;&lt;strong&gt;说明：又叫”熊猫头“，会对页面中的静态资源进行信息提取，可以获得一些网页目录、api接口等敏感路径和用户名、密码等一些敏感信息，还会列出完整URL、IP、域名等等，用于信息收集&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img alt=&#34;插件三&#34; loading=&#34;lazy&#34; src=&#34;https://lhzzz08.github.io/images/2026-1/plugin3.png&#34;&gt;&lt;/p&gt;
-&lt;h1 id=&#34;雪瞳&#34;&gt;雪瞳&lt;/h1&gt;
-&lt;p&gt;&lt;strong&gt;Tips：需要&lt;a href=&#34;https://github.com/SickleSec/snoweyes&#34;&gt;GitHub&lt;/a&gt;下载自行导入&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;说明：和 FindSomething 功能相似，一款新出的综合信息提取识别插件，多了一些指纹嗅探、网站解析的功能，可以添加扫描白名单&lt;/strong&gt;&lt;/p&gt;
-&lt;h1 id=&#34;wappalyzer---technology-profiler&#34;&gt;Wappalyzer - Technology profiler&lt;/h1&gt;
-&lt;p&gt;&lt;strong&gt;说明：老牌指纹识别工具，必备&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img alt=&#34;插件五&#34; loading=&#34;lazy&#34; src=&#34;https://lhzzz08.github.io/images/2026-1/plugin5.png&#34;&gt;&lt;/p&gt;
-&lt;h1 id=&#34;source-detector&#34;&gt;Source detector&lt;/h1&gt;
-&lt;p&gt;&lt;strong&gt;Tips：需要&lt;a href=&#34;https://github.com/mKeySafe/SourceDetector-dist&#34;&gt;GitHub&lt;/a&gt;下载自行导入，Chrome版本高于等于v142，无法安装此插件&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;说明：自动化提取 js.map 文件（webpack进行打包等）的工具，后续可以利用 reverse-sourcemap 工具，还原源代码，进行代码审计&lt;/strong&gt;&lt;/p&gt;
-&lt;h1 id=&#34;heimdallr&#34;&gt;Heimdallr&lt;/h1&gt;
-&lt;p&gt;&lt;strong&gt;Tips：需要&lt;a href=&#34;https://github.com/Ghr07h/Heimdallr&#34;&gt;GitHub&lt;/a&gt;下载自行导入&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;说明：指纹识别、反蜜罐、特征对抗&lt;/strong&gt;&lt;/p&gt;
-&lt;h1 id=&#34;总结&#34;&gt;总结&lt;/h1&gt;
-&lt;p&gt;我认为 &lt;strong&gt;Proxy SwitchyOmega 3 (ZeroOmega) &amp;amp; Wappalyzer - Technology profiler&lt;/strong&gt; 必装，&lt;strong&gt;FindSomething &amp;amp; 雪瞳&lt;/strong&gt; 任选一个或者两个都用，其他的按需安装即可&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>记一次实战中的SQL注入</title>
-      <link>https://lhzzz08.github.io/posts/sqlidemo1/</link>
-      <pubDate>Sat, 31 Jan 2026 12:08:01 +0800</pubDate>
-      <guid>https://lhzzz08.github.io/posts/sqlidemo1/</guid>
-      <description>&lt;h1 id=&#34;声明&#34;&gt;声明&lt;/h1&gt;
-&lt;p&gt;&lt;strong&gt;本博客提供的思路和技术仅限于提升自身技术，不得用于非法活动，任何非法活动均与本博客的立场相违背，违法者将依法承担法律责任&lt;/strong&gt;&lt;/p&gt;
-&lt;h1 id=&#34;某src数字店铺存在sql注入漏洞&#34;&gt;某SRC数字店铺存在SQL注入漏洞&lt;/h1&gt;
-&lt;p&gt;注册后登陆数字店铺后台查看“数字标签”页面，其中的查询框存在SQL报错注入&lt;/p&gt;
-&lt;p&gt;&lt;img alt=&#34;数字店铺后台&#34; loading=&#34;lazy&#34; src=&#34;https://lhzzz08.github.io/images/2026-1/shop1.png&#34;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img alt=&#34;报错数据包1&#34; loading=&#34;lazy&#34; src=&#34;https://lhzzz08.github.io/images/2026-1/burpsuite1.png&#34;&gt;&lt;/p&gt;
-&lt;p&gt;仔细观察请求数据包，我传递的查询参数只有一个&lt;code&gt;1&#39;&lt;/code&gt;，但是请求数据包中的内容却采用POST&lt;code&gt;multipart/form-data&lt;/code&gt;类型进行传输，更具数据包分析很容易知道前端进行了加密签名处理，这个网站中的其他数据传输都采用这种方式，&lt;strong&gt;这样可以让你看不出传递的具体数据并防止篡改请求包，这就是为什么此站在无waf的情况下，挂着xray代理（以及任何多强大扫描SQL注入的工具）不可能扫描出此处存在SQL注入的原因&lt;/strong&gt;，也就是说这里只能靠手动尝试才可以发现&lt;/p&gt;
-&lt;p&gt;查询参数输入&lt;code&gt;1&#39;&lt;/code&gt;时回显&lt;code&gt;You have an error in your SQL syntax&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;查询参数输入&lt;code&gt;1&#39;&#39;&lt;/code&gt;时回显正常&lt;/p&gt;
-&lt;p&gt;查询参数输入&lt;code&gt;1&#39;&#39;&#39;&lt;/code&gt;时回显&lt;code&gt;You have an error in your SQL syntax&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;查询参数输入&lt;code&gt;1&#39;&#39;&#39;&#39;&lt;/code&gt;时回显正常&lt;/p&gt;
-&lt;p&gt;通过4个单引号检测，明确确定存在SQL注入，接下来需要构造注入语句得到数据库名证明危害即可，&lt;strong&gt;不要拖库拿信息！！！不要拖库拿信息！！！不要拖库拿信息！！！&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Tips：注释符号一般都是不起作用的，建议使用单引号闭合的方式闭合语句，这里注释符就不起作用&lt;/strong&gt;&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-Payload&#34; data-lang=&#34;Payload&#34;&gt;1&amp;#39; and updatexml(1,concat(0x7e,DATABASE(),0x7e),1) and &amp;#39;1&amp;#39;=&amp;#39;1
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img alt=&#34;报错数据包1&#34; loading=&#34;lazy&#34; src=&#34;https://lhzzz08.github.io/images/2026-1/burpsuite2.png&#34;&gt;&lt;/p&gt;
-&lt;p&gt;用报错注入，成功得到数据库名😎&lt;/p&gt;
-&lt;h1 id=&#34;总结&#34;&gt;总结&lt;/h1&gt;
-&lt;ul&gt;
-&lt;li&gt;要提升逻辑观察能力，随机应变，遇到只能手动测试的网站不要怕麻烦，万一出洞了呢&lt;/li&gt;
-&lt;li&gt;4个单引号检测SQL注入挺好用&lt;/li&gt;
-&lt;li&gt;实战尽量使用单引号闭合方式，不要用注释符打不成功就不打了&lt;/li&gt;
-&lt;li&gt;上述只是针对一般类型的SQL注入，还有好多类型的SQL注入&lt;/li&gt;
-&lt;/ul&gt;</description>
     </item>
   </channel>
 </rss>
