@@ -6,8 +6,36 @@
     <description>Recent content in Posts on Lhz&#39;s blog</description>
     <generator>Hugo -- 0.152.2</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 11 Apr 2026 16:59:39 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 23 Apr 2026 22:41:23 +0800</lastBuildDate>
     <atom:link href="https://lhzzz08.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Watermark removal management system vul_1</title>
+      <link>https://lhzzz08.github.io/posts/cveapplication1/</link>
+      <pubDate>Thu, 23 Apr 2026 22:41:23 +0800</pubDate>
+      <guid>https://lhzzz08.github.io/posts/cveapplication1/</guid>
+      <description>&lt;h2 id=&#34;title-unauthorized-database-operation-vulnerability-in-ludashi-watermark-removal-management-system&#34;&gt;Title: Unauthorized Database Operation Vulnerability in Ludashi Watermark Removal Management System&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;BUG_Author:&lt;/strong&gt; liuhanzhi&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Affected Version:&lt;/strong&gt; Watermark removal management system ≤ 4.0&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Vendor:&lt;/strong&gt; &lt;a href=&#34;https://3ep447gp4d.k.topthink.com/@9421839zpg/chengxujieshao.html&#34;&gt;Standalone Watermark Removal Mini Program&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Software:&lt;/strong&gt; &lt;a href=&#34;https://3ep447gp4d.k.topthink.com/@9421839zpg/chengxuxiazai.html&#34;&gt;Ludashi Watermark Removal Management System&lt;/a&gt; &lt;a href=&#34;https://pan.quark.cn/s/f6727f5273a4#/list/share&#34;&gt;Download Link&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Vulnerability Files:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;admin/ajax.php&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;description&#34;&gt;Description:&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Unauthorized database write operations:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Deobfuscate the obfuscated code in &lt;code&gt;/admin/ajax.php&lt;/code&gt;, click to download the &lt;a href=&#34;https://lhzzz08.github.io/files/ajax.php&#34;&gt;anti-obfuscation code&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;In &lt;code&gt;/admin/ajax.php&lt;/code&gt;, the interface dispatches a large amount of add/delete/update logic through the &lt;code&gt;act&lt;/code&gt; parameter.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;No effective backend session authentication and authorization logic is found in the file, so attackers can directly invoke sensitive operations without logging in.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>JS加解密逆向实战案例</title>
       <link>https://lhzzz08.github.io/posts/vulnerability1/</link>

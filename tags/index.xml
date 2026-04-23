@@ -6,8 +6,15 @@
     <description>Recent content in Tags on Lhz&#39;s blog</description>
     <generator>Hugo -- 0.152.2</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 11 Apr 2026 16:59:39 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 23 Apr 2026 22:41:23 +0800</lastBuildDate>
     <atom:link href="https://lhzzz08.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>CVE</title>
+      <link>https://lhzzz08.github.io/tags/cve/</link>
+      <pubDate>Thu, 23 Apr 2026 22:41:23 +0800</pubDate>
+      <guid>https://lhzzz08.github.io/tags/cve/</guid>
+      <description></description>
+    </item>
     <item>
       <title>JS逆向</title>
       <link>https://lhzzz08.github.io/tags/js%E9%80%86%E5%90%91/</link>

