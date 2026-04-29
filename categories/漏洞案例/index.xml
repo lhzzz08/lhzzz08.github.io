@@ -2,17 +2,44 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>漏洞案例 on Lhz&#39;s blog</title>
-    <link>https://lhzzz08.github.io/categories/%E6%BC%8F%E6%B4%9E%E6%A1%88%E4%BE%8B/</link>
+    <link>http://localhost:1313/categories/%E6%BC%8F%E6%B4%9E%E6%A1%88%E4%BE%8B/</link>
     <description>Recent content in 漏洞案例 on Lhz&#39;s blog</description>
     <generator>Hugo -- 0.152.2</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 23 Apr 2026 22:41:23 +0800</lastBuildDate>
-    <atom:link href="https://lhzzz08.github.io/categories/%E6%BC%8F%E6%B4%9E%E6%A1%88%E4%BE%8B/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 29 Apr 2026 16:02:55 +0800</lastBuildDate>
+    <atom:link href="http://localhost:1313/categories/%E6%BC%8F%E6%B4%9E%E6%A1%88%E4%BE%8B/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>short_videos ssrf Vulnerability</title>
+      <link>http://localhost:1313/posts/cveapplication2/</link>
+      <pubDate>Wed, 29 Apr 2026 16:02:55 +0800</pubDate>
+      <guid>http://localhost:1313/posts/cveapplication2/</guid>
+      <description>&lt;h2 id=&#34;title-server-side-request-forgery-ssrf-vulnerability-in-short_videos-via-apisvproxyurlphp&#34;&gt;Title: Server-Side Request Forgery (SSRF) Vulnerability in short_videos via &lt;code&gt;api/svproxyurl.php&lt;/code&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;BUG_Author:&lt;/strong&gt; liuhanzhi&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Affected Version:&lt;/strong&gt; short_videos (latest unpatched version as of 2026-04-29)&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Vendor:&lt;/strong&gt; &lt;a href=&#34;https://github.com/jiuhunwl/short_videos&#34;&gt;short_videos GitHub Repository&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Software:&lt;/strong&gt; &lt;a href=&#34;https://github.com/jiuhunwl/short_videos&#34;&gt;short_videos&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Vulnerability Files:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;api/svproxyurl.php&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;description&#34;&gt;Description:&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Unauthenticated SSRF / Open Proxy in &lt;code&gt;api/svproxyurl.php&lt;/code&gt;:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;In &lt;code&gt;api/svproxyurl.php&lt;/code&gt;, the application accepts a user-controlled &lt;code&gt;proxyurl&lt;/code&gt; parameter from &lt;code&gt;$_GET&lt;/code&gt; or &lt;code&gt;$_POST&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;The value is decoded by &lt;code&gt;base64_decode()&lt;/code&gt; and then passed directly into &lt;code&gt;CURLOPT_URL&lt;/code&gt; inside both &lt;code&gt;weibo_proxy()&lt;/code&gt; and &lt;code&gt;douyin_proxy()&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;No authentication, host allowlist, private-network restriction, or redirect target validation is implemented.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Cause of the vulnerability:&lt;/strong&gt;&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Watermark removal management system vul_1</title>
-      <link>https://lhzzz08.github.io/posts/cveapplication1/</link>
+      <link>http://localhost:1313/posts/cveapplication1/</link>
       <pubDate>Thu, 23 Apr 2026 22:41:23 +0800</pubDate>
-      <guid>https://lhzzz08.github.io/posts/cveapplication1/</guid>
+      <guid>http://localhost:1313/posts/cveapplication1/</guid>
       <description>&lt;h2 id=&#34;title-unauthorized-database-operation-vulnerability-in-ludashi-watermark-removal-management-system&#34;&gt;Title: Unauthorized Database Operation Vulnerability in Ludashi Watermark Removal Management System&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;BUG_Author:&lt;/strong&gt; liuhanzhi&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Affected Version:&lt;/strong&gt; Watermark removal management system ≤ 4.0&lt;/p&gt;
@@ -28,7 +55,7 @@
 &lt;p&gt;&lt;strong&gt;Unauthorized database write operations:&lt;/strong&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
-&lt;p&gt;Deobfuscate the obfuscated code in &lt;code&gt;/admin/ajax.php&lt;/code&gt;, click to download the &lt;a href=&#34;https://lhzzz08.github.io/files/ajax.php&#34;&gt;anti-obfuscation code&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Deobfuscate the obfuscated code in &lt;code&gt;/admin/ajax.php&lt;/code&gt;, click to download the &lt;a href=&#34;http://localhost:1313/files/ajax.php&#34;&gt;anti-obfuscation code&lt;/a&gt;.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;In &lt;code&gt;/admin/ajax.php&lt;/code&gt;, the interface dispatches a large amount of add/delete/update logic through the &lt;code&gt;act&lt;/code&gt; parameter.&lt;/p&gt;
@@ -38,9 +65,9 @@
     </item>
     <item>
       <title>JS加解密逆向实战案例</title>
-      <link>https://lhzzz08.github.io/posts/vulnerability1/</link>
+      <link>http://localhost:1313/posts/vulnerability1/</link>
       <pubDate>Sat, 11 Apr 2026 16:59:39 +0800</pubDate>
-      <guid>https://lhzzz08.github.io/posts/vulnerability1/</guid>
+      <guid>http://localhost:1313/posts/vulnerability1/</guid>
       <description>&lt;h1 id=&#34;声明&#34;&gt;声明&lt;/h1&gt;
 &lt;p&gt;&lt;strong&gt;本博客提供的思路和技术仅限于提升自身技术，不得用于非法活动，任何非法活动均与本博客的立场相违背，违法者将依法承担法律责任&lt;/strong&gt;&lt;/p&gt;
 &lt;h1 id=&#34;我的看法&#34;&gt;我的看法&lt;/h1&gt;
@@ -51,7 +78,7 @@
 &lt;h3 id=&#34;漏洞发现&#34;&gt;漏洞发现&lt;/h3&gt;
 &lt;p&gt;我在测试&lt;a href=&#34;https://store.sunmi.com/user/login&#34;&gt;商米数字店铺&lt;/a&gt;中发现用户登录处使用手机验证码登录时验证码做了防爆破处理，但是
 要实现用户登录是不是还可以修改原来的密码，用创建的新密码来实现密码登录，【修改密码】同样需要手机验证码验证，但是&lt;strong&gt;这里的验证接口并没有做验证码验证次数限制，而且为四位验证码，遍历次数只要10000次，可以进行爆破验证码操作&lt;/strong&gt;
-&lt;img loading=&#34;lazy&#34; src=&#34;https://lhzzz08.github.io/images/2026-2/202603011231.png&#34;&gt;
+&lt;img loading=&#34;lazy&#34; src=&#34;http://localhost:1313/images/2026-2/202603011231.png&#34;&gt;
 但是数据包中却没有找到验证码参数，甚至连像模像样的信息都没有，而且全站都是这样的，【重置密码】具体数据包内容如下&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-http&#34; data-lang=&#34;http&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;// 原始数据包如下
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;POST&lt;/span&gt; /api/user/resetPassword &lt;span style=&#34;color:#66d9ef&#34;&gt;HTTP&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;
@@ -128,15 +155,15 @@
     </item>
     <item>
       <title>记一次实战中的SQL注入</title>
-      <link>https://lhzzz08.github.io/posts/sqlidemo1/</link>
+      <link>http://localhost:1313/posts/sqlidemo1/</link>
       <pubDate>Sat, 31 Jan 2026 12:08:01 +0800</pubDate>
-      <guid>https://lhzzz08.github.io/posts/sqlidemo1/</guid>
+      <guid>http://localhost:1313/posts/sqlidemo1/</guid>
       <description>&lt;h1 id=&#34;声明&#34;&gt;声明&lt;/h1&gt;
 &lt;p&gt;&lt;strong&gt;本博客提供的思路和技术仅限于提升自身技术，不得用于非法活动，任何非法活动均与本博客的立场相违背，违法者将依法承担法律责任&lt;/strong&gt;&lt;/p&gt;
 &lt;h1 id=&#34;某src数字店铺存在sql注入漏洞&#34;&gt;某SRC数字店铺存在SQL注入漏洞&lt;/h1&gt;
 &lt;p&gt;注册后登陆数字店铺后台查看“数字标签”页面，其中的查询框存在SQL报错注入&lt;/p&gt;
-&lt;p&gt;&lt;img alt=&#34;数字店铺后台&#34; loading=&#34;lazy&#34; src=&#34;https://lhzzz08.github.io/images/2026-1/shop1.png&#34;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img alt=&#34;报错数据包1&#34; loading=&#34;lazy&#34; src=&#34;https://lhzzz08.github.io/images/2026-1/burpsuite1.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;数字店铺后台&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/images/2026-1/shop1.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;报错数据包1&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/images/2026-1/burpsuite1.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;仔细观察请求数据包，我传递的查询参数只有一个&lt;code&gt;1&#39;&lt;/code&gt;，但是请求数据包中的内容却采用POST&lt;code&gt;multipart/form-data&lt;/code&gt;类型进行传输，更具数据包分析很容易知道前端进行了加密签名处理，这个网站中的其他数据传输都采用这种方式，&lt;strong&gt;这样可以让你看不出传递的具体数据并防止篡改请求包，这就是为什么此站在无waf的情况下，挂着xray代理（以及任何多强大扫描SQL注入的工具）不可能扫描出此处存在SQL注入的原因&lt;/strong&gt;，也就是说这里只能靠手动尝试才可以发现&lt;/p&gt;
 &lt;p&gt;查询参数输入&lt;code&gt;1&#39;&lt;/code&gt;时回显&lt;code&gt;You have an error in your SQL syntax&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;查询参数输入&lt;code&gt;1&#39;&#39;&lt;/code&gt;时回显正常&lt;/p&gt;
@@ -145,7 +172,7 @@
 &lt;p&gt;通过4个单引号检测，明确确定存在SQL注入，接下来需要构造注入语句得到数据库名证明危害即可，&lt;strong&gt;不要拖库拿信息！！！不要拖库拿信息！！！不要拖库拿信息！！！&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Tips：注释符号一般都是不起作用的，建议使用单引号闭合的方式闭合语句，这里注释符就不起作用&lt;/strong&gt;&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-Payload&#34; data-lang=&#34;Payload&#34;&gt;1&amp;#39; and updatexml(1,concat(0x7e,DATABASE(),0x7e),1) and &amp;#39;1&amp;#39;=&amp;#39;1
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img alt=&#34;报错数据包1&#34; loading=&#34;lazy&#34; src=&#34;https://lhzzz08.github.io/images/2026-1/burpsuite2.png&#34;&gt;&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img alt=&#34;报错数据包1&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/images/2026-1/burpsuite2.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;用报错注入，成功得到数据库名😎&lt;/p&gt;
 &lt;h1 id=&#34;总结&#34;&gt;总结&lt;/h1&gt;
 &lt;ul&gt;

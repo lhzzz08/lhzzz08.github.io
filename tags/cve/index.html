@@ -1,25 +1,25 @@
 <!DOCTYPE html>
 <html lang="en" dir="auto" data-theme="auto">
 
-<head><meta charset="utf-8">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="index, follow">
+<meta name="robots" content="noindex, nofollow">
 <title>CVE | Lhz&#39;s blog</title>
 <meta name="keywords" content="">
 <meta name="description" content="">
 <meta name="author" content="">
-<link rel="canonical" href="https://lhzzz08.github.io/tags/cve/">
+<link rel="canonical" href="http://localhost:1313/tags/cve/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.343cc480b9ffc8f04ccbe5e968ad674880cab773ec19905e93033065c1e7a804.css" integrity="sha256-NDzEgLn/yPBMy&#43;XpaK1nSIDKt3PsGZBekwMwZcHnqAQ=" rel="preload stylesheet" as="style">
-<link rel="icon" href="https://lhzzz08.github.io/favicon.svg">
-<link rel="icon" type="image/png" sizes="16x16" href="https://lhzzz08.github.io/favicon.svg">
-<link rel="icon" type="image/png" sizes="32x32" href="https://lhzzz08.github.io/favicon.svg">
-<link rel="apple-touch-icon" href="https://lhzzz08.github.io/apple-icon.png">
-<link rel="mask-icon" href="https://lhzzz08.github.io/safari-pinned-tab.svg">
+<link rel="icon" href="http://localhost:1313/favicon.svg">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon.svg">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" type="application/rss+xml" href="https://lhzzz08.github.io/tags/cve/index.xml" title="rss">
-<link rel="alternate" hreflang="en" href="https://lhzzz08.github.io/tags/cve/">
+<link rel="alternate" type="application/rss+xml" href="http://localhost:1313/tags/cve/index.xml" title="rss">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/tags/cve/">
 <noscript>
     <style>
         #theme-toggle,
@@ -71,21 +71,13 @@
         document.querySelector("html").dataset.theme = 'light';
     }
 
-</script><meta property="og:url" content="https://lhzzz08.github.io/tags/cve/">
-  <meta property="og:site_name" content="Lhz&#39;s blog">
-  <meta property="og:title" content="CVE">
-  <meta property="og:locale" content="en-us">
-  <meta property="og:type" content="website">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CVE">
-<meta name="twitter:description" content="">
-
+</script>
 </head>
 <body class="list" id="top">
     <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="https://lhzzz08.github.io/" accesskey="h" title="Lhz&#39;s blog (Alt + H)">Lhz&#39;s blog</a>
+            <a href="http://localhost:1313/" accesskey="h" title="Lhz&#39;s blog (Alt + H)">Lhz&#39;s blog</a>
             <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
@@ -111,17 +103,17 @@
         </div>
         <ul id="menu">
             <li>
-                <a href="https://lhzzz08.github.io/" title="Home">
+                <a href="http://localhost:1313/" title="Home">
                     <span>Home</span>
                 </a>
             </li>
             <li>
-                <a href="https://lhzzz08.github.io/categories/" title="Categories">
+                <a href="http://localhost:1313/categories/" title="Categories">
                     <span>Categories</span>
                 </a>
             </li>
             <li>
-                <a href="https://lhzzz08.github.io/tags/" title="Tags">
+                <a href="http://localhost:1313/tags/" title="Tags">
                     <span>Tags</span>
                 </a>
             </li>
@@ -134,6 +126,25 @@
     CVE
   </h1>
 </header>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">short_videos ssrf Vulnerability
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Title: Server-Side Request Forgery (SSRF) Vulnerability in short_videos via api/svproxyurl.php BUG_Author: liuhanzhi
+Affected Version: short_videos (latest unpatched version as of 2026-04-29)
+Vendor: short_videos GitHub Repository
+Software: short_videos
+Vulnerability Files:
+api/svproxyurl.php Description: Unauthenticated SSRF / Open Proxy in api/svproxyurl.php:
+In api/svproxyurl.php, the application accepts a user-controlled proxyurl parameter from $_GET or $_POST. The value is decoded by base64_decode() and then passed directly into CURLOPT_URL inside both weibo_proxy() and douyin_proxy(). No authentication, host allowlist, private-network restriction, or redirect target validation is implemented. Cause of the vulnerability:
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2026-04-29 16:02:55 +0800 CST'>April 29, 2026</span></footer>
+  <a class="entry-link" aria-label="post link to short_videos ssrf Vulnerability" href="http://localhost:1313/posts/cveapplication2/"></a>
+</article>
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
@@ -153,12 +164,12 @@ No effective backend session authentication and authorization logic is found in 
 ...</p>
   </div>
   <footer class="entry-footer"><span title='2026-04-23 22:41:23 +0800 CST'>April 23, 2026</span></footer>
-  <a class="entry-link" aria-label="post link to Watermark removal management system vul_1" href="https://lhzzz08.github.io/posts/cveapplication1/"></a>
+  <a class="entry-link" aria-label="post link to Watermark removal management system vul_1" href="http://localhost:1313/posts/cveapplication1/"></a>
 </article>
     </main>
     
 <footer class="footer">
-        <span>&copy; 2026 <a href="https://lhzzz08.github.io/">Lhz&#39;s blog</a></span> · 
+        <span>&copy; 2026 <a href="http://localhost:1313/">Lhz&#39;s blog</a></span> · 
 
     <span>
         Powered by

@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>网站搭建 on Lhz&#39;s blog</title>
-    <link>https://lhzzz08.github.io/tags/%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA/</link>
+    <link>http://localhost:1313/tags/%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA/</link>
     <description>Recent content in 网站搭建 on Lhz&#39;s blog</description>
     <generator>Hugo -- 0.152.2</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 20 Nov 2025 15:16:41 +0800</lastBuildDate>
-    <atom:link href="https://lhzzz08.github.io/tags/%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/tags/%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>如何快速搭建个人博客</title>
-      <link>https://lhzzz08.github.io/posts/quickstart/</link>
+      <link>http://localhost:1313/posts/quickstart/</link>
       <pubDate>Thu, 20 Nov 2025 15:16:41 +0800</pubDate>
-      <guid>https://lhzzz08.github.io/posts/quickstart/</guid>
+      <guid>http://localhost:1313/posts/quickstart/</guid>
       <description>&lt;h1 id=&#34;声明&#34;&gt;声明&lt;/h1&gt;
 &lt;p&gt;&lt;strong&gt;以下具体操作环境为 macOS，不同操作系统操作思路一致&lt;/strong&gt;&lt;/p&gt;
 &lt;h1 id=&#34;快速开始&#34;&gt;快速开始&lt;/h1&gt;

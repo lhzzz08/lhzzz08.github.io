@@ -2,23 +2,23 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>SQL注入 on Lhz&#39;s blog</title>
-    <link>https://lhzzz08.github.io/tags/sql%E6%B3%A8%E5%85%A5/</link>
+    <link>http://localhost:1313/tags/sql%E6%B3%A8%E5%85%A5/</link>
     <description>Recent content in SQL注入 on Lhz&#39;s blog</description>
     <generator>Hugo -- 0.152.2</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 31 Jan 2026 12:08:01 +0800</lastBuildDate>
-    <atom:link href="https://lhzzz08.github.io/tags/sql%E6%B3%A8%E5%85%A5/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/tags/sql%E6%B3%A8%E5%85%A5/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>记一次实战中的SQL注入</title>
-      <link>https://lhzzz08.github.io/posts/sqlidemo1/</link>
+      <link>http://localhost:1313/posts/sqlidemo1/</link>
       <pubDate>Sat, 31 Jan 2026 12:08:01 +0800</pubDate>
-      <guid>https://lhzzz08.github.io/posts/sqlidemo1/</guid>
+      <guid>http://localhost:1313/posts/sqlidemo1/</guid>
       <description>&lt;h1 id=&#34;声明&#34;&gt;声明&lt;/h1&gt;
 &lt;p&gt;&lt;strong&gt;本博客提供的思路和技术仅限于提升自身技术，不得用于非法活动，任何非法活动均与本博客的立场相违背，违法者将依法承担法律责任&lt;/strong&gt;&lt;/p&gt;
 &lt;h1 id=&#34;某src数字店铺存在sql注入漏洞&#34;&gt;某SRC数字店铺存在SQL注入漏洞&lt;/h1&gt;
 &lt;p&gt;注册后登陆数字店铺后台查看“数字标签”页面，其中的查询框存在SQL报错注入&lt;/p&gt;
-&lt;p&gt;&lt;img alt=&#34;数字店铺后台&#34; loading=&#34;lazy&#34; src=&#34;https://lhzzz08.github.io/images/2026-1/shop1.png&#34;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img alt=&#34;报错数据包1&#34; loading=&#34;lazy&#34; src=&#34;https://lhzzz08.github.io/images/2026-1/burpsuite1.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;数字店铺后台&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/images/2026-1/shop1.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;报错数据包1&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/images/2026-1/burpsuite1.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;仔细观察请求数据包，我传递的查询参数只有一个&lt;code&gt;1&#39;&lt;/code&gt;，但是请求数据包中的内容却采用POST&lt;code&gt;multipart/form-data&lt;/code&gt;类型进行传输，更具数据包分析很容易知道前端进行了加密签名处理，这个网站中的其他数据传输都采用这种方式，&lt;strong&gt;这样可以让你看不出传递的具体数据并防止篡改请求包，这就是为什么此站在无waf的情况下，挂着xray代理（以及任何多强大扫描SQL注入的工具）不可能扫描出此处存在SQL注入的原因&lt;/strong&gt;，也就是说这里只能靠手动尝试才可以发现&lt;/p&gt;
 &lt;p&gt;查询参数输入&lt;code&gt;1&#39;&lt;/code&gt;时回显&lt;code&gt;You have an error in your SQL syntax&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;查询参数输入&lt;code&gt;1&#39;&#39;&lt;/code&gt;时回显正常&lt;/p&gt;
@@ -27,7 +27,7 @@
 &lt;p&gt;通过4个单引号检测，明确确定存在SQL注入，接下来需要构造注入语句得到数据库名证明危害即可，&lt;strong&gt;不要拖库拿信息！！！不要拖库拿信息！！！不要拖库拿信息！！！&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Tips：注释符号一般都是不起作用的，建议使用单引号闭合的方式闭合语句，这里注释符就不起作用&lt;/strong&gt;&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-Payload&#34; data-lang=&#34;Payload&#34;&gt;1&amp;#39; and updatexml(1,concat(0x7e,DATABASE(),0x7e),1) and &amp;#39;1&amp;#39;=&amp;#39;1
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img alt=&#34;报错数据包1&#34; loading=&#34;lazy&#34; src=&#34;https://lhzzz08.github.io/images/2026-1/burpsuite2.png&#34;&gt;&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img alt=&#34;报错数据包1&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/images/2026-1/burpsuite2.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;用报错注入，成功得到数据库名😎&lt;/p&gt;
 &lt;h1 id=&#34;总结&#34;&gt;总结&lt;/h1&gt;
 &lt;ul&gt;
