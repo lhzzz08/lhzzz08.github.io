@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" dir="auto" data-theme="auto">
 
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="noindex, nofollow">
+<meta name="robots" content="index, follow">
 <title>如何快速搭建个人博客 | Lhz&#39;s blog</title>
 <meta name="keywords" content="网站搭建">
 <meta name="description" content="声明
@@ -82,16 +82,16 @@ git commit -m &#34;init myblog&#34;
 git push -u github-blog main
 会遇到的问题：">
 <meta name="author" content="">
-<link rel="canonical" href="http://localhost:1313/posts/quickstart/">
+<link rel="canonical" href="https://lhzzz08.github.io/posts/quickstart/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.343cc480b9ffc8f04ccbe5e968ad674880cab773ec19905e93033065c1e7a804.css" integrity="sha256-NDzEgLn/yPBMy&#43;XpaK1nSIDKt3PsGZBekwMwZcHnqAQ=" rel="preload stylesheet" as="style">
-<link rel="icon" href="http://localhost:1313/favicon.svg">
-<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon.svg">
-<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon.svg">
-<link rel="apple-touch-icon" href="http://localhost:1313/apple-icon.png">
-<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<link rel="icon" href="https://lhzzz08.github.io/favicon.svg">
+<link rel="icon" type="image/png" sizes="16x16" href="https://lhzzz08.github.io/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="https://lhzzz08.github.io/favicon.svg">
+<link rel="apple-touch-icon" href="https://lhzzz08.github.io/apple-icon.png">
+<link rel="mask-icon" href="https://lhzzz08.github.io/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="en" href="http://localhost:1313/posts/quickstart/">
+<link rel="alternate" hreflang="en" href="https://lhzzz08.github.io/posts/quickstart/">
 <noscript>
     <style>
         #theme-toggle,
@@ -143,13 +143,151 @@ git push -u github-blog main
         document.querySelector("html").dataset.theme = 'light';
     }
 
+</script><meta property="og:url" content="https://lhzzz08.github.io/posts/quickstart/">
+  <meta property="og:site_name" content="Lhz&#39;s blog">
+  <meta property="og:title" content="如何快速搭建个人博客">
+  <meta property="og:description" content="声明 以下具体操作环境为 macOS，不同操作系统操作思路一致
+快速开始 开始前准备：
+安装了 homebrew 软件包管理系统 安装了 git 分布式版本控制系统 拥有一个 GitHub 静态网站托管仓库（GitHub Pages） 在执行代码前可以先查看本文中会遇到的问题 # 安装 hugo 静态网站生成器 brew install hugo # 找一个放置网站数据的地方 cd ~/Workspace # 创建一个名为 Lhz-blogs 的新网站项目目录 # --format 来选取构建的首选文件格式（toml 默认 ｜ yaml ｜ json） hugo new site Lhz-blogs --format yaml # 进入新创建的项目目录 cd Lhz-blogs # 在项目根目录下初始化 git 仓库 git init # 拉取最新的 PaperMod 网站主题 git submodule add --depth=1 https://github.com/adityatelange/hugo-PaperMod.git themes/PaperMod # 追加网站主题配置信息 # 拿我的 hugo.yaml 举个例子 baseURL: https://lhzzz08.github.io languageCode: en-us title: Lhz&#39;s blog theme: PaperMod params: homeInfoParams: Title: &#34;在这里分享我的个人见解与技术心得🎉&#34; Content: &#34;大二在读，专注于Web安全，欢迎交流👏（wx:lhz13588161325)&#34; # 创建一篇 quickstart.md 的文章，位于 content/posts/ 目录下 hugo new posts/quickstart.md # 编辑文章 open content/posts/quickstart.md -a Typora # 在本地启动一个 Web 服务器预览博客，可以边写边改，在部署前检查 hugo server # 将项目源文件编译成静态文件并输出到项目根目录的 public 目录下 hugo # 切换为静态文件目录 cd public # 在静态目录下初始化第二个 git 仓库 git init # 为静态文件仓库添加一个名为 git-blog 的远程仓库，指向您的 GitHub Pages 仓库 URL git remote add git-blog https://github.com/lhzzz08/lhzzz08.github.io.git # 显示当前仓库配置的所有远程仓库的详细信息 git remote -v # 将目录下的所有静态文件添加到 git 暂存区 git add . # 将暂存区的文件提交到本地仓库 git commit -m &#34;init myblog&#34; # 将本地 main 分支的内容提交到远程仓库 git push -u github-blog main 会遇到的问题：">
+  <meta property="og:locale" content="en-us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-11-20T15:16:41+08:00">
+    <meta property="article:modified_time" content="2025-11-20T15:16:41+08:00">
+    <meta property="article:tag" content="网站搭建">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="如何快速搭建个人博客">
+<meta name="twitter:description" content="声明
+以下具体操作环境为 macOS，不同操作系统操作思路一致
+快速开始
+开始前准备：
+
+安装了 homebrew 软件包管理系统
+安装了 git 分布式版本控制系统
+拥有一个 GitHub 静态网站托管仓库（GitHub Pages）
+在执行代码前可以先查看本文中会遇到的问题
+
+# 安装 hugo 静态网站生成器
+brew install hugo
+
+# 找一个放置网站数据的地方
+cd ~/Workspace
+
+# 创建一个名为 Lhz-blogs 的新网站项目目录
+# --format 来选取构建的首选文件格式（toml 默认 ｜ yaml ｜ json）
+hugo new site Lhz-blogs --format yaml
+
+# 进入新创建的项目目录
+cd Lhz-blogs
+
+# 在项目根目录下初始化 git 仓库
+git init
+
+# 拉取最新的 PaperMod 网站主题
+git submodule add --depth=1 https://github.com/adityatelange/hugo-PaperMod.git themes/PaperMod
+
+# 追加网站主题配置信息
+# 拿我的 hugo.yaml 举个例子
+baseURL: https://lhzzz08.github.io
+languageCode: en-us
+title: Lhz&#39;s blog
+theme: PaperMod
+
+params:
+  homeInfoParams:
+    Title: &#34;在这里分享我的个人见解与技术心得🎉&#34;
+    Content: &#34;大二在读，专注于Web安全，欢迎交流👏（wx:lhz13588161325)&#34;
+
+# 创建一篇 quickstart.md 的文章，位于 content/posts/ 目录下
+hugo new posts/quickstart.md
+
+# 编辑文章
+open content/posts/quickstart.md -a Typora
+
+# 在本地启动一个 Web 服务器预览博客，可以边写边改，在部署前检查
+hugo server
+
+# 将项目源文件编译成静态文件并输出到项目根目录的 public 目录下
+hugo
+
+# 切换为静态文件目录
+cd public
+
+# 在静态目录下初始化第二个 git 仓库
+git init
+
+# 为静态文件仓库添加一个名为 git-blog 的远程仓库，指向您的 GitHub Pages 仓库 URL
+git remote add git-blog https://github.com/lhzzz08/lhzzz08.github.io.git
+
+# 显示当前仓库配置的所有远程仓库的详细信息
+git remote -v
+
+# 将目录下的所有静态文件添加到 git 暂存区
+git add .
+
+# 将暂存区的文件提交到本地仓库
+git commit -m &#34;init myblog&#34;
+
+# 将本地 main 分支的内容提交到远程仓库
+git push -u github-blog main
+会遇到的问题：">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://lhzzz08.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "如何快速搭建个人博客",
+      "item": "https://lhzzz08.github.io/posts/quickstart/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "如何快速搭建个人博客",
+  "name": "如何快速搭建个人博客",
+  "description": "声明 以下具体操作环境为 macOS，不同操作系统操作思路一致\n快速开始 开始前准备：\n安装了 homebrew 软件包管理系统 安装了 git 分布式版本控制系统 拥有一个 GitHub 静态网站托管仓库（GitHub Pages） 在执行代码前可以先查看本文中会遇到的问题 # 安装 hugo 静态网站生成器 brew install hugo # 找一个放置网站数据的地方 cd ~/Workspace # 创建一个名为 Lhz-blogs 的新网站项目目录 # --format 来选取构建的首选文件格式（toml 默认 ｜ yaml ｜ json） hugo new site Lhz-blogs --format yaml # 进入新创建的项目目录 cd Lhz-blogs # 在项目根目录下初始化 git 仓库 git init # 拉取最新的 PaperMod 网站主题 git submodule add --depth=1 https://github.com/adityatelange/hugo-PaperMod.git themes/PaperMod # 追加网站主题配置信息 # 拿我的 hugo.yaml 举个例子 baseURL: https://lhzzz08.github.io languageCode: en-us title: Lhz\u0026#39;s blog theme: PaperMod params: homeInfoParams: Title: \u0026#34;在这里分享我的个人见解与技术心得🎉\u0026#34; Content: \u0026#34;大二在读，专注于Web安全，欢迎交流👏（wx:lhz13588161325)\u0026#34; # 创建一篇 quickstart.md 的文章，位于 content/posts/ 目录下 hugo new posts/quickstart.md # 编辑文章 open content/posts/quickstart.md -a Typora # 在本地启动一个 Web 服务器预览博客，可以边写边改，在部署前检查 hugo server # 将项目源文件编译成静态文件并输出到项目根目录的 public 目录下 hugo # 切换为静态文件目录 cd public # 在静态目录下初始化第二个 git 仓库 git init # 为静态文件仓库添加一个名为 git-blog 的远程仓库，指向您的 GitHub Pages 仓库 URL git remote add git-blog https://github.com/lhzzz08/lhzzz08.github.io.git # 显示当前仓库配置的所有远程仓库的详细信息 git remote -v # 将目录下的所有静态文件添加到 git 暂存区 git add . # 将暂存区的文件提交到本地仓库 git commit -m \u0026#34;init myblog\u0026#34; # 将本地 main 分支的内容提交到远程仓库 git push -u github-blog main 会遇到的问题：\n",
+  "keywords": [
+    "网站搭建"
+  ],
+  "articleBody": "声明 以下具体操作环境为 macOS，不同操作系统操作思路一致\n快速开始 开始前准备：\n安装了 homebrew 软件包管理系统 安装了 git 分布式版本控制系统 拥有一个 GitHub 静态网站托管仓库（GitHub Pages） 在执行代码前可以先查看本文中会遇到的问题 # 安装 hugo 静态网站生成器 brew install hugo # 找一个放置网站数据的地方 cd ~/Workspace # 创建一个名为 Lhz-blogs 的新网站项目目录 # --format 来选取构建的首选文件格式（toml 默认 ｜ yaml ｜ json） hugo new site Lhz-blogs --format yaml # 进入新创建的项目目录 cd Lhz-blogs # 在项目根目录下初始化 git 仓库 git init # 拉取最新的 PaperMod 网站主题 git submodule add --depth=1 https://github.com/adityatelange/hugo-PaperMod.git themes/PaperMod # 追加网站主题配置信息 # 拿我的 hugo.yaml 举个例子 baseURL: https://lhzzz08.github.io languageCode: en-us title: Lhz's blog theme: PaperMod params: homeInfoParams: Title: \"在这里分享我的个人见解与技术心得🎉\" Content: \"大二在读，专注于Web安全，欢迎交流👏（wx:lhz13588161325)\" # 创建一篇 quickstart.md 的文章，位于 content/posts/ 目录下 hugo new posts/quickstart.md # 编辑文章 open content/posts/quickstart.md -a Typora # 在本地启动一个 Web 服务器预览博客，可以边写边改，在部署前检查 hugo server # 将项目源文件编译成静态文件并输出到项目根目录的 public 目录下 hugo # 切换为静态文件目录 cd public # 在静态目录下初始化第二个 git 仓库 git init # 为静态文件仓库添加一个名为 git-blog 的远程仓库，指向您的 GitHub Pages 仓库 URL git remote add git-blog https://github.com/lhzzz08/lhzzz08.github.io.git # 显示当前仓库配置的所有远程仓库的详细信息 git remote -v # 将目录下的所有静态文件添加到 git 暂存区 git add . # 将暂存区的文件提交到本地仓库 git commit -m \"init myblog\" # 将本地 main 分支的内容提交到远程仓库 git push -u github-blog main 会遇到的问题：\nhugo new posts/quickstart.md在 content/posts/ 目录下生成的 .md 文件中要修改draft: false，否则本地以及最终构建时将被忽略\ngit push -u github-blog main命令填写的密码不是账号的密码，而是要用个人访问令牌（Personal Access Token，PAT）来代替 Github 账号密码，关于具体如何生成 PTA，可以查阅相关资源\n后续更新文章流程：\n# 在项目根目录下执行命令 hugo new posts/demo.md # 启动本地 web 服务器，边写边看渲染效果 hugo server # 编辑文章内容 open content/posts/demo.md -a Typora # 在本地测试没问题后，构建静态文件 hugo # 如果进行了配置文件以及文件名修改，可能需要整体重新构建静态文件（删除 public/ 下的所有可见文件） hugo # 推送到 GitHub 远程仓库 cd public git add . git commit -m 'add new demo.md' git push 通过学习以上内容，你就学会了简易的博客构建以及更新流程，但还有许多配置、美化，增加细节等方面可以以后学习，我有空会追加在这篇文章更新的😘\n文章中插入图片 我这里采用 static 目录的方式讲解，Hugo 默认会将项目根目录下 static 文件夹里的所有内容，原封不动地拷贝到最终生成的 public 文件夹中\n存放图片：\n在你的项目根目录下找到 static 目录，建议创建子目录，把图片放入目录中即可\n# 创建演示目录 mkdir /static/images 引用图片：\n从文章中引用时，去掉 static 前缀，直接从 static 目录下开始写即可，演示图片位置/static/images/demo.jpg，引用语句为![这是一张演示图片-图片描述](/images/demo.jpg)\n上面的哈基米就是我演示的图片\n使用分类和标签功能 什么是分类和标签功能？就是如下图中的分类功能，点击即可查看特定分类或标签的所有内容\n第一步：在网站根目录下的 hugo.yaml 中添加几行配置信息\nhomeInfoParams: Title: \"在这里分享我的个人见解与技术心得🎉\" Content: \"大二在读，专注于Web安全，欢迎交流👏（wx:lhz13588161325)\" # 需要添加的 menu: main: - identifier: home name: Home url: / weight: 10 - identifier: categories name: Categories url: /categories/ weight: 20 - identifier: tags name: Tags url: /tags/ weight: 30 第二步：在每一篇文章头中添加相关的配置信息\ndate: '2025-11-20T15:16:41+08:00' draft: false title: '如何快速搭建个人博客' categories: [\"其他分享内容\"] # 需要添加 多个分类用逗号隔开即可 tags: [\"网站搭建\"] # 需要添加 多个标签用逗号隔开即可 添加网站图标 第一步：自己准备一个合适的图片（我这里用 SVG 图标作为演示），并将图片放到 /static 目录下，命名为 favicon.svg，但是 Apple 设备对 SVG 的支持不够好，所以需要将 SVG 图标转成 180x180 像素的图片，命名为 apple-icon.png 也是放在/static 目录下\n第二步：在 hugo.yaml 配置文件中添加相应配置信息\nparams: homeInfoParams: Title: \"XXX\" Content: \"XXX\" # 要添加的在下面 assets: favicon: \"favicon.svg\" favicon16x16: \"favicon.svg\" favicon32x32: \"favicon.svg\" apple_touch_icon: \"apple-icon.png\" ",
+  "wordCount" : "346",
+  "inLanguage": "en",
+  "datePublished": "2025-11-20T15:16:41+08:00",
+  "dateModified": "2025-11-20T15:16:41+08:00",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://lhzzz08.github.io/posts/quickstart/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Lhz's blog",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://lhzzz08.github.io/favicon.svg"
+    }
+  }
+}
 </script>
 </head>
 <body id="top">
     <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="http://localhost:1313/" accesskey="h" title="Lhz&#39;s blog (Alt + H)">Lhz&#39;s blog</a>
+            <a href="https://lhzzz08.github.io/" accesskey="h" title="Lhz&#39;s blog (Alt + H)">Lhz&#39;s blog</a>
             <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
@@ -175,17 +313,17 @@ git push -u github-blog main
         </div>
         <ul id="menu">
             <li>
-                <a href="http://localhost:1313/" title="Home">
+                <a href="https://lhzzz08.github.io/" title="Home">
                     <span>Home</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/categories/" title="Categories">
+                <a href="https://lhzzz08.github.io/categories/" title="Categories">
                     <span>Categories</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/tags/" title="Tags">
+                <a href="https://lhzzz08.github.io/tags/" title="Tags">
                     <span>Tags</span>
                 </a>
             </li>
@@ -369,14 +507,14 @@ git push -u github-blog main
 
   <footer class="post-footer">
     <ul class="post-tags">
-      <li><a href="http://localhost:1313/tags/%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA/">网站搭建</a></li>
+      <li><a href="https://lhzzz08.github.io/tags/%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA/">网站搭建</a></li>
     </ul>
   </footer>
 </article>
     </main>
     
 <footer class="footer">
-        <span>&copy; 2026 <a href="http://localhost:1313/">Lhz&#39;s blog</a></span> · 
+        <span>&copy; 2026 <a href="https://lhzzz08.github.io/">Lhz&#39;s blog</a></span> · 
 
     <span>
         Powered by

@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>CVE on Lhz&#39;s blog</title>
-    <link>http://localhost:1313/tags/cve/</link>
+    <link>https://lhzzz08.github.io/tags/cve/</link>
     <description>Recent content in CVE on Lhz&#39;s blog</description>
     <generator>Hugo -- 0.152.2</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 29 Apr 2026 16:02:55 +0800</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/cve/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://lhzzz08.github.io/tags/cve/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>short_videos ssrf Vulnerability</title>
-      <link>http://localhost:1313/posts/cveapplication2/</link>
+      <link>https://lhzzz08.github.io/posts/cveapplication2/</link>
       <pubDate>Wed, 29 Apr 2026 16:02:55 +0800</pubDate>
-      <guid>http://localhost:1313/posts/cveapplication2/</guid>
+      <guid>https://lhzzz08.github.io/posts/cveapplication2/</guid>
       <description>&lt;h2 id=&#34;title-server-side-request-forgery-ssrf-vulnerability-in-short_videos-via-apisvproxyurlphp&#34;&gt;Title: Server-Side Request Forgery (SSRF) Vulnerability in short_videos via &lt;code&gt;api/svproxyurl.php&lt;/code&gt;&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;BUG_Author:&lt;/strong&gt; liuhanzhi&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Affected Version:&lt;/strong&gt; short_videos (latest unpatched version as of 2026-04-29)&lt;/p&gt;
@@ -37,9 +37,9 @@
     </item>
     <item>
       <title>Watermark removal management system vul_1</title>
-      <link>http://localhost:1313/posts/cveapplication1/</link>
+      <link>https://lhzzz08.github.io/posts/cveapplication1/</link>
       <pubDate>Thu, 23 Apr 2026 22:41:23 +0800</pubDate>
-      <guid>http://localhost:1313/posts/cveapplication1/</guid>
+      <guid>https://lhzzz08.github.io/posts/cveapplication1/</guid>
       <description>&lt;h2 id=&#34;title-unauthorized-database-operation-vulnerability-in-ludashi-watermark-removal-management-system&#34;&gt;Title: Unauthorized Database Operation Vulnerability in Ludashi Watermark Removal Management System&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;BUG_Author:&lt;/strong&gt; liuhanzhi&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Affected Version:&lt;/strong&gt; Watermark removal management system ≤ 4.0&lt;/p&gt;
@@ -55,7 +55,7 @@
 &lt;p&gt;&lt;strong&gt;Unauthorized database write operations:&lt;/strong&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
-&lt;p&gt;Deobfuscate the obfuscated code in &lt;code&gt;/admin/ajax.php&lt;/code&gt;, click to download the &lt;a href=&#34;http://localhost:1313/files/ajax.php&#34;&gt;anti-obfuscation code&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Deobfuscate the obfuscated code in &lt;code&gt;/admin/ajax.php&lt;/code&gt;, click to download the &lt;a href=&#34;https://lhzzz08.github.io/files/ajax.php&#34;&gt;anti-obfuscation code&lt;/a&gt;.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;In &lt;code&gt;/admin/ajax.php&lt;/code&gt;, the interface dispatches a large amount of add/delete/update logic through the &lt;code&gt;act&lt;/code&gt; parameter.&lt;/p&gt;

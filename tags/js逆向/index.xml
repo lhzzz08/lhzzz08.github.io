@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>JS逆向 on Lhz&#39;s blog</title>
-    <link>http://localhost:1313/tags/js%E9%80%86%E5%90%91/</link>
+    <link>https://lhzzz08.github.io/tags/js%E9%80%86%E5%90%91/</link>
     <description>Recent content in JS逆向 on Lhz&#39;s blog</description>
     <generator>Hugo -- 0.152.2</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 11 Apr 2026 16:59:39 +0800</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/js%E9%80%86%E5%90%91/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://lhzzz08.github.io/tags/js%E9%80%86%E5%90%91/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>JS加解密逆向实战案例</title>
-      <link>http://localhost:1313/posts/vulnerability1/</link>
+      <link>https://lhzzz08.github.io/posts/vulnerability1/</link>
       <pubDate>Sat, 11 Apr 2026 16:59:39 +0800</pubDate>
-      <guid>http://localhost:1313/posts/vulnerability1/</guid>
+      <guid>https://lhzzz08.github.io/posts/vulnerability1/</guid>
       <description>&lt;h1 id=&#34;声明&#34;&gt;声明&lt;/h1&gt;
 &lt;p&gt;&lt;strong&gt;本博客提供的思路和技术仅限于提升自身技术，不得用于非法活动，任何非法活动均与本博客的立场相违背，违法者将依法承担法律责任&lt;/strong&gt;&lt;/p&gt;
 &lt;h1 id=&#34;我的看法&#34;&gt;我的看法&lt;/h1&gt;
@@ -23,7 +23,7 @@
 &lt;h3 id=&#34;漏洞发现&#34;&gt;漏洞发现&lt;/h3&gt;
 &lt;p&gt;我在测试&lt;a href=&#34;https://store.sunmi.com/user/login&#34;&gt;商米数字店铺&lt;/a&gt;中发现用户登录处使用手机验证码登录时验证码做了防爆破处理，但是
 要实现用户登录是不是还可以修改原来的密码，用创建的新密码来实现密码登录，【修改密码】同样需要手机验证码验证，但是&lt;strong&gt;这里的验证接口并没有做验证码验证次数限制，而且为四位验证码，遍历次数只要10000次，可以进行爆破验证码操作&lt;/strong&gt;
-&lt;img loading=&#34;lazy&#34; src=&#34;http://localhost:1313/images/2026-2/202603011231.png&#34;&gt;
+&lt;img loading=&#34;lazy&#34; src=&#34;https://lhzzz08.github.io/images/2026-2/202603011231.png&#34;&gt;
 但是数据包中却没有找到验证码参数，甚至连像模像样的信息都没有，而且全站都是这样的，【重置密码】具体数据包内容如下&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-http&#34; data-lang=&#34;http&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;// 原始数据包如下
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;POST&lt;/span&gt; /api/user/resetPassword &lt;span style=&#34;color:#66d9ef&#34;&gt;HTTP&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;
