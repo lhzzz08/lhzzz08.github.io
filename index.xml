@@ -6,8 +6,30 @@
     <description>Recent content on Lhz&#39;s blog</description>
     <generator>Hugo -- 0.152.2</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 29 Apr 2026 16:02:55 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 02 May 2026 22:49:19 +0800</lastBuildDate>
     <atom:link href="https://lhzzz08.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Courier Management System SQLI Vulnerability</title>
+      <link>https://lhzzz08.github.io/posts/cveapplication3/</link>
+      <pubDate>Sat, 02 May 2026 22:49:19 +0800</pubDate>
+      <guid>https://lhzzz08.github.io/posts/cveapplication3/</guid>
+      <description>&lt;h1 id=&#34;sql-injection-vulnerability-in-itsourcecode-courier-management-system-v10&#34;&gt;SQL Injection Vulnerability in itsourcecode Courier Management System V1.0&lt;/h1&gt;
+&lt;p&gt;&lt;strong&gt;BUG_Author:&lt;/strong&gt; liuhanzhi
+&lt;strong&gt;Affected Version:&lt;/strong&gt; V1.0
+&lt;strong&gt;Vendor:&lt;/strong&gt; &lt;a href=&#34;https://itsourcecode.com/free-projects/php-project/courier-management-system-project-in-php-and-mysql/&#34;&gt;itsourcecode&lt;/a&gt;
+&lt;strong&gt;Software:&lt;/strong&gt; &lt;a href=&#34;https://itsourcecode.com/wp-content/uploads/2021/04/Courier-Management-System-Project-In-PHP-Source-Code.zip&#34;&gt;Courier Management System&lt;/a&gt;
+&lt;strong&gt;Vulnerability File:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;/manage_user.php&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;description&#34;&gt;Description&lt;/h2&gt;
+&lt;h3 id=&#34;1-sql-injection-via-id-parameter&#34;&gt;1. SQL Injection via &lt;code&gt;id&lt;/code&gt; Parameter&lt;/h3&gt;
+&lt;p&gt;In the file &lt;code&gt;/manage_user.php&lt;/code&gt;, the application directly concatenates the user-supplied &lt;code&gt;id&lt;/code&gt; parameter into an SQL query without any sanitization or validation.&lt;/p&gt;
+&lt;p&gt;Vulnerable code (line 5):&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-php&#34; data-lang=&#34;php&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$user &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; $conn&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;query&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;SELECT * FROM users where id =&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;$_GET[&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;id&amp;#39;&lt;/span&gt;]);
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;2-exploiting-the-sql-injection&#34;&gt;2. Exploiting the SQL Injection&lt;/h3&gt;
+&lt;p&gt;By injecting malicious SQL commands into the &lt;code&gt;id&lt;/code&gt; parameter via a GET request, an attacker can manipulate the underlying SQL query to perform unauthorized database operations including data extraction, modification, and enumeration.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>short_videos ssrf Vulnerability</title>
       <link>https://lhzzz08.github.io/posts/cveapplication2/</link>

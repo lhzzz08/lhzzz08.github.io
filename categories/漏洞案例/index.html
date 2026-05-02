@@ -137,6 +137,22 @@
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">Courier Management System SQLI Vulnerability
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>SQL Injection Vulnerability in itsourcecode Courier Management System V1.0 BUG_Author: liuhanzhi Affected Version: V1.0 Vendor: itsourcecode Software: Courier Management System Vulnerability File:
+/manage_user.php Description 1. SQL Injection via id Parameter In the file /manage_user.php, the application directly concatenates the user-supplied id parameter into an SQL query without any sanitization or validation.
+Vulnerable code (line 5):
+$user = $conn-&gt;query(&#34;SELECT * FROM users where id =&#34;.$_GET[&#39;id&#39;]); 2. Exploiting the SQL Injection By injecting malicious SQL commands into the id parameter via a GET request, an attacker can manipulate the underlying SQL query to perform unauthorized database operations including data extraction, modification, and enumeration.
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2026-05-02 22:49:19 +0800 CST'>May 2, 2026</span></footer>
+  <a class="entry-link" aria-label="post link to Courier Management System SQLI Vulnerability" href="https://lhzzz08.github.io/posts/cveapplication3/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">short_videos ssrf Vulnerability
     </h2>
   </header>
