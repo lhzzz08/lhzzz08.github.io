@@ -175,46 +175,6 @@ $user = $conn-&gt;query(&#34;SELECT * FROM users where id =&#34;.$_GET[&#39;id&#
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2 class="entry-hint-parent">short_videos ssrf Vulnerability
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>Title: Server-Side Request Forgery (SSRF) Vulnerability in short_videos via api/svproxyurl.php BUG_Author: liuhanzhi
-Affected Version: short_videos (latest unpatched version as of 2026-04-29)
-Vendor: short_videos GitHub Repository
-Software: short_videos
-Vulnerability Files:
-api/svproxyurl.php Description: Unauthenticated SSRF / Open Proxy in api/svproxyurl.php:
-In api/svproxyurl.php, the application accepts a user-controlled proxyurl parameter from $_GET or $_POST. The value is decoded by base64_decode() and then passed directly into CURLOPT_URL inside both weibo_proxy() and douyin_proxy(). No authentication, host allowlist, private-network restriction, or redirect target validation is implemented. Cause of the vulnerability:
-...</p>
-  </div>
-  <footer class="entry-footer"><span title='2026-04-29 16:02:55 +0800 CST'>April 29, 2026</span></footer>
-  <a class="entry-link" aria-label="post link to short_videos ssrf Vulnerability" href="https://lhzzz08.github.io/posts/cveapplication2/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">Watermark removal management system vul_1
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>Title: Unauthorized Database Operation Vulnerability in Ludashi Watermark Removal Management System BUG_Author: liuhanzhi
-Affected Version: Watermark removal management system ≤ 4.0
-Vendor: Standalone Watermark Removal Mini Program
-Software: Ludashi Watermark Removal Management System Download Link
-Vulnerability Files:
-admin/ajax.php Description: Unauthorized database write operations:
-Deobfuscate the obfuscated code in /admin/ajax.php, click to download the anti-obfuscation code.
-In /admin/ajax.php, the interface dispatches a large amount of add/delete/update logic through the act parameter.
-No effective backend session authentication and authorization logic is found in the file, so attackers can directly invoke sensitive operations without logging in.
-...</p>
-  </div>
-  <footer class="entry-footer"><span title='2026-04-23 22:41:23 +0800 CST'>April 23, 2026</span></footer>
-  <a class="entry-link" aria-label="post link to Watermark removal management system vul_1" href="https://lhzzz08.github.io/posts/cveapplication1/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
     <h2 class="entry-hint-parent">JS加解密逆向实战案例
     </h2>
   </header>
