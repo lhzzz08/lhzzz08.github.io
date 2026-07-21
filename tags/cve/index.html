@@ -137,6 +137,21 @@
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">FastAdmin Reflected XSS Vulnerability
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>FastAdmin Reflected XSS Vulnerability (url Parameter) Bug Author: lhzzz08 Affected Version: FastAdmin ≤ v1.2.0.20210401_beta (fixed in v1.2.1.20210731_beta) Vendor: FastAdminNet Software: FastAdmin on GitHub/Gitee Vulnerability Files:
+application/index/controller/User.php (lines 68, 146) application/index/view/user/login.html (line 7) application/index/view/user/register.html (line 8) Description Reflected XSS Vulnerability in FastAdmin index/user Login and Register Pages via url Parameter
+1. Reflected XSS via url Parameter FastAdmin’s front-end user module (app\index\controller\User) accepts a url GET parameter in both the login and register endpoints. This parameter is intended to redirect users after successful authentication. In the vulnerable version, the parameter is retrieved with only a trim filter (no HTML sanitization) and assigned to the template:
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2026-07-21 22:53:10 +0800 CST'>July 21, 2026</span></footer>
+  <a class="entry-link" aria-label="post link to FastAdmin Reflected XSS Vulnerability" href="https://lhzzz08.github.io/posts/cveapplication4/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">Courier Management System SQLI Vulnerability
     </h2>
   </header>

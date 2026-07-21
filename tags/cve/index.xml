@@ -6,8 +6,29 @@
     <description>Recent content in CVE on Lhz&#39;s blog</description>
     <generator>Hugo -- 0.152.2</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 02 May 2026 22:49:19 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 21 Jul 2026 22:53:10 +0800</lastBuildDate>
     <atom:link href="https://lhzzz08.github.io/tags/cve/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>FastAdmin Reflected XSS Vulnerability</title>
+      <link>https://lhzzz08.github.io/posts/cveapplication4/</link>
+      <pubDate>Tue, 21 Jul 2026 22:53:10 +0800</pubDate>
+      <guid>https://lhzzz08.github.io/posts/cveapplication4/</guid>
+      <description>&lt;h1 id=&#34;fastadmin-reflected-xss-vulnerability-url-parameter&#34;&gt;FastAdmin Reflected XSS Vulnerability (url Parameter)&lt;/h1&gt;
+&lt;p&gt;&lt;strong&gt;Bug Author:&lt;/strong&gt; lhzzz08
+&lt;strong&gt;Affected Version:&lt;/strong&gt; FastAdmin ≤ v1.2.0.20210401_beta (fixed in v1.2.1.20210731_beta)
+&lt;strong&gt;Vendor:&lt;/strong&gt; &lt;a href=&#34;https://www.fastadmin.net/&#34;&gt;FastAdminNet&lt;/a&gt;
+&lt;strong&gt;Software:&lt;/strong&gt; &lt;a href=&#34;https://github.com/fastadminnet/fastadmin&#34;&gt;FastAdmin on GitHub/Gitee&lt;/a&gt;
+&lt;strong&gt;Vulnerability Files:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;application/index/controller/User.php&lt;/code&gt; (lines 68, 146)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;application/index/view/user/login.html&lt;/code&gt; (line 7)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;application/index/view/user/register.html&lt;/code&gt; (line 8)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;description&#34;&gt;Description&lt;/h3&gt;
+&lt;p&gt;Reflected XSS Vulnerability in FastAdmin index/user Login and Register Pages via &lt;code&gt;url&lt;/code&gt; Parameter&lt;/p&gt;
+&lt;h4 id=&#34;1-reflected-xss-via-url-parameter&#34;&gt;1. Reflected XSS via &lt;code&gt;url&lt;/code&gt; Parameter&lt;/h4&gt;
+&lt;p&gt;FastAdmin&amp;rsquo;s front-end user module (&lt;code&gt;app\index\controller\User&lt;/code&gt;) accepts a &lt;code&gt;url&lt;/code&gt; GET parameter in both the login and register endpoints. This parameter is intended to redirect users after successful authentication. In the vulnerable version, the parameter is retrieved with only a &lt;code&gt;trim&lt;/code&gt; filter (no HTML sanitization) and assigned to the template:&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Courier Management System SQLI Vulnerability</title>
       <link>https://lhzzz08.github.io/posts/cveapplication3/</link>
